@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PAIRDEN | Más Llamadas Contestadas. Más Trabajos Agendados.</title>
+  <meta name="description" content="PAIRDEN crea sitios web, sistemas de citas, reseñas, seguimiento de llamadas perdidas y recepción telefónica con IA para negocios de servicio en el Inland Empire y el Sur de California." />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
+  <link rel="canonical" href="https://pairden.com/es/" />
+  <link rel="alternate" hreflang="en" href="https://pairden.com/" />
+  <link rel="alternate" hreflang="es" href="https://pairden.com/es/" />
+  <link rel="alternate" hreflang="x-default" href="https://pairden.com/" />
+  <meta property="og:title" content="PAIRDEN | Más Llamadas Contestadas. Más Trabajos Agendados." />
+  <meta property="og:description" content="Sitios web, citas, reseñas, seguimiento de llamadas perdidas y recepción telefónica con IA para negocios de servicio locales." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pairden.com/es/" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PAIRDEN | Más Llamadas Contestadas. Más Trabajos Agendados." />
+  <meta name="twitter:description" content="Sistemas conectados de captación para negocios de servicio en el Inland Empire y el Sur de California." />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PAIRDEN",
+    "legalName": "Pairden Technologies LLC",
+    "url": "https://pairden.com/es/",
+    "logo": "https://pairden.com/assets/brand/pairden-icon.png",
+    "image": "https://pairden.com/assets/brand/og-card.png",
+    "description": "Sitios web, citas, reseñas, llamadas perdidas y sistemas telefónicos con IA para negocios de servicio locales.",
+    "telephone": "+1-840-688-2967",
+    "email": "Admin@pairden.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Menifee",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "areaServed": ["Inland Empire", "Southern California"]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* ── Estilos de la página principal ── */
+    .hero { align-items: center; display: flex; min-height: 100vh; overflow: hidden; padding: 150px 0 60px; }
+    .hero-bg { inset: 0; pointer-events: none; position: absolute; z-index: 0; }
+    .hero-bg::before {
+      background: radial-gradient(ellipse at 72% 38%, rgba(10,132,255,0.14) 0%, transparent 52%);
+      content: ""; inset: 0; position: absolute;
+    }
+    .hero-bg::after {
+      background: radial-gradient(ellipse at 50% 100%, rgba(6,99,199,0.08) 0%, transparent 55%);
+      content: ""; inset: 0; position: absolute;
+    }
+    .hero-grid {
+      align-items: center; display: grid; gap: 48px;
+      grid-template-columns: 1.05fr 1fr; position: relative; z-index: 1;
+    }
+    .hero-badge {
+      align-items: center; display: inline-flex; gap: 8px;
+      background: rgba(10,132,255,0.1); border: 1px solid rgba(23,200,244,0.4);
+      border-radius: 999px; color: var(--accent-bright);
+      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      margin-bottom: 26px; padding: 8px 16px;
+      box-shadow: 0 0 18px rgba(10,132,255,0.12);
+    }
+    .hero-badge-dot { animation: blink 2s ease-in-out infinite; background: var(--accent-bright); border-radius: 50%; height: 7px; width: 7px; }
+    .hero h1 { margin-bottom: 24px; }
+    .hero-sub { color: var(--muted); font-size: 18px; line-height: 1.7; margin-bottom: 34px; max-width: 590px; }
+    .hero-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-actions .btn-primary { font-size: 14px; letter-spacing: 0.06em; min-height: 58px; padding: 0 34px; text-transform: uppercase; }
+    .hero-trust { align-items: center; display: flex; flex-wrap: wrap; gap: 20px; margin-top: 42px; }
+    .trust-item { align-items: center; color: var(--muted); display: flex; font-size: 13px; gap: 8px; }
+    .trust-check {
+      align-items: center; display: flex; justify-content: center;
+      background: rgba(10,132,255,0.14); border: 1px solid rgba(23,200,244,0.4);
+      border-radius: 50%; color: var(--accent-bright); font-size: 10px; font-weight: 800;
+      height: 20px; width: 20px;
+    }
+    .growth-visual { align-items: center; display: flex; justify-content: center; min-height: 480px; position: relative; }
+    .growth-visual::before {
+      background: radial-gradient(circle, rgba(10,132,255,0.24), transparent 66%);
+      border-radius: 50%; content: ""; height: 78%; position: absolute; width: 78%;
+    }
+    .gv-render {
+      filter: drop-shadow(0 0 42px rgba(10,132,255,0.38));
+      position: relative; width: clamp(270px, 31vw, 420px); z-index: 2;
+    }
+    .services-row-wrap { padding: 24px 0 88px; position: relative; z-index: 2; }
+    .services-row { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+    .service-tile {
+      align-items: center; display: flex; flex-direction: column; gap: 14px; justify-content: flex-start;
+      appearance: none; -webkit-appearance: none;
+      border: 1px solid var(--glass-border); color: var(--text); cursor: pointer; font-family: inherit;
+      padding: 26px 12px 22px; text-align: center; width: 100%;
+    }
+    .service-tile .icon-chip { margin-bottom: 0; }
+    .service-tile span { font-family: var(--font-head); font-size: 14px; font-weight: 600; line-height: 1.35; }
+    .service-tile.is-active {
+      border-color: var(--glass-border-hi);
+      box-shadow: 0 24px 60px rgba(0,3,12,0.65), 0 0 30px rgba(10,132,255,0.26), inset 0 1px 0 var(--highlight);
+      transform: translateY(-4px);
+    }
+    .service-detail-panel {
+      display: grid; grid-template-rows: 0fr;
+      margin: 18px auto 0; max-width: 820px; opacity: 0; overflow: hidden;
+      transition: grid-template-rows 0.28s ease, opacity 0.22s ease, margin-top 0.22s ease;
+    }
+    .service-detail-panel.open { grid-template-rows: 1fr; margin-top: 22px; opacity: 1; }
+    .service-detail-inner { min-height: 0; }
+    .service-detail-content {
+      align-items: flex-start; display: grid; gap: 20px; grid-template-columns: auto 1fr; padding: 28px;
+    }
+    .service-detail-content .icon-chip { margin-bottom: 0; }
+    .service-detail-copy h3 { font-size: 22px; margin-bottom: 8px; }
+    .service-detail-copy p { color: var(--muted); font-size: 15px; line-height: 1.68; }
+    .service-results { align-items: center; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .result-pill {
+      background: rgba(10,132,255,0.1); border: 1px solid rgba(23,200,244,0.3);
+      border-radius: 999px; color: var(--accent-pale); font-size: 11px; font-weight: 700; padding: 3px 10px;
+    }
+    .service-detail-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .service-detail-link { color: var(--accent-bright); font-size: 14px; font-weight: 800; }
+    .service-detail-link:hover { text-decoration: underline; }
+    .package-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+    .package-card { display: flex; flex-direction: column; padding: 30px; position: relative; }
+    .package-card.featured {
+      border-color: var(--accent-bright);
+      box-shadow: 0 24px 70px rgba(0,3,12,0.7), 0 0 42px rgba(10,132,255,0.2), inset 0 1px 0 var(--highlight);
+    }
+    .package-badge {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent)); border-radius: 999px;
+      color: #04101F; font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
+      padding: 6px 11px; position: absolute; right: 22px; text-transform: uppercase; top: 20px;
+    }
+    .package-kicker { color: var(--accent-bright); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; text-transform: uppercase; }
+    .package-card h3 { font-size: 24px; margin-bottom: 8px; }
+    .package-tagline { color: var(--muted); font-size: 14px; line-height: 1.55; min-height: 44px; }
+    .package-price { align-items: baseline; display: flex; gap: 7px; margin: 24px 0 4px; }
+    .package-price strong { font-family: var(--font-head); font-size: 42px; letter-spacing: -0.04em; }
+    .package-price span { color: var(--muted); font-size: 13px; }
+    .package-setup { color: var(--accent-pale); font-size: 12px; line-height: 1.5; margin-bottom: 22px; }
+    .package-list { display: grid; gap: 11px; list-style: none; margin-bottom: 26px; }
+    .package-list li { color: #D7E1EF; font-size: 13px; line-height: 1.5; padding-left: 22px; position: relative; }
+    .package-list li::before { color: var(--accent-bright); content: "✓"; font-weight: 900; left: 0; position: absolute; }
+    .package-card .btn-primary, .package-card .btn-ghost { margin-top: auto; width: 100%; }
+    .package-note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 24px auto 0; max-width: 780px; text-align: center; }
+    .reporting-strip { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-top: 26px; }
+    .reporting-item { border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
+    .reporting-item strong { display: block; font-family: var(--font-head); font-size: 14px; }
+    .reporting-item span { color: var(--muted); display: block; font-size: 11px; margin-top: 4px; }
+    .steps-mark-bg {
+      left: 50%; opacity: 0.04; pointer-events: none; position: absolute; top: 50%;
+      transform: translate(-50%, -50%); width: clamp(200px, 22vw, 320px); z-index: 0;
+    }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
+    .steps-grid::before {
+      background: linear-gradient(90deg, transparent, rgba(23,200,244,0.4), transparent);
+      content: ""; height: 1px; left: 16%; position: absolute; right: 16%; top: 32px;
+    }
+    .step { padding: 0 32px; text-align: center; }
+    .step-number {
+      align-items: center; display: inline-flex; justify-content: center;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
+      border-radius: 50%; color: #fff;
+      font-family: var(--font-head); font-size: 20px; font-weight: 700;
+      box-shadow: 0 8px 26px rgba(10,132,255,0.45);
+      height: 64px; margin-bottom: 20px; position: relative; width: 64px; z-index: 1;
+    }
+    .step h3 { font-size: 18px; margin-bottom: 10px; }
+    .step p  { color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .why-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+    .why-card { align-items: flex-start; display: flex; gap: 18px; padding: 24px; }
+    .why-card .icon-chip { height: 46px; margin-bottom: 0; width: 46px; }
+    .why-card .icon-chip svg { height: 21px; width: 21px; }
+    .why-card h3 { font-size: 16px; }
+    .why-card p  { color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .contact-wrap { display: grid; gap: 48px; grid-template-columns: 1fr 520px; align-items: center; }
+    .contact-copy h2 { margin-bottom: 16px; }
+    .contact-copy p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 24px; max-width: 440px; }
+    .contact-direct { display: grid; gap: 8px; }
+    .contact-direct a { color: var(--accent-bright); font-size: 14px; font-weight: 600; }
+    .contact-direct a:hover { text-decoration: underline; }
+    .contact-form-card { border-color: var(--glass-border-hi); border-radius: var(--r-lg); box-shadow: 0 0 70px rgba(10,132,255,0.12), var(--shadow); padding: 32px; }
+    .contact-form-card h3 { font-size: 20px; margin-bottom: 6px; }
+    .contact-form-card > p { color: var(--muted); font-size: 13px; line-height: 1.55; margin-bottom: 20px; }
+    .contact-form-card .btn-primary { font-size: 15px; margin-top: 8px; min-height: 54px; width: 100%; }
+    .form-success { align-items: center; display: none; flex-direction: column; gap: 12px; padding: 20px 0; text-align: center; }
+    .form-success h3 { font-size: 20px; }
+    .form-success p  { color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .form-success .icon-chip { margin: 0 auto; }
+    .privacy-note { color: var(--muted); font-size: 11px; margin-top: 12px; text-align: center; }
+    .consent-row { align-items: flex-start; color: var(--muted); cursor: pointer; display: flex; font-size: 11px; gap: 10px; line-height: 1.55; margin: 4px 0 14px; }
+    .consent-row input { flex: 0 0 auto; height: 16px; margin-top: 2px; width: 16px; }
+    .consent-row a { color: var(--accent-bright); text-decoration: underline; }
+
+    @media (max-width: 1100px) {
+      .hero-grid { gap: 32px; }
+      .contact-wrap { grid-template-columns: 1fr 460px; }
+    }
+    @media (max-width: 900px) {
+      .hero { padding-top: 130px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .growth-visual { min-height: 340px; }
+      .gv-render { width: min(380px, 78vw); }
+      .services-row { grid-template-columns: repeat(3, 1fr); }
+      .steps-grid { gap: 40px; grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .package-grid { grid-template-columns: 1fr; }
+      .package-card { margin: 0 auto; max-width: 580px; width: 100%; }
+      .reporting-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 116px 0 32px; }
+      .services-row { grid-template-columns: 1fr 1fr; }
+      .service-detail-content { grid-template-columns: 1fr; padding: 22px 18px; }
+      .hero-trust { gap: 12px; }
+      .step { padding: 0 12px; }
+      .contact-form-card { padding: 22px 16px; }
+      .gv-render { width: min(310px, 78vw); }
+      .growth-visual { min-height: 280px; }
+      .reporting-strip { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .hero-badge { font-size: 9px; padding: 6px 10px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn-primary, .hero-actions .btn-ghost { justify-content: center; width: 100%; }
+      .services-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Conjunto de iconos SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-thumbs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+    <symbol id="i-workflow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol>
+    <symbol id="i-mappin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+  </svg>
+
+  <!-- ── Navegación ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/es/" class="nav-logo">
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" height="34" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/es/" aria-current="page">Inicio</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#plans">Planes</a></li>
+        <li><a href="/es/frontdesk">Recepción con IA</a></li>
+        <li><a href="/es/faq">Preguntas</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+      <a href="/" class="lang-toggle" hreflang="en" aria-label="View this page in English">
+        <span>EN</span> ⇄ <span class="is-current">ES</span>
+      </a>
+      <a href="#contact" class="btn-primary nav-cta">Diagnóstico Gratis →</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <ul>
+      <li><a href="/es/">Inicio</a></li>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#plans">Planes</a></li>
+      <li><a href="/es/frontdesk">Recepción con IA</a></li>
+      <li><a href="/es/faq">Preguntas</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <a href="/" class="lang-toggle" hreflang="en"><span>EN</span> ⇄ <span class="is-current">ES</span></a>
+    <a href="#contact" class="btn-primary">Diagnóstico Gratis →</a>
+  </div>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge reveal">
+            <span class="hero-badge-dot"></span>
+            Automatización con IA para negocios de servicio locales
+          </div>
+          <h1 class="reveal reveal-d1">
+            Más Llamadas Contestadas.<br>
+            <span class="grad-text">Más Trabajos Agendados.</span>
+          </h1>
+          <p class="hero-sub reveal reveal-d2">
+            Sitios web, citas, reseñas, seguimiento de llamadas perdidas y recepción telefónica con IA para negocios de servicio del Inland Empire y el Sur de California: un solo equipo, un solo sistema conectado.
+          </p>
+          <div class="hero-actions reveal reveal-d3">
+            <a href="#contact" class="btn-primary">Solicite su Diagnóstico Gratis →</a>
+            <a href="tel:+18406882967" class="btn-ghost">Llame a la Demo con IA</a>
+          </div>
+          <div class="hero-trust reveal reveal-d3">
+            <div class="trust-item"><div class="trust-check">✓</div> Hecho para negocios de servicio</div>
+            <div class="trust-item"><div class="trust-check">✓</div> Disponible en inglés y español</div>
+            <div class="trust-item"><div class="trust-check">✓</div> La mayoría funciona en una semana</div>
+          </div>
+        </div>
+
+        <div class="growth-visual reveal reveal-d2" aria-hidden="true">
+          <img src="/assets/brand/pairden-icon.png" alt="" class="gv-render" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Servicios ── -->
+  <section class="services-row-wrap" id="services">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:38px">
+        <p class="eyebrow">Servicios conectados</p>
+        <h2>Cierre las Fugas Donde<br>se Pierden los Buenos Clientes.</h2>
+        <p>Empiece con un solo servicio o conecte el sistema completo. Cada pieza está diseñada para que su negocio aparezca, responda más rápido y dé seguimiento.</p>
+      </div>
+      <div class="services-row">
+        <button type="button" class="service-tile glass-card glass-lift reveal" data-service="website" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-monitor"/></svg></span>
+          <span>Sitio Web + Presencia en Google</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d1" data-service="booking" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-workflow"/></svg></span>
+          <span>Citas + Recordatorios</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d1" data-service="missedcall" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-zap"/></svg></span>
+          <span>Mensaje por Llamada Perdida</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d2" data-service="reviews" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-thumbs"/></svg></span>
+          <span>Motor de Reseñas</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d2" data-service="receptionist" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-bot"/></svg></span>
+          <span>Recepcionista con IA</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d3" data-service="seo" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-search"/></svg></span>
+          <span>SEO Local</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d3" data-service="chat" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-sparkles"/></svg></span>
+          <span>Chat con IA en su Sitio</span>
+        </button>
+        <button type="button" class="service-tile glass-card glass-lift reveal reveal-d3" data-service="winback" aria-expanded="false" aria-controls="serviceDetailPanel">
+          <span class="icon-chip"><svg><use href="#i-mail"/></svg></span>
+          <span>Recuperación de Clientes</span>
+        </button>
+      </div>
+      <div class="service-detail-panel" id="serviceDetailPanel" aria-live="polite">
+        <div class="service-detail-inner">
+          <div class="service-detail-content glass-card">
+            <div class="icon-chip" id="serviceDetailIcon" aria-hidden="true"></div>
+            <div class="service-detail-copy">
+              <h3 id="serviceDetailTitle"></h3>
+              <p id="serviceDetailText"></p>
+              <div class="service-results" id="serviceDetailPills"></div>
+              <div class="service-detail-actions" id="serviceDetailActions"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Planes ── -->
+  <section class="section-pad section-tint" id="plans">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Tres planes sencillos</p>
+        <h2>Empiece Donde Está.<br>Avance Sin Volver a Empezar.</h2>
+        <p>Cada plan reúne las herramientas que más necesitan los negocios de servicio locales. Los clientes actuales solo pagan la diferencia de instalación al subir de plan.</p>
+      </div>
+      <div class="package-grid">
+        <article class="package-card glass-card reveal" id="plan-foundation">
+          <p class="package-kicker">Que lo encuentren</p>
+          <h3>Online Foundation</h3>
+          <p class="package-tagline">Una presencia en línea confiable que convierte las búsquedas locales en solicitudes directas.</p>
+          <div class="package-price"><strong>$147</strong><span>/mes</span></div>
+          <p class="package-setup">$250 de instalación única · sin costo con un plan de 6 meses</p>
+          <ul class="package-list">
+            <li>Sitio web profesional de 3 páginas</li>
+            <li>Optimización del Perfil de Empresa en Google</li>
+            <li>Formulario de cotización que llega a su teléfono</li>
+            <li>Hospedaje, seguridad y 2 actualizaciones al mes</li>
+            <li>Reporte mensual de llamadas y solicitudes</li>
+          </ul>
+          <a href="#contact" class="btn-ghost package-select" data-package="Online Foundation">Elegir Foundation</a>
+        </article>
+
+        <article class="package-card glass-card featured reveal reveal-d1" id="plan-growth">
+          <span class="package-badge">Más popular</span>
+          <p class="package-kicker">Cierre las fugas</p>
+          <h3>Growth Engine</h3>
+          <p class="package-tagline">El sistema conectado de citas y seguimiento que necesitan la mayoría de los negocios en crecimiento.</p>
+          <div class="package-price"><strong>$397</strong><span>/mes</span></div>
+          <p class="package-setup">$500 de instalación única · sin costo con un plan de 6 meses</p>
+          <ul class="package-list">
+            <li>Todo lo de Online Foundation</li>
+            <li>Sitio de varias páginas, una por servicio</li>
+            <li>Citas en línea con depósitos</li>
+            <li>Confirmaciones y recordatorios por SMS</li>
+            <li>Mensaje por llamada perdida y motor de reseñas</li>
+            <li>Reporte mensual de resultados</li>
+          </ul>
+          <a href="#contact" class="btn-primary package-select" data-package="Growth Engine">Elegir Growth Engine</a>
+        </article>
+
+        <article class="package-card glass-card reveal reveal-d2" id="plan-frontoffice">
+          <p class="package-kicker">Conteste cada llamada</p>
+          <h3>AI Front Office</h3>
+          <p class="package-tagline">Una recepción completa para negocios establecidos con volumen real de llamadas.</p>
+          <div class="package-price"><strong>$997</strong><span>/mes</span></div>
+          <p class="package-setup">$997 de instalación única · sin costo con un plan de 12 meses</p>
+          <ul class="package-list">
+            <li>Todo lo de Growth Engine</li>
+            <li>Recepcionista con IA 24/7, en inglés y español</li>
+            <li>Agendado y resúmenes de llamadas</li>
+            <li>SEO local y chat con IA en su sitio</li>
+            <li>4 campañas de recuperación de clientes al año</li>
+            <li>Soporte prioritario y llamada mensual de estrategia</li>
+          </ul>
+          <a href="#contact" class="btn-ghost package-select" data-package="AI Front Office">Elegir AI Front Office</a>
+        </article>
+      </div>
+      <p class="package-note reveal">AI Front Office incluye hasta 1,000 minutos de recepcionista al mes. Los minutos adicionales cuestan $0.40 cada uno. Algunos servicios también están disponibles por separado.</p>
+      <div class="reporting-strip reveal">
+        <div class="reporting-item"><strong>Llamadas atendidas</strong><span>Vea qué recuperó el seguimiento</span></div>
+        <div class="reporting-item"><strong>Trabajos agendados</strong><span>Siga las citas y los depósitos</span></div>
+        <div class="reporting-item"><strong>Reseñas obtenidas</strong><span>Mida el crecimiento de su reputación</span></div>
+        <div class="reporting-item"><strong>Seguimientos hechos</strong><span>Sepa qué pasó después</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Cómo funciona ── -->
+  <section class="section-pad" id="how-it-works">
+    <img src="/assets/brand/pairden-icon.png" alt="" aria-hidden="true" class="steps-mark-bg" />
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2>Del Primer Diagnóstico al<br>Sistema Activo en Tres Pasos.</h2>
+        <p>Identificamos dónde se pierden los clientes, conectamos las herramientas correctas y arrancamos con una base clara para que usted vea el cambio.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-number">1</div>
+          <h3>Encontramos la Fuga</h3>
+          <p>Revisamos cómo lo encuentran los clientes, qué pasa cuando llaman y dónde fallan hoy las citas, el seguimiento o las reseñas.</p>
+        </div>
+        <div class="step reveal reveal-d1">
+          <div class="step-number">2</div>
+          <h3>Conectamos el Sistema</h3>
+          <p>Configuramos el sitio web, el teléfono, el calendario, los mensajes y los reportes según sus servicios, horarios, área de cobertura y reglas de traspaso.</p>
+        </div>
+        <div class="step reveal reveal-d2">
+          <div class="step-number">3</div>
+          <h3>Arrancamos y Medimos</h3>
+          <p>Probamos cada paso en su teléfono, lanzamos y reportamos llamadas atendidas, citas agendadas, recordatorios enviados y reseñas obtenidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Por qué PAIRDEN ── -->
+  <section class="section-pad section-tint" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Por qué PAIRDEN</p>
+        <h2>Hecho para Negocios Locales.<br>Operado con Supervisión Humana.</h2>
+        <p>PAIRDEN combina automatización práctica con configuración personalizada para que los negocios de servicio respondan más rápido sin reemplazar a las personas en quienes sus clientes confían.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card glass-card glass-lift reveal">
+          <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
+          <div>
+            <h3>Enfoque en Servicios Locales</h3>
+            <p>Nuestros sistemas están pensados para llamadas, áreas de cobertura, citas, cuadrillas, estimados y la realidad del trabajo en campo.</p>
+          </div>
+        </div>
+        <div class="why-card glass-card glass-lift reveal reveal-d1">
+          <div class="icon-chip"><svg><use href="#i-chart"/></svg></div>
+          <div>
+            <h3>Números que Sirven</h3>
+            <p>El reporte mensual se centra en resultados operativos: llamadas atendidas, trabajos agendados, recordatorios enviados, reseñas obtenidas y seguimientos completados.</p>
+          </div>
+        </div>
+        <div class="why-card glass-card glass-lift reveal">
+          <div class="icon-chip"><svg><use href="#i-workflow"/></svg></div>
+          <div>
+            <h3>Instalaciones Rápidas y Repetibles</h3>
+            <p>Nuestras plantillas probadas nos permiten avanzar rápido y aun así ajustar servicios, preguntas frecuentes, reglas de citas, rutas de escalamiento y marca a su negocio.</p>
+          </div>
+        </div>
+        <div class="why-card glass-card glass-lift reveal reveal-d1">
+          <div class="icon-chip"><svg><use href="#i-mappin"/></svg></div>
+          <div>
+            <h3>Inglés y Español</h3>
+            <p>Ofrecemos sitios web y atención telefónica bilingües para negocios que sirven a las comunidades diversas del Inland Empire y el Sur de California.</p>
+          </div>
+        </div>
+        <div class="why-card glass-card glass-lift reveal">
+          <div class="icon-chip"><svg><use href="#i-zap"/></svg></div>
+          <div>
+            <h3>Reglas de Traspaso a Personas</h3>
+            <p>La automatización maneja la toma de datos y el seguimiento de rutina, mientras que los casos urgentes, delicados o inciertos se pasan a una persona real.</p>
+          </div>
+        </div>
+        <div class="why-card glass-card glass-lift reveal reveal-d1">
+          <div class="icon-chip"><svg><use href="#i-link"/></svg></div>
+          <div>
+            <h3>Empiece Poco a Poco</h3>
+            <p>Comience con un servicio o un plan. Cuando avance, lo ya configurado se conserva en lugar de obligarlo a empezar de cero.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contacto ── -->
+  <section class="section-pad section-tint" id="contact">
+    <div class="container">
+      <div class="contact-wrap">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Diagnóstico gratuito</p>
+          <h2>Vea Dónde se Están<br><span class="grad-text">Perdiendo sus Clientes.</span></h2>
+          <p>Cuéntenos cómo lo encuentran, lo llaman y agendan hoy sus clientes. Identificaremos la fuga más clara y le recomendaremos el sistema más sencillo que la resuelva.</p>
+          <div class="contact-direct">
+            <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
+            <a href="tel:+18406882967">Llame a la demo: (840) 688-2967</a>
+          </div>
+        </div>
+
+        <div class="contact-form-card glass-card reveal reveal-d1">
+          <h3>Solicite su Diagnóstico Gratuito</h3>
+          <p>Revisaremos su configuración actual y le responderemos en un día hábil con el siguiente paso más práctico.</p>
+
+          <form id="leadForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">Nombre *</label>
+                <input id="firstName" name="first_name" type="text" autocomplete="given-name" placeholder="Juana" required />
+              </div>
+              <div class="form-group">
+                <label for="company">Nombre del negocio *</label>
+                <input id="company" name="company" type="text" autocomplete="organization" placeholder="Plomería Smith" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="businessType">Tipo de negocio *</label>
+                <select id="businessType" name="business_type" required>
+                  <option value="">— Seleccione —</option>
+                  <option>Acarreo / Limpieza de escombros</option>
+                  <option>Plomería / HVAC / Techos</option>
+                  <option>Restauración / Reparaciones</option>
+                  <option>Jardinería / Limpieza</option>
+                  <option>Barbería / Detallado</option>
+                  <option>Restaurante / Alimentos</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="packageInterest">¿Qué le interesa más?</label>
+                <select id="packageInterest" name="package_interest">
+                  <option value="">— Aún no estoy seguro —</option>
+                  <option>Online Foundation</option>
+                  <option>Growth Engine</option>
+                  <option>AI Front Office</option>
+                  <option>Un servicio individual</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" id="businessTypeOtherGroup" style="display:none">
+              <label for="businessTypeOther">Díganos su tipo de negocio *</label>
+              <input id="businessTypeOther" name="business_type_other" type="text" placeholder="ej. Limpieza de albercas" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electrónico *</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="juana@ejemplo.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Teléfono *</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="goal">¿Dónde se atoran los clientes? (opcional)</label>
+              <textarea id="goal" name="challenge" placeholder="ej. Perdemos llamadas en el trabajo, tenemos muchas citas canceladas o necesitamos más reseñas en Google…"></textarea>
+            </div>
+
+            <label class="consent-row" for="smsConsent">
+              <input id="smsConsent" name="sms_consent" type="checkbox" required />
+              <span>Acepto recibir llamadas y mensajes de texto de PAIRDEN sobre esta solicitud. La frecuencia de los mensajes varía. Pueden aplicarse tarifas de mensajes y datos. Responda STOP para cancelar o AYUDA para obtener ayuda. El consentimiento no es una condición de compra. Consulte nuestra <a href="/es/privacidad">Política de Privacidad</a> y <a href="/es/terminos">Términos de Servicio</a>.</span>
+            </label>
+
+            <!-- Honeypot — oculto para personas, lo llenan los bots → bloqueado por Make.com -->
+            <input type="text" id="hp_field" name="hp_field"
+                   style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
+                   autocomplete="off" tabindex="-1" aria-hidden="true" />
+
+            <p class="form-error-msg" id="formError">Complete todos los campos obligatorios.</p>
+            <button type="submit" class="btn-primary" id="leadSubmitBtn">
+              Solicitar mi Diagnóstico Gratuito →
+            </button>
+            <p class="privacy-note">🔒 Usamos su información únicamente para responder a su solicitud y enviarle las comunicaciones que autorice.</p>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <div class="icon-chip"><svg><use href="#i-rocket"/></svg></div>
+            <h3>¡Ya está en la lista!</h3>
+            <p>Gracias — recibimos su solicitud de diagnóstico. Le contactaremos en <strong>1 día hábil</strong>.</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted)">Su solicitud está en el proceso de PAIRDEN y lista para revisión.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Banda CTA ── -->
+  <section class="cta-band">
+    <div class="container">
+      <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN — People. AI. Better Together." class="cta-wordmark reveal" />
+      <p class="eyebrow reveal" style="text-align:center">Escúchelo usted mismo</p>
+      <h2 class="reveal">Llame a la Recepcionista con IA.<br>Trate de Confundirla.</h2>
+      <p class="reveal reveal-d1">Haga las mismas preguntas que hacen sus clientes. Pruebe con un trabajo urgente, una duda sobre el área de cobertura o una llamada fuera de horario.</p>
+      <div class="cta-actions reveal reveal-d2">
+        <a href="tel:+18406882967" class="btn-primary" style="font-size:16px;min-height:58px;padding:0 36px">Llame al (840) 688-2967</a>
+        <a href="#contact" class="btn-ghost" style="font-size:16px;min-height:58px;padding:0 36px">
+          Diagnóstico Gratuito →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pie de página ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" class="footer-wordmark" />
+          <p>Sitios web, citas, reseñas, seguimiento de llamadas perdidas y recepción telefónica con IA para negocios de servicio del Inland Empire y el Sur de California.</p>
+          <div class="footer-contact">
+            <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
+            <a href="tel:+18406882967">(840) 688-2967</a>
+          </div>
+          <div class="footer-social" aria-label="PAIRDEN en redes sociales">
+            <a href="https://instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+            <a href="https://tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://linkedin.com/company/pairdenai" rel="noopener" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#services">Sitio Web + Presencia en Google</a></li>
+            <li><a href="#services">Citas + Recordatorios</a></li>
+            <li><a href="#services">Mensaje por Llamada Perdida</a></li>
+            <li><a href="#services">Motor de Reseñas</a></li>
+            <li><a href="/es/frontdesk">Recepcionista con IA</a></li>
+            <li><a href="#services">SEO Local</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#plans">Planes</a></li>
+            <li><a href="#about">Por qué PAIRDEN</a></li>
+            <li><a href="/tools">Herramientas Gratis</a></li>
+            <li><a href="/es/faq">Preguntas Frecuentes</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA</span>
+        <span><a href="/es/privacidad">Política de Privacidad</a> · <a href="/es/terminos">Términos de Servicio</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="/site.js" defer></script>
+  <script>
+    /* ────────────────────────────────────────────────────────────────
+       Webhook de Make.com — mismo endpoint y mismas llaves que la
+       versión en inglés. NO renombrar llaves: el escenario de Make
+       depende de ellas.
+    ──────────────────────────────────────────────────────────────── */
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/4s7yesdxybsh7nwvek8tgjtf63gkaa1c";
+
+    const serviceDetails = {
+      website: {
+        icon: "i-monitor",
+        title: "Sitio Web + Presencia en Google",
+        text: "Un sitio web profesional, un Perfil de Empresa en Google optimizado y un formulario de cotización que envía las solicitudes nuevas a su teléfono. El hospedaje, la seguridad y las actualizaciones quedan cubiertos.",
+        pills: ["Desde $147/mes", "Visibilidad local"]
+      },
+      booking: {
+        icon: "i-workflow",
+        title: "Citas + Recordatorios",
+        text: "Permita que sus clientes agenden en línea, cobre depósitos a través de su propia cuenta de Stripe y envíe confirmaciones automáticas más recordatorios por SMS 24 y 2 horas antes.",
+        pills: ["$197/mes", "Menos citas perdidas"]
+      },
+      missedcall: {
+        icon: "i-zap",
+        title: "Mensaje por Llamada Perdida",
+        text: "Cuando una llamada queda sin contestar, el cliente recibe de inmediato un mensaje de texto útil para que la conversación siga antes de que llame a otra empresa.",
+        pills: ["$97/mes", "Prueba de 30 días disponible"]
+      },
+      reviews: {
+        icon: "i-thumbs",
+        title: "Motor de Reseñas",
+        text: "Solicite automáticamente una reseña de Google al terminar el trabajo, canalice los comentarios privados por la vía adecuada y mantenga las respuestas al día sin sumar otra tarea diaria.",
+        pills: ["$147/mes", "Prueba de 30 días disponible"]
+      },
+      receptionist: {
+        icon: "i-bot",
+        title: "Recepcionista con IA",
+        text: "Cubra el horario nocturno, las llamadas que se acumulan o todas sus llamadas con una recepcionista con IA configurada para su negocio: responde preguntas comunes, toma los datos del trabajo y sigue sus reglas de traspaso.",
+        pills: ["Planes desde $197/mes", "Línea de demostración"],
+        action: { href: "/es/frontdesk", label: "Ver planes de recepcionista con IA ->" }
+      },
+      seo: {
+        icon: "i-search",
+        title: "SEO Local",
+        text: "Trabajo continuo sobre su Perfil de Empresa en Google, limpieza de directorios, contenido local y reportes mensuales de posicionamiento frente a los competidores que usted elija. Este servicio necesita tiempo suficiente para que las señales de búsqueda se desarrollen.",
+        pills: ["$497/mes", "Plazos de 6 o 12 meses"]
+      },
+      chat: {
+        icon: "i-sparkles",
+        title: "Chat con IA en su Sitio",
+        text: "Responda las preguntas frecuentes de su sitio a toda hora, capture el nombre y el número del visitante y avise al dueño cuando haya un cliente listo para dar seguimiento.",
+        pills: ["$97/mes", "Prueba de 30 días disponible"]
+      },
+      winback: {
+        icon: "i-mail",
+        title: "Campaña de Recuperación de Clientes",
+        text: "Lleve una oferta real a sus clientes anteriores con una campaña de reactivación enfocada, con aviso de cancelación conforme a la ley y una forma clara de medir las respuestas.",
+        pills: ["$497 pago único", "Reactivación de clientes"]
+      }
+    };
+
+    (function initServiceDetails() {
+      const tiles = [...document.querySelectorAll(".service-tile[data-service]")];
+      const panel = document.getElementById("serviceDetailPanel");
+      const icon = document.getElementById("serviceDetailIcon");
+      const title = document.getElementById("serviceDetailTitle");
+      const text = document.getElementById("serviceDetailText");
+      const pills = document.getElementById("serviceDetailPills");
+      const actions = document.getElementById("serviceDetailActions");
+      if (!tiles.length || !panel || !icon || !title || !text || !pills || !actions) return;
+
+      let activeService = "";
+
+      function closePanel() {
+        activeService = "";
+        panel.classList.remove("open");
+        tiles.forEach(tile => {
+          tile.classList.remove("is-active");
+          tile.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      function openPanel(tile) {
+        const key = tile.dataset.service;
+        const detail = serviceDetails[key];
+        if (!detail) return;
+        if (activeService === key) { closePanel(); return; }
+
+        activeService = key;
+        tiles.forEach(item => {
+          const isActive = item === tile;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-expanded", isActive ? "true" : "false");
+        });
+
+        icon.innerHTML = `<svg><use href="#${detail.icon}"/></svg>`;
+        title.textContent = detail.title;
+        text.textContent = detail.text;
+        pills.innerHTML = detail.pills.map(pill => `<span class="result-pill">${pill}</span>`).join("");
+        actions.innerHTML = detail.action
+          ? `<a class="service-detail-link" href="${detail.action.href}">${detail.action.label}</a>`
+          : "";
+        panel.classList.add("open");
+      }
+
+      tiles.forEach(tile => {
+        tile.addEventListener("click", () => openPanel(tile));
+        tile.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " " && event.key !== "Spacebar") return;
+          event.preventDefault();
+          openPanel(tile);
+        });
+      });
+    })();
+
+    function calculateIntentScore({ services, goal, phone }) {
+      let score = 40; // base
+
+      const packageScores = {
+        "Online Foundation": 8,
+        "Growth Engine": 18,
+        "AI Front Office": 25,
+        "Un servicio individual": 6
+      };
+      const primaryInterest = Array.isArray(services) ? services[0] : services;
+      score += packageScores[primaryInterest] || 0;
+
+      const svcCount = Array.isArray(services) ? services.length : 0;
+      score += Math.min(svcCount * 5, 15);
+
+      if (goal && goal.trim().length > 10) score += 5;
+      if (phone && phone.trim().length >= 7) score += 5;
+
+      return Math.min(score, 100);
+    }
+
+    async function submitToMake({ firstName, lastName, company, businessType, email, phone, services, budget, goal, honeypot, smsConsent = false }) {
+      if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL === "YOUR_MAKE_WEBHOOK_URL") {
+        console.warn("Make.com webhook not configured — form submission not sent.");
+        return { ok: false, fallback: true };
+      }
+      const intentScore = calculateIntentScore({ services, goal, phone });
+      try {
+        const res = await fetch(MAKE_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            company,
+            businessType,
+            email,
+            phone,
+            services: Array.isArray(services) ? services : [services].filter(Boolean),
+            goal:     goal || "",
+            budget:   budget || "",
+            smsConsent: Boolean(smsConsent),
+            intentScore,
+            honeypot: honeypot || "",
+            submittedAt: new Date().toISOString()
+          })
+        });
+        return { ok: res.ok, intentScore };
+      } catch (err) {
+        console.error("Make.com webhook error:", err);
+        return { ok: false };
+      }
+    }
+
+    /* ── Las tarjetas de plan rellenan el formulario ── */
+    const packageInterestSelect = document.getElementById("packageInterest");
+    document.querySelectorAll(".package-select[data-package]").forEach(link => {
+      link.addEventListener("click", () => {
+        if (packageInterestSelect) packageInterestSelect.value = link.dataset.package || "";
+      });
+    });
+
+    /* ── Campo "Otro" del tipo de negocio ── */
+    const businessTypeSelect     = document.getElementById("businessType");
+    const businessTypeOtherGroup = document.getElementById("businessTypeOtherGroup");
+    const businessTypeOtherInput = document.getElementById("businessTypeOther");
+    businessTypeSelect.addEventListener("change", () => {
+      const isOther = businessTypeSelect.value === "Otro";
+      businessTypeOtherGroup.style.display = isOther ? "block" : "none";
+      if (!isOther) businessTypeOtherInput.value = "";
+    });
+
+    /* ── Formulario ── */
+    const form        = document.getElementById("leadForm");
+    const formSuccess = document.getElementById("formSuccess");
+    const formError   = document.getElementById("formError");
+    const submitBtn   = document.getElementById("leadSubmitBtn");
+
+    if (form) form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      formError.textContent = "Complete todos los campos obligatorios y acepte el consentimiento de comunicación.";
+      formError.style.display = "none";
+
+      const firstName        = document.getElementById("firstName").value.trim();
+      const company          = document.getElementById("company").value.trim();
+      const businessTypeSel  = document.getElementById("businessType").value;
+      const businessTypeOther = document.getElementById("businessTypeOther").value.trim();
+      const email            = document.getElementById("email").value.trim();
+      const phone            = document.getElementById("phone").value.trim();
+      const packageInterest  = document.getElementById("packageInterest").value;
+      const smsConsent       = document.getElementById("smsConsent").checked;
+
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const phoneValid = /^[\d\s\-\+\(\)\.]{7,20}$/.test(phone);
+      const businessTypeValid = businessTypeSel && (businessTypeSel !== "Otro" || businessTypeOther);
+      if (!firstName || !company || !businessTypeValid || !email || !phone || !emailValid || !phoneValid || !smsConsent) {
+        formError.style.display = "block";
+        return;
+      }
+
+      const businessType = businessTypeSel === "Otro" ? businessTypeOther : businessTypeSel;
+      const services = [packageInterest || "Needs recommendation"];
+      const budget   = "";
+      const goal     = document.getElementById("goal").value.trim();
+      const honeypot = document.getElementById("hp_field").value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando…";
+
+      const result = await submitToMake({ firstName, lastName: "Not provided", company, businessType, email, phone, services, budget, goal, honeypot, smsConsent });
+
+      if (result.ok || result.fallback) {
+        form.style.display        = "none";
+        formSuccess.style.display = "flex";
+        formSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        formError.textContent      = "Algo salió mal — inténtelo de nuevo o escríbanos directamente.";
+        formError.style.display    = "block";
+        submitBtn.disabled         = false;
+        submitBtn.textContent      = "Solicitar mi Diagnóstico Gratuito →";
+      }
+    });
+  </script>
+</body>
+</html>

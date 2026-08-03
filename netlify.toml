@@ -1,0 +1,156 @@
+# Netlify config for the PAIRDEN public site (static, no build step).
+# This repo's root IS the site root (index.html + the other .html pages live here).
+# Netlify automatically serves 404.html for unknown paths.
+
+[build]
+  publish = "."
+  command = ""
+
+# ═══════════════════════════════════════════════════════════════════
+# AXIS DOMAIN MIGRATION — ported VERBATIM from reference/legacy/netlify.toml
+# Do not edit without Michael's approval. Preserve every path while
+# permanently moving the former Axis domain to PAIRDEN.
+# Keep axismarketingai.net assigned to this Netlify site so these host-level
+# redirects continue working during the domain migration.
+# ═══════════════════════════════════════════════════════════════════
+[[redirects]]
+  from = "http://axismarketingai.net/*"
+  to = "https://pairden.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://axismarketingai.net/*"
+  to = "https://pairden.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.axismarketingai.net/*"
+  to = "https://pairden.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.axismarketingai.net/*"
+  to = "https://pairden.com/:splat"
+  status = 301
+  force = true
+
+# 301s from the old page filenames (with spaces) to the new clean URLs.
+# Paths with spaces must be URL-encoded (%20) in redirect rules.
+[[redirects]]
+  from = "/FAQ.html"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/Free%20Tools.html"
+  to = "/tools.html"
+  status = 301
+
+[[redirects]]
+  from = "/Privacy%20Policy.html"
+  to = "/privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/Terms%20of%20Service.html"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/Landing%20Page.html"
+  to = "/"
+  status = 301
+
+# ── Short links → plan deep links (Phase 3) ────────────────────────
+[[redirects]]
+  from = "/growth"
+  to = "/?plan=growth"
+  status = 302
+
+[[redirects]]
+  from = "/foundation"
+  to = "/?plan=foundation"
+  status = 302
+
+[[redirects]]
+  from = "/frontoffice"
+  to = "/?plan=frontoffice"
+  status = 302
+
+[[redirects]]
+  from = "/demo"
+  to = "/frontdesk"
+  status = 302
+
+# ── Clean-URL rewrites — English ───────────────────────────────────
+[[redirects]]
+  from = "/frontdesk"
+  to = "/frontdesk.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/tools"
+  to = "/tools.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+# ── Clean-URL rewrites — Spanish (/es/) ────────────────────────────
+[[redirects]]
+  from = "/es"
+  to = "/es/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/"
+  to = "/es/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/frontdesk"
+  to = "/es/frontdesk.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/faq"
+  to = "/es/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/privacidad"
+  to = "/es/privacidad.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/terminos"
+  to = "/es/terminos.html"
+  status = 200
+
+# ── Security headers (ported from legacy) ──────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

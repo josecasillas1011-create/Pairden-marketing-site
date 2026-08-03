@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Tools — PAIRDEN</title>
+  <meta name="description" content="Free PAIRDEN tools for local service businesses: estimate missed-call revenue, audit lead-system gaps, and find the right package. No email required." />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
+  <meta property="og:title" content="Free Marketing Tools — PAIRDEN" />
+  <meta property="og:description" content="Estimate missed-call revenue, audit your lead system, and find the right PAIRDEN package." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pairden.com/tools" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pairden.com/tools" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .page-head { padding: 160px 0 24px; text-align: center; }
+    .page-head p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 16px auto 0; max-width: 560px; }
+    @media (max-width: 600px) { .page-head { padding-top: 130px; } }
+  </style>
+</head>
+<body>
+  <!-- SVG icon set -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol>
+  </svg>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" height="34" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#plans">Plans</a></li>
+        <li><a href="/frontdesk">AI Front Desk</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <a href="/es/" class="lang-toggle" hreflang="es" aria-label="Ver el sitio en español">
+        <span class="is-current">EN</span> ⇄ <span>ES</span>
+      </a>
+      <a href="/#contact" class="btn-primary nav-cta">Get Free Audit →</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#plans">Plans</a></li>
+        <li><a href="/frontdesk">AI Front Desk</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="/es/" class="lang-toggle" hreflang="es"><span class="is-current">EN</span> ⇄ <span>ES</span></a>
+    <a href="/#contact" class="btn-primary">Get Free Audit →</a>
+  </div>
+
+  <!-- ── Interactive Tools ── -->
+  <header class="page-head">
+    <div class="container">
+      <p class="eyebrow reveal">Free tools</p>
+      <h1 class="reveal">Find the Leaks Before<br>You Add More Leads.</h1>
+      <p class="reveal reveal-d1">Three free tools—no email required. Estimate missed-call revenue, audit your current lead system, and find the PAIRDEN plan that best fits your operation.</p>
+    </div>
+  </header>
+
+  <section class="section-pad" id="tools" style="padding-top:36px">
+    <div class="container">
+      <div class="tools-tabs reveal">
+        <button class="tools-tab active" data-tab="roi"><svg><use href="#i-coins"/></svg> Missed-Call Calculator</button>
+        <button class="tools-tab" data-tab="audit"><svg><use href="#i-search"/></svg> Lead-System Audit</button>
+        <button class="tools-tab" data-tab="pricing"><svg><use href="#i-clipboard"/></svg> Package Finder</button>
+      </div>
+
+      <!-- Missed-call calculator -->
+      <div class="tools-panel active" id="tab-roi">
+        <div class="tool-card glass-card reveal">
+          <h3>Missed-Call Revenue Calculator</h3>
+          <p>Estimate how much work may be slipping away when callers reach voicemail and move on.</p>
+          <div class="tool-2col">
+            <div class="tool-field">
+              <label for="missed-weekly-calls">Incoming calls per week</label>
+              <input type="number" id="missed-weekly-calls" placeholder="50" min="0" />
+            </div>
+            <div class="tool-field">
+              <label for="missed-rate">Estimated missed-call rate (%)</label>
+              <input type="number" id="missed-rate" placeholder="20" min="0" max="100" />
+            </div>
+            <div class="tool-field">
+              <label for="missed-job-value">Average booked job value ($)</label>
+              <input type="number" id="missed-job-value" placeholder="350" min="0" />
+            </div>
+            <div class="tool-field">
+              <label for="missed-close-rate">Close rate after contact (%)</label>
+              <input type="number" id="missed-close-rate" placeholder="30" min="0" max="100" />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="calcMissedCalls()" style="margin-top:18px;width:100%">Estimate Missed-Call Revenue →</button>
+          <div class="tool-result" id="roi-result">
+            <div class="tool-result-grid">
+              <div>
+                <div class="tool-result-label">Missed calls / month</div>
+                <div class="tool-result-value" id="roi-current">—</div>
+              </div>
+              <div>
+                <div class="tool-result-label">Recoverable jobs</div>
+                <div class="tool-result-value" id="roi-projected" style="color:var(--accent-pale)">—</div>
+              </div>
+              <div>
+                <div class="tool-result-label">Revenue opportunity</div>
+                <div class="tool-result-value" id="roi-uplift">—</div>
+              </div>
+            </div>
+            <div class="tool-result-sub" id="roi-sub"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Audit Quiz -->
+      <div class="tools-panel" id="tab-audit">
+        <div class="tool-card glass-card">
+          <h3>Lead-System Audit</h3>
+          <p>Answer 6 quick questions and get a lead-system score based on visibility, response speed, booking, reviews, and call coverage.</p>
+          <div id="audit-questions">
+            <div class="quiz-question" data-q="0">
+              <p>1. Can local customers find and trust you online?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="0" data-val="10">Modern website + complete Google profile</button>
+                <button class="quiz-opt" data-q="0" data-val="6">One is solid, the other needs work</button>
+                <button class="quiz-opt" data-q="0" data-val="2">Both are outdated or incomplete</button>
+                <button class="quiz-opt" data-q="0" data-val="0">We barely show up online</button>
+              </div>
+            </div>
+            <div class="quiz-question" data-q="1">
+              <p>2. What happens when you miss a business call?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="1" data-val="10">An automated text or receptionist responds</button>
+                <button class="quiz-opt" data-q="1" data-val="6">We call back the same day</button>
+                <button class="quiz-opt" data-q="1" data-val="2">They reach voicemail and we check later</button>
+                <button class="quiz-opt" data-q="1" data-val="0">There is no consistent follow-up</button>
+              </div>
+            </div>
+            <div class="quiz-question" data-q="2">
+              <p>3. How do customers book and receive reminders?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="2" data-val="10">Online booking, deposits, and reminders</button>
+                <button class="quiz-opt" data-q="2" data-val="6">Online booking without reminders</button>
+                <button class="quiz-opt" data-q="2" data-val="2">Everything is handled by phone</button>
+                <button class="quiz-opt" data-q="2" data-val="0">We do not have a consistent booking system</button>
+              </div>
+            </div>
+            <div class="quiz-question" data-q="3">
+              <p>4. How consistently do completed jobs generate reviews?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="3" data-val="10">Every customer is asked automatically</button>
+                <button class="quiz-opt" data-q="3" data-val="6">We ask manually most of the time</button>
+                <button class="quiz-opt" data-q="3" data-val="2">We ask occasionally</button>
+                <button class="quiz-opt" data-q="3" data-val="0">We rarely or never ask</button>
+              </div>
+            </div>
+            <div class="quiz-question" data-q="4">
+              <p>5. How quickly does someone respond to a website inquiry?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="4" data-val="10">Within 5 minutes</button>
+                <button class="quiz-opt" data-q="4" data-val="6">Within the same day</button>
+                <button class="quiz-opt" data-q="4" data-val="2">Within a few days</button>
+                <button class="quiz-opt" data-q="4" data-val="0">Response time is inconsistent</button>
+              </div>
+            </div>
+            <div class="quiz-question" data-q="5">
+              <p>6. Who answers calls outside normal business hours?</p>
+              <div class="quiz-options">
+                <button class="quiz-opt" data-q="5" data-val="10">A trained person or configured system</button>
+                <button class="quiz-opt" data-q="5" data-val="6">We have limited after-hours coverage</button>
+                <button class="quiz-opt" data-q="5" data-val="2">Calls go to voicemail</button>
+                <button class="quiz-opt" data-q="5" data-val="0">The owner's personal cell is the only option</button>
+              </div>
+            </div>
+          </div>
+          <div id="audit-result" style="display:none;text-align:center;padding:10px 0">
+            <div style="display:flex;justify-content:center;margin-bottom:16px">
+              <div class="quiz-score-ring" id="scoreRing">
+                <span class="quiz-score-num" id="scoreNum">0</span>
+                <span class="quiz-score-lbl">/ 60</span>
+              </div>
+            </div>
+            <div style="font-size:20px;font-weight:800;margin-bottom:8px" id="scoreLabel"></div>
+            <div style="color:var(--muted);font-size:13px;line-height:1.65;max-width:420px;margin:0 auto 20px" id="scoreDesc"></div>
+            <a href="/#contact" class="btn-primary" style="display:inline-flex">Get My Free Full Audit →</a>
+            <button onclick="retakeAudit()" style="display:block;margin:12px auto 0;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline">Retake Quiz</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Estimator -->
+      <div class="tools-panel" id="tab-pricing">
+        <div class="tool-card glass-card">
+          <h3>PAIRDEN Package Finder</h3>
+          <p>Answer three questions to see which of the three connected plans is the most practical starting point.</p>
+          <div class="tool-field">
+            <label for="pe-type">Team size</label>
+            <select id="pe-type">
+              <option value="">— Select —</option>
+              <option value="solo">Solo owner</option>
+              <option value="small">2–3 people</option>
+              <option value="developed">4+ people or multiple crews</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="pe-rev">Biggest lead-system gap</label>
+            <select id="pe-rev">
+              <option value="">— Select —</option>
+              <option value="visibility">Website and Google presence</option>
+              <option value="missed">Missed calls and slow follow-up</option>
+              <option value="booking">Booking, reminders, and no-shows</option>
+              <option value="complete">Several pieces need to work together</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="pe-goal">Phone coverage needed</label>
+            <select id="pe-goal">
+              <option value="">— Select —</option>
+              <option value="none">No AI phone coverage right now</option>
+              <option value="afterhours">After-hours or overflow coverage</option>
+              <option value="full">Every call answered 24/7</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="calcPricing()" style="margin-top:18px;width:100%">Find My Starting Plan →</button>
+          <div class="tool-result" id="pricing-result">
+            <div class="tool-result-label">Recommended starting point</div>
+            <div class="tool-result-value" id="pricing-range" style="color:#fff"></div>
+            <div class="tool-result-sub" id="pricing-includes" style="margin-top:10px"></div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(163,177,198,0.12);font-size:12px;color:var(--muted)">
+              This recommendation is directional. The free systems audit confirms the right plan, setup details, and any individual service that may be a better first step.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA Band ── -->
+  <section class="cta-band">
+    <div class="container">
+      <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN — People. AI. Better Together." class="cta-wordmark reveal" />
+      <p class="eyebrow reveal" style="text-align:center">Ready to fix the first leak?</p>
+      <h2 class="reveal">Bring the Results to a Free<br>Systems Audit.</h2>
+      <p class="reveal reveal-d1">We will turn the calculator or audit result into the smallest practical next step for your business.</p>
+      <div class="cta-actions reveal reveal-d2">
+        <a href="/#contact" class="btn-primary" style="font-size:17px;min-height:58px;padding:0 36px">
+          Request My Free Systems Audit →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" class="footer-wordmark" />
+          <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
+          <div class="footer-contact">
+            <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
+            <a href="tel:+18406882967">(840) 688-2967</a>
+          </div>
+          <div class="footer-social" aria-label="PAIRDEN on social media">
+            <a href="https://instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+            <a href="https://tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://linkedin.com/company/pairdenai" rel="noopener" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/#services">Website + Google Presence</a></li>
+            <li><a href="/#services">Booking + Reminders</a></li>
+            <li><a href="/#services">Missed-Call Text-Back</a></li>
+            <li><a href="/#services">Review Engine</a></li>
+            <li><a href="/frontdesk">AI Receptionist</a></li>
+            <li><a href="/#services">Local SEO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/#plans">Plans</a></li>
+            <li><a href="/#about">Why PAIRDEN</a></li>
+            <li><a href="/tools">Free Tools</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA</span>
+        <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="/site.js" defer></script>
+  <script>
+    /* ── Tools tabs ── */
+    document.querySelectorAll(".tools-tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tools-tab").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tools-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    /* ── Missed-call calculator ── */
+    function calcMissedCalls() {
+      const weeklyCalls = parseFloat(document.getElementById("missed-weekly-calls").value) || 0;
+      const missedRate  = parseFloat(document.getElementById("missed-rate").value) || 0;
+      const jobValue    = parseFloat(document.getElementById("missed-job-value").value) || 0;
+      const closeRate   = parseFloat(document.getElementById("missed-close-rate").value) || 0;
+      if (!weeklyCalls || !missedRate || !jobValue || !closeRate || missedRate > 100 || closeRate > 100) {
+        alert("Please enter valid values in all four fields. Percentages must be between 1 and 100.");
+        return;
+      }
+      const monthlyCalls = weeklyCalls * 4.33;
+      const missedCalls = monthlyCalls * (missedRate / 100);
+      const recoverableJobs = missedCalls * (closeRate / 100);
+      const revenueOpportunity = recoverableJobs * jobValue;
+      const fmt = n => "$" + Math.round(n).toLocaleString();
+      document.getElementById("roi-current").textContent = Math.round(missedCalls).toLocaleString();
+      document.getElementById("roi-projected").textContent = recoverableJobs.toFixed(1);
+      document.getElementById("roi-uplift").textContent = fmt(revenueOpportunity);
+      document.getElementById("roi-sub").textContent = "This estimate assumes " + weeklyCalls.toLocaleString() + " incoming calls per week, a " + missedRate + "% missed-call rate, and a " + closeRate + "% close rate after contact. It illustrates opportunity, not guaranteed recovered revenue.";
+      document.getElementById("roi-result").classList.add("visible");
+    }
+
+    /* ── Audit Quiz ── */
+    const auditAnswers = {};
+    document.querySelectorAll(".quiz-opt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const q = btn.dataset.q;
+        document.querySelectorAll(`.quiz-opt[data-q="${q}"]`).forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        auditAnswers[q] = parseInt(btn.dataset.val);
+        if (Object.keys(auditAnswers).length === 6) {
+          setTimeout(showAuditResult, 400);
+        }
+      });
+    });
+    function showAuditResult() {
+      const score = Object.values(auditAnswers).reduce((a, b) => a + b, 0);
+      const pct   = Math.round((score / 60) * 100);
+      document.getElementById("scoreNum").textContent = score;
+      document.getElementById("scoreRing").style.setProperty("--pct", pct + "%");
+      let label, desc;
+      if (score >= 48) {
+        label = "Strong Lead System";
+        desc  = "Your core response and follow-up system is in good shape. The next step is tightening reporting, finding smaller leaks, and improving the handoffs that still depend on memory.";
+      } else if (score >= 30) {
+        label = "Ready to Connect";
+        desc  = "You have several useful pieces, but they are not working as one system yet. Booking, missed-call follow-up, reviews, or response speed is likely the best first connection.";
+      } else if (score >= 15) {
+        label = "High Opportunity";
+        desc  = "Multiple operational gaps are likely costing conversations before they become booked work. Start with the single leak that can be measured most clearly, then build from there.";
+      } else {
+        label = "Critical Gaps";
+        desc  = "The current process relies heavily on manual response and memory. A basic online foundation plus one fast follow-up system would create the clearest immediate improvement.";
+      }
+      document.getElementById("scoreLabel").textContent = label;
+      document.getElementById("scoreDesc").textContent  = desc;
+      document.getElementById("audit-questions").style.display = "none";
+      document.getElementById("audit-result").style.display    = "block";
+    }
+    function retakeAudit() {
+      Object.keys(auditAnswers).forEach(k => delete auditAnswers[k]);
+      document.querySelectorAll(".quiz-opt").forEach(b => b.classList.remove("selected"));
+      document.getElementById("audit-questions").style.display = "";
+      document.getElementById("audit-result").style.display    = "none";
+    }
+
+    /* ── Pricing Estimator ── */
+    function calcPricing() {
+      const type = document.getElementById("pe-type").value;
+      const rev  = document.getElementById("pe-rev").value;
+      const goal = document.getElementById("pe-goal").value;
+      if (!type || !rev || !goal) { alert("Please answer all three fields."); return; }
+      let plan = "Growth Engine";
+      if (type === "developed" || rev === "complete" || goal === "full") plan = "AI Front Office";
+      else if (type === "solo" && rev === "visibility" && goal === "none") plan = "Online Foundation";
+
+      const details = {
+        "Online Foundation": {
+          price: "$147 /mo",
+          text: "$250 setup. Professional 3-page website, Google Business Profile optimization, instant-quote routing, hosting, updates, and monthly snapshot reporting."
+        },
+        "Growth Engine": {
+          price: "$397 /mo",
+          text: "$500 setup. Adds a multi-page site, booking with deposits, SMS reminders, missed-call text-back, review automation, and monthly performance reporting."
+        },
+        "AI Front Office": {
+          price: "$997 /mo",
+          text: "$997 setup. Adds a full 24/7 AI receptionist, local SEO, website chat, quarterly win-back campaigns, priority support, and a monthly strategy call."
+        }
+      }[plan];
+      const afterHoursNote = goal === "afterhours" && plan !== "AI Front Office"
+        ? " An individual After-Hours AI Receptionist can also be added from $197/month."
+        : "";
+      document.getElementById("pricing-range").textContent = plan + " · " + details.price;
+      document.getElementById("pricing-includes").textContent = details.text + afterHoursNote;
+      document.getElementById("pricing-result").classList.add("visible");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Front Desk for Local Service Businesses | PAIRDEN</title>
+  <meta name="description" content="A 24/7 AI receptionist for local service businesses that answers missed calls, captures job details, handles common questions, and helps route urgent leads." />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
+  <link rel="canonical" href="https://pairden.com/frontdesk" />
+  <link rel="alternate" hreflang="en" href="https://pairden.com/frontdesk" />
+  <link rel="alternate" hreflang="es" href="https://pairden.com/es/frontdesk" />
+  <link rel="alternate" hreflang="x-default" href="https://pairden.com/frontdesk" />
+  <meta property="og:title" content="AI Front Desk for Local Service Businesses | PAIRDEN" />
+  <meta property="og:description" content="Call the demo line and hear an AI receptionist capture a real local-service lead." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pairden.com/frontdesk" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Front Desk for Local Service Businesses | PAIRDEN" />
+  <meta name="twitter:description" content="A 24/7 AI receptionist that helps local service businesses answer missed calls and capture job details." />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "PAIRDEN AI Receptionist",
+    "provider": {
+      "@type": "Organization",
+      "name": "PAIRDEN",
+      "legalName": "Pairden Technologies LLC",
+      "url": "https://pairden.com/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Menifee",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "areaServed": ["Inland Empire", "Southern California"],
+    "serviceType": "AI receptionist and missed-call coverage for local service businesses",
+    "url": "https://pairden.com/frontdesk"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .frontdesk-hero {
+      align-items: center;
+      display: flex;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 148px 0 72px;
+    }
+    .frontdesk-hero::before {
+      background:
+        radial-gradient(600px circle at 78% 24%, rgba(23,200,244,0.18), transparent 62%),
+        radial-gradient(760px circle at 16% 18%, rgba(6,99,199,0.16), transparent 58%);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+    .frontdesk-hero-grid {
+      align-items: center;
+      display: grid;
+      gap: 56px;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+      position: relative;
+      z-index: 1;
+    }
+    .frontdesk-badge {
+      align-items: center;
+      background: rgba(10,132,255,0.1);
+      border: 1px solid rgba(23,200,244,0.42);
+      border-radius: 999px;
+      color: var(--accent-bright);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 800;
+      gap: 9px;
+      letter-spacing: 0.16em;
+      margin-bottom: 24px;
+      padding: 8px 15px;
+      text-transform: uppercase;
+    }
+    .signal-dot {
+      animation: blink 2s ease-in-out infinite;
+      background: var(--accent-bright);
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(23,200,244,0.8);
+      flex: 0 0 7px;
+      height: 7px;
+      width: 7px;
+    }
+    .frontdesk-hero h1 { max-width: 780px; }
+    .frontdesk-sub {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.72;
+      margin: 24px 0 34px;
+      max-width: 610px;
+    }
+    .frontdesk-actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .frontdesk-actions .btn-primary,
+    .frontdesk-actions .btn-ghost { min-height: 56px; }
+    .trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+      max-width: 720px;
+    }
+    .trust-chip {
+      align-items: center;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #DDE9F8;
+      display: flex;
+      font-size: 12px;
+      font-weight: 700;
+      gap: 8px;
+      min-height: 38px;
+      min-width: 168px;
+      padding: 8px 12px;
+    }
+    .trust-chip span {
+      align-items: center;
+      background: rgba(23,200,244,0.14);
+      border: 1px solid rgba(23,200,244,0.38);
+      border-radius: 50%;
+      color: var(--accent-bright);
+      display: inline-flex;
+      flex: 0 0 18px;
+      font-size: 10px;
+      font-weight: 800;
+      height: 18px;
+      justify-content: center;
+      width: 18px;
+    }
+    .demo-call-card {
+      border-color: var(--glass-border-hi);
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 0 76px rgba(10,132,255,0.18), var(--shadow);
+    }
+    .demo-call-top {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+    }
+    .demo-call-status {
+      align-items: center;
+      color: var(--accent-bright);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 800;
+      gap: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .demo-call-pill {
+      background: rgba(23,200,244,0.1);
+      border: 1px solid rgba(23,200,244,0.28);
+      border-radius: 999px;
+      color: var(--accent-pale);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+    .demo-call-card h2 {
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      margin-bottom: 10px;
+    }
+    .demo-call-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .demo-number {
+      color: var(--accent-bright);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: clamp(1.55rem, 3vw, 2.3rem);
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin: 18px 0;
+      overflow-wrap: anywhere;
+    }
+    .demo-card-actions {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+      margin: 18px 0 22px;
+    }
+    .demo-card-actions .btn-primary,
+    .demo-card-actions .btn-ghost {
+      min-height: 50px;
+      padding: 0 16px;
+      text-align: center;
+    }
+    .call-transcript {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      display: grid;
+      gap: 13px;
+      margin-top: 20px;
+      padding: 16px;
+    }
+    .transcript-line { display: grid; gap: 5px; }
+    .transcript-label {
+      color: var(--accent-pale);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .transcript-line p {
+      color: #F7FBFF;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .capture-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 2px;
+    }
+    .capture-row span {
+      background: rgba(10,132,255,0.1);
+      border: 1px solid rgba(23,200,244,0.28);
+      border-radius: 999px;
+      color: #DDF5FF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+    }
+    .problem-grid, .include-grid, .fit-grid { display: grid; gap: 16px; }
+    .problem-grid { grid-template-columns: repeat(3, 1fr); }
+    .include-grid { grid-template-columns: repeat(3, 1fr); }
+    .fit-grid { grid-template-columns: repeat(6, 1fr); }
+    .front-card { padding: 24px; }
+    .front-card h3 { font-size: 17px; margin-bottom: 9px; }
+    .front-card p { color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .workflow-steps {
+      counter-reset: step;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .workflow-step { min-height: 240px; padding: 28px; position: relative; }
+    .workflow-step::before {
+      align-items: center;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
+      border-radius: 50%;
+      color: #fff;
+      content: counter(step);
+      counter-increment: step;
+      display: flex;
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 800;
+      height: 46px;
+      justify-content: center;
+      margin-bottom: 20px;
+      width: 46px;
+    }
+    .phase-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      margin: 26px auto 0;
+      max-width: 780px;
+      text-align: center;
+    }
+    .demo-proof-grid {
+      align-items: stretch;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .demo-test-card { border-color: var(--glass-border-hi); padding: 30px; }
+    .demo-facts { display: grid; gap: 10px; margin: 24px 0; }
+    .demo-facts div {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      padding-bottom: 10px;
+    }
+    .demo-facts span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .demo-facts strong { color: var(--text); font-size: 14px; text-align: right; }
+    .demo-guide-card { align-content: center; min-height: 100%; padding: 30px; }
+    .receptionist-pricing-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pricing-single { display: flex; flex-direction: column; padding: 34px; }
+    .pricing-single.featured {
+      border-color: var(--accent-bright);
+      box-shadow: 0 24px 70px rgba(0,3,12,0.68), 0 0 38px rgba(10,132,255,0.2), inset 0 1px 0 var(--highlight);
+    }
+    .pricing-head {
+      align-items: start;
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .price {
+      color: var(--accent-bright);
+      font-family: var(--font-mono);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 0.95;
+      white-space: nowrap;
+    }
+    .price small {
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .setup-note {
+      background: rgba(10,132,255,0.08);
+      border: 1px solid rgba(23,200,244,0.28);
+      border-radius: 12px;
+      color: #DDEFFF;
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 22px;
+      padding: 14px 16px;
+    }
+    .feature-list { display: grid; gap: 10px; list-style: none; margin: 0 0 24px; }
+    .feature-list li {
+      align-items: flex-start;
+      color: #EAF4FF;
+      display: flex;
+      font-size: 14px;
+      gap: 10px;
+      line-height: 1.55;
+    }
+    .feature-list li::before {
+      color: var(--accent-bright);
+      content: "✓";
+      flex: 0 0 auto;
+      font-weight: 800;
+    }
+    .pricing-single .btn-primary,
+    .pricing-single .btn-ghost { margin-top: auto; width: 100%; }
+    .plan-limit { color: var(--muted); font-size: 12px; line-height: 1.55; margin: -10px 0 20px; }
+    .full-office-callout { margin: 22px auto 0; max-width: 860px; padding: 20px 24px; text-align: center; }
+    .full-office-callout p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .full-office-callout a { color: var(--accent-bright); font-weight: 800; }
+    .usage-note {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      margin-top: 10px;
+      padding-top: 18px;
+    }
+    .fit-card {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      min-height: 92px;
+      padding: 18px 10px;
+      text-align: center;
+    }
+    .fit-card h3 { font-size: 15px; line-height: 1.25; margin: 0; }
+    .weak-fit-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      margin: 22px auto 0;
+      max-width: 720px;
+      text-align: center;
+    }
+    .book-wrap {
+      align-items: center;
+      display: grid;
+      gap: 36px;
+      grid-template-columns: 1fr minmax(300px, 420px);
+    }
+    .book-copy p:not(.eyebrow) {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 16px 0 26px;
+      max-width: 560px;
+    }
+    .book-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact-panel { padding: 28px; }
+    .contact-panel h3 { font-size: 19px; margin-bottom: 8px; }
+    .contact-panel p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .contact-links { display: grid; gap: 10px; }
+    .contact-links a { color: var(--accent-bright); font-weight: 700; overflow-wrap: anywhere; }
+    .contact-links a:hover { text-decoration: underline; }
+    .footer-col .current-service { color: var(--accent-bright); }
+
+    @media (max-width: 1100px) {
+      .frontdesk-hero-grid { gap: 34px; grid-template-columns: 1fr; }
+      .demo-call-card { max-width: 760px; }
+      .fit-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .frontdesk-hero { min-height: auto; padding: 132px 0 58px; }
+      .problem-grid, .workflow-steps, .include-grid, .demo-proof-grid, .book-wrap { grid-template-columns: 1fr; }
+      .workflow-step { min-height: auto; }
+      .pricing-head { display: grid; gap: 14px; }
+      .receptionist-pricing-grid { grid-template-columns: 1fr; }
+      .pricing-single { margin: 0 auto; max-width: 620px; width: 100%; }
+      .price { white-space: normal; }
+    }
+    @media (max-width: 600px) {
+      .frontdesk-hero { padding: 104px 0 44px; }
+      .frontdesk-hero h1 { font-size: clamp(2.05rem, 10vw, 2.5rem); }
+      .frontdesk-sub { font-size: 16px; line-height: 1.58; margin: 18px 0 24px; }
+      .trust-strip { gap: 8px; margin-top: 24px; }
+      .trust-chip { flex: 1 1 calc(50% - 4px); font-size: 11px; min-width: 0; padding: 8px 9px; white-space: normal; }
+      .frontdesk-actions, .book-actions { flex-direction: column; align-items: stretch; }
+      .frontdesk-actions .btn-primary, .frontdesk-actions .btn-ghost,
+      .book-actions .btn-primary, .book-actions .btn-ghost { width: 100%; }
+      .demo-call-card, .front-card, .workflow-step, .demo-test-card,
+      .demo-guide-card, .pricing-single, .contact-panel { padding: 20px 16px; }
+      .demo-card-actions { grid-template-columns: 1fr; }
+      .demo-facts div { align-items: flex-start; display: grid; gap: 4px; }
+      .demo-facts strong { text-align: left; }
+      .fit-grid { grid-template-columns: 1fr 1fr; }
+      .frontdesk-badge { font-size: 9px; padding: 7px 11px; }
+    }
+    @media (max-width: 390px) {
+      .fit-grid { grid-template-columns: 1fr; }
+      .trust-chip { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.25-1.25a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92Z"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-workflow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  </svg>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" height="34" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#book">Contact</a></li>
+      </ul>
+      <a href="/es/frontdesk" class="lang-toggle" hreflang="es" aria-label="Ver esta página en español">
+        <span class="is-current">EN</span> ⇄ <span>ES</span>
+      </a>
+      <a href="tel:+18406882967" class="btn-primary nav-cta">Call Demo -&gt;</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#book">Contact</a></li>
+    </ul>
+    <a href="/es/frontdesk" class="lang-toggle" hreflang="es"><span class="is-current">EN</span> ⇄ <span>ES</span></a>
+    <a href="tel:+18406882967" class="btn-primary">Call Demo -&gt;</a>
+  </div>
+
+  <main>
+    <section class="frontdesk-hero" id="home">
+      <div class="container">
+        <div class="frontdesk-hero-grid">
+          <div>
+            <div class="frontdesk-badge reveal">
+              <span class="signal-dot"></span>
+              AI Front Desk for Local Service Businesses
+            </div>
+            <h1 class="reveal reveal-d1">Missed calls should not turn into <span class="grad-text">missed jobs.</span></h1>
+            <p class="frontdesk-sub reveal reveal-d2">
+              PAIRDEN AI Receptionist covers after-hours, overflow, or every call. It answers approved questions, captures job details, can connect to booking, and routes urgent leads before they move on.
+            </p>
+            <div class="frontdesk-actions reveal reveal-d3">
+              <a href="tel:+18406882967" class="btn-primary">Call the Live Demo -&gt;</a>
+              <!-- BOOKING_URL placeholder — Michael supplies the Pairden GHL calendar link -->
+              <a href="BOOKING_URL" class="btn-ghost">Book a Setup Call</a>
+            </div>
+            <div class="trust-strip reveal reveal-d3">
+              <div class="trust-chip"><span>✓</span>After-hours or 24/7</div>
+              <div class="trust-chip"><span>✓</span>Built for local services</div>
+              <div class="trust-chip"><span>✓</span>English &amp; Spanish available</div>
+              <div class="trust-chip"><span>✓</span>Human handoff path</div>
+            </div>
+          </div>
+
+          <div class="demo-call-card glass-card reveal reveal-d2" id="demo-card">
+            <div class="demo-call-top">
+              <div class="demo-call-status"><span class="signal-dot"></span>Live Demo</div>
+              <div class="demo-call-pill">Inbound Test Line</div>
+            </div>
+            <h2>Test it like a real caller.</h2>
+            <p>Call the demo line and ask about a burst pipe, a weekend repair, pricing, or a service question. The agent should collect the lead without inventing details.</p>
+            <a href="tel:+18406882967" class="demo-number">(840) 688-2967</a>
+            <div class="demo-card-actions">
+              <a href="tel:+18406882967" class="btn-primary">Call Now</a>
+              <a href="#demo" class="btn-ghost">How to Test</a>
+            </div>
+            <div class="call-transcript" aria-label="Example call flow">
+              <div class="transcript-line">
+                <span class="transcript-label">Incoming caller</span>
+                <p>"I think a pipe burst under my kitchen sink."</p>
+              </div>
+              <div class="transcript-line">
+                <span class="transcript-label">Chip</span>
+                <p>"Got it, I can help get this routed quickly. What is your name?"</p>
+              </div>
+              <div class="transcript-line">
+                <span class="transcript-label">Captured</span>
+                <div class="capture-row">
+                  <span>Name</span><span>Phone</span><span>City</span><span>Job Type</span><span>Urgency</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-tint" id="problem">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">The leak</p>
+          <h2>The phone rings while your team is busy.<br>The lead does not wait.</h2>
+          <p>For local service businesses, missed calls usually happen at the worst possible time: during jobs, after hours, on weekends, or when the front desk is helping someone else.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="front-card glass-card glass-lift reveal">
+            <div class="icon-chip"><svg><use href="#i-clock"/></svg></div>
+            <h3>After-hours calls</h3>
+            <p>A caller needs help when your office is closed and voicemail is the only thing standing between them and another provider.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-phone"/></svg></div>
+            <h3>On-the-job missed calls</h3>
+            <p>The owner or crew cannot stop mid-job to answer, so the lead never gets a real first response.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d2">
+            <div class="icon-chip"><svg><use href="#i-zap"/></svg></div>
+            <h3>Urgent service requests</h3>
+            <p>When the issue feels urgent, the first business to respond often earns the next conversation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="how-it-works">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>A simple front-desk layer<br>for the calls you miss.</h2>
+          <p>Start with the part that matters most: answer the call, capture the details, and route the handoff cleanly.</p>
+        </div>
+        <div class="workflow-steps">
+          <article class="workflow-step glass-card glass-lift reveal">
+            <h3>Caller reaches your business</h3>
+            <p>Forward missed calls, after-hours calls, or a dedicated tracking number to the AI Front Desk.</p>
+          </article>
+          <article class="workflow-step glass-card glass-lift reveal reveal-d1">
+            <h3>The agent handles the conversation</h3>
+            <p>It asks one question at a time and captures name, phone, job details, location, urgency, and common FAQs.</p>
+          </article>
+          <article class="workflow-step glass-card glass-lift reveal reveal-d2">
+            <h3>Your team gets the handoff</h3>
+            <p>You receive the summary and call back, schedule, or follow up based on the caller's urgency.</p>
+          </article>
+        </div>
+        <p class="phase-note reveal">Start with missed-call or after-hours coverage, then add calendar booking, SMS summaries, and deeper CRM workflows when the operating rules are confirmed.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-tint" id="demo">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Live demo</p>
+          <h2>Do not read about it.<br>Call it.</h2>
+          <p>The fastest way to understand the offer is to test the line yourself. Ask a real service question, try a price question, or pretend you have an urgent repair.</p>
+        </div>
+        <div class="demo-proof-grid">
+          <article class="demo-test-card glass-card reveal">
+            <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
+            <h3>Demo line details</h3>
+            <div class="demo-facts">
+              <div><span>Demo number</span><strong>(840) 688-2967</strong></div>
+              <div><span>Demo niche</span><strong>Restoration and home repair</strong></div>
+              <div><span>Agent name</span><strong>Chip</strong></div>
+              <div><span>Best test prompt</span><strong>"I think a pipe burst under my kitchen sink."</strong></div>
+            </div>
+            <a href="tel:+18406882967" class="btn-primary">Call Demo Line -&gt;</a>
+          </article>
+
+          <article class="demo-guide-card glass-card reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-shield"/></svg></div>
+            <h3>Try more than one question</h3>
+            <ul class="feature-list">
+              <li>Ask whether a service is available in your city</li>
+              <li>Describe an urgent or after-hours situation</li>
+              <li>Ask for a price the agent has not been approved to quote</li>
+              <li>Interrupt, change details, or ask for a human</li>
+            </ul>
+            <p class="usage-note">The goal is not a scripted performance. Test whether the agent stays concise, captures the right details, and knows when to hand the call back to a person.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="includes">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">What is included</p>
+          <h2>The essentials every<br>receptionist plan needs.</h2>
+          <p>Every tier is configured around your business knowledge, intake fields, service area, and a handoff path your team can actually use.</p>
+        </div>
+        <div class="include-grid">
+          <article class="front-card glass-card glass-lift reveal">
+            <div class="icon-chip"><svg><use href="#i-workflow"/></svg></div>
+            <h3>Custom call script</h3>
+            <p>Built around your business name, services, service area, tone, FAQs, and escalation rules.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
+            <h3>AI voice agent</h3>
+            <p>Configured to answer inbound calls, ask short questions, and avoid long robotic paragraphs.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d2">
+            <div class="icon-chip"><svg><use href="#i-phone"/></svg></div>
+            <h3>Local demo or tracking number</h3>
+            <p>A clean number that can be used for demos, missed-call routing, or campaign tracking.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal">
+            <div class="icon-chip"><svg><use href="#i-shield"/></svg></div>
+            <h3>Lead capture flow</h3>
+            <p>Name, phone, job type, city or address, urgency, and caller summary captured for follow-up.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-zap"/></svg></div>
+            <h3>Human handoff rules</h3>
+            <p>Clear instructions for urgent jobs, unknown answers, pricing questions, and escalation.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d2">
+            <div class="icon-chip"><svg><use href="#i-clock"/></svg></div>
+            <h3>Launch QA</h3>
+            <p>Test calls for latency, turn-taking, hallucination checks, and booking capture.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-tint" id="pricing">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Receptionist plans</p>
+          <h2>Choose the Coverage Level<br>That Matches Your Call Volume.</h2>
+          <p>Start with after-hours coverage or put the complete 24/7 front-office layer in place.</p>
+        </div>
+        <div class="receptionist-pricing-grid">
+          <article class="pricing-single glass-card reveal">
+            <div class="pricing-head">
+              <div><p class="eyebrow">Coverage</p><h3>After-Hours Guard</h3></div>
+              <div class="price">$197<small>/mo</small></div>
+            </div>
+            <div class="setup-note">$250 one-time setup</div>
+            <p class="plan-limit">Approximately 200 receptionist minutes included each month.</p>
+            <ul class="feature-list">
+              <li>Answers nights, weekends, and overflow</li>
+              <li>You keep answering your normal daytime calls</li>
+              <li>Business-specific services and FAQs</li>
+              <li>Lead details and call summaries</li>
+              <li>Urgent-call handoff rules</li>
+            </ul>
+            <!-- BOOKING_URL placeholder — Michael supplies the Pairden GHL calendar link -->
+            <a href="BOOKING_URL" class="btn-ghost">Choose After-Hours</a>
+          </article>
+
+          <article class="pricing-single glass-card featured reveal reveal-d1">
+            <div class="pricing-head">
+              <div><p class="eyebrow">Most popular</p><h3>Full 24/7 Receptionist</h3></div>
+              <div class="price">$397<small>/mo</small></div>
+            </div>
+            <div class="setup-note">$497 one-time setup</div>
+            <p class="plan-limit">Approximately 500 receptionist minutes included each month.</p>
+            <ul class="feature-list">
+              <li>Every inbound call answered 24/7</li>
+              <li>English and Spanish available</li>
+              <li>Approved pricing or estimate rules</li>
+              <li>Calendar booking when configured</li>
+              <li>Call summaries sent to your team</li>
+              <li>Monthly tuning and QA</li>
+            </ul>
+            <!-- BOOKING_URL placeholder — Michael supplies the Pairden GHL calendar link -->
+            <a href="BOOKING_URL" class="btn-primary">Choose Full Receptionist</a>
+          </article>
+
+          <article class="pricing-single glass-card reveal reveal-d2">
+            <div class="pricing-head">
+              <div><p class="eyebrow">Busy lines</p><h3>High-Volume Receptionist</h3></div>
+              <div class="price">$797<small>/mo</small></div>
+            </div>
+            <div class="setup-note">$997 one-time setup</div>
+            <p class="plan-limit">Approximately 1,500 receptionist minutes included each month.</p>
+            <ul class="feature-list">
+              <li>Everything in Full Receptionist</li>
+              <li>Higher included call volume</li>
+              <li>Priority tuning and support</li>
+              <li>Custom call flows and routing</li>
+              <li>Usage alerts before overages</li>
+            </ul>
+            <!-- BOOKING_URL placeholder — Michael supplies the Pairden GHL calendar link -->
+            <a href="BOOKING_URL" class="btn-ghost">Choose High Volume</a>
+          </article>
+        </div>
+        <p class="usage-note" style="max-width:760px;margin:22px auto 0;text-align:center">Additional receptionist minutes are $0.40 each. A capped 14-day trial may be available after the live demo and fit review.</p>
+        <div class="full-office-callout glass-card reveal">
+          <p>Need the website, booking, reviews, local SEO, and 24/7 receptionist together? <a href="/#plans">See the complete AI Front Office package for $997/month.</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="fit">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Best fit</p>
+          <h2>Built for businesses where a missed call<br>can become a lost job.</h2>
+          <p>The strongest fit is local service work where speed, availability, and clean intake matter.</p>
+        </div>
+        <div class="fit-grid">
+          <article class="fit-card glass-card glass-lift reveal"><h3>Restoration</h3></article>
+          <article class="fit-card glass-card glass-lift reveal reveal-d1"><h3>Plumbing</h3></article>
+          <article class="fit-card glass-card glass-lift reveal reveal-d1"><h3>HVAC</h3></article>
+          <article class="fit-card glass-card glass-lift reveal reveal-d2"><h3>Roofing</h3></article>
+          <article class="fit-card glass-card glass-lift reveal reveal-d2"><h3>Handyman and repair</h3></article>
+          <article class="fit-card glass-card glass-lift reveal reveal-d3"><h3>Med spas and appointment clinics</h3></article>
+        </div>
+        <p class="weak-fit-note reveal">
+          This is less urgent for businesses where callers rarely need immediate help or where most leads already arrive through scheduled forms.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-pad section-tint" id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions owners ask before<br>testing the line.</h2>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item glass-card">
+            <button class="faq-q">Does this replace my receptionist?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">No. It is best used as coverage for missed calls, after-hours calls, overflow, and simple intake. A human handoff still matters.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">Will it make up prices?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">It should not. The agent is instructed to avoid inventing pricing, timelines, guarantees, or policies. Pricing questions are routed to your team.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">Can it answer in Spanish?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">Yes. English and Spanish call handling can be configured around the same approved services, booking rules, and escalation path.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">Does this connect to my CRM?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">Yes, depending on the plan and your current tools. Calendar booking, contact creation, call summaries, and SMS handoffs are configured after the exact intake fields and operating rules are confirmed.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">How fast can it go live?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">Most receptionist systems can be configured and tested in 7–14 days once the business knowledge, forwarding choice, booking rules, and escalation contacts are complete.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">What do you need from me?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">Your business details, services, service area, hours, common questions, unavailable work, and the person who should receive urgent handoffs.</div>
+          </div>
+          <div class="faq-item glass-card">
+            <button class="faq-q">Does the caller know it is automated?<span class="faq-chevron">⌄</span></button>
+            <div class="faq-a">Yes. The opening is configured to disclose the automated assistant and any recording used for the call, followed by a concise business-specific greeting.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="book">
+      <div class="container">
+        <div class="book-wrap">
+          <div class="book-copy reveal">
+            <p class="eyebrow">Start with a demo line</p>
+            <h2>Want a demo line with<br><span class="grad-text">your business name</span> on it?</h2>
+            <p>Send the business details and PAIRDEN can map a personalized demo: voice, greeting, services, FAQ handling, booking rules, and human handoffs.</p>
+            <div class="book-actions">
+              <!-- BOOKING_URL placeholder — Michael supplies the Pairden GHL calendar link -->
+              <a href="BOOKING_URL" class="btn-primary">Book Setup Call -&gt;</a>
+              <a href="tel:+18406882967" class="btn-ghost">Call the Demo</a>
+            </div>
+          </div>
+          <aside class="contact-panel glass-card reveal reveal-d1">
+            <h3>Direct contact</h3>
+            <p>Use this if you already know the business you want to test, or if a referral partner sent you here.</p>
+            <div class="contact-links">
+              <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
+              <a href="tel:+18406882967">(840) 688-2967</a>
+              <a href="tel:+18406882967">Demo: (840) 688-2967</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" class="footer-wordmark" />
+          <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
+          <div class="footer-contact">
+            <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
+            <a href="tel:+18406882967">(840) 688-2967</a>
+          </div>
+          <div class="footer-social" aria-label="PAIRDEN on social media">
+            <a href="https://instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+            <a href="https://tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://linkedin.com/company/pairdenai" rel="noopener" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a class="current-service" href="/frontdesk">AI Receptionist</a></li>
+            <li><a href="/#services">Website + Google Presence</a></li>
+            <li><a href="/#services">Booking + Reminders</a></li>
+            <li><a href="/#services">Missed-Call Text-Back</a></li>
+            <li><a href="/#services">Review Engine</a></li>
+            <li><a href="/#services">Local SEO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/#plans">Plans</a></li>
+            <li><a href="/#about">Why PAIRDEN</a></li>
+            <li><a href="/tools">Free Tools</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="#book">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA</span>
+        <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="/site.js" defer></script>
+</body>
+</html>

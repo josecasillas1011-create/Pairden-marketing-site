@@ -1,0 +1,23 @@
+# Local reference material — never deployed (Netlify publishes the repo root)
+reference/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors / tooling
+node_modules/
+.vscode/
+*.log
+
+# Never commit prospect or client data, keys, or secrets
+*warm-list*
+*.csv
+*.tsv
+.env
+*.env
+*.key
+*.pem
+secrets/
