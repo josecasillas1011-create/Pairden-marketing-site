@@ -35,6 +35,30 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+// Auto-stagger reveals inside a group so cards cascade instead of popping together.
+// MUST run BEFORE the reveal observer below — the observer snapshots .reveal
+// elements once, so anything given the class afterwards is never observed and
+// would stay stuck at opacity:0 forever.
+(function () {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const GROUPS = [
+    ".services-row", ".package-grid", ".why-grid", ".problem-grid",
+    ".include-grid", ".fit-grid", ".workflow-steps", ".reporting-strip",
+    ".faq-list", ".receptionist-pricing-grid", ".steps-grid"
+  ];
+  GROUPS.forEach(sel => {
+    document.querySelectorAll(sel).forEach(group => {
+      [...group.children].forEach((child, i) => {
+        if (!child.classList.contains("reveal")) child.classList.add("reveal");
+        // Only set a delay if the markup didn't already choose one
+        if (!/reveal-d\d/.test(child.className)) {
+          child.style.transitionDelay = Math.min(i * 0.07, 0.42) + "s";
+        }
+      });
+    });
+  });
+})();
+
 // Reveal-on-scroll
 (function () {
   const els = document.querySelectorAll(".reveal");
@@ -136,56 +160,6 @@ const prefersReducedMotion =
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
   update();
-})();
-
-// Auto-stagger reveals inside a group so cards cascade instead of popping together
-(function () {
-  if (prefersReducedMotion) return;
-  const GROUPS = [
-    ".services-row", ".package-grid", ".why-grid", ".problem-grid",
-    ".include-grid", ".fit-grid", ".workflow-steps", ".reporting-strip",
-    ".faq-list", ".receptionist-pricing-grid", ".steps-grid"
-  ];
-  GROUPS.forEach(sel => {
-    document.querySelectorAll(sel).forEach(group => {
-      [...group.children].forEach((child, i) => {
-        if (!child.classList.contains("reveal")) child.classList.add("reveal");
-        // Only set a delay if the markup didn't already choose one
-        if (!/reveal-d\d/.test(child.className)) {
-          child.style.transitionDelay = Math.min(i * 0.07, 0.42) + "s";
-        }
-      });
-    });
-  });
-})();
-
-// Subtle pointer-tracked tilt on feature cards
-(function () {
-  if (prefersReducedMotion) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-
-  const MAX = 5; // degrees
-  const cards = document.querySelectorAll(
-    ".why-card, .front-card, .workflow-step, .package-card, .pricing-single, .service-tile"
-  );
-
-  cards.forEach(card => {
-    let raf = null;
-    card.addEventListener("pointermove", e => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform =
-          `perspective(900px) rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg) translateY(-6px)`;
-        raf = null;
-      });
-    });
-    card.addEventListener("pointerleave", () => {
-      card.style.transform = "";
-    });
-  });
 })();
 
 // Count-up for any [data-count] element (opt-in via markup)

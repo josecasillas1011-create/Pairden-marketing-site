@@ -80,10 +80,40 @@ All five Spanish pages were written **without** the pre-review BUILD-SPEC requir
 | # | Item | Why it needs you |
 |---|---|---|
 | D | **Social URLs** | I built all five from the `@pairdenai` handle in the spec. **LinkedIn is a genuine coin-flip** — I used `/company/pairdenai`, but `/in/` is equally plausible. Check all five resolve. |
-| E | **Demo number (840) 688-2967** | Carried from legacy, now appears ~14 times across both frontdesk pages. Confirm the line is still live. |
+| E | ~~Demo number~~ | ✅ **RESOLVED** — replaced with (909) 415-8481. See §4b. |
 | F | **Individual service prices** | `$497/mo` Local SEO · `$197` booking · `$97` missed-call · `$147` reviews · `$97` chat · `$497` win-back. **None are in CLAUDE.md's locked list**, so they were ported unverified. These are public prices on a live page. |
 | G | **FrontDesk setup fees** | `$250` / `$497` / `$997`. Monthly prices are locked and correct; setup fees came from legacy unverified. |
 | H | **LLC header wording** | I used `Pairden Technologies LLC, d/b/a PAIRDEN` on the legal pages. Confirm that's the exact form you want. |
+
+---
+
+## 4b · DECISIONS MADE — logged (Aug 3, 2026)
+
+### Demo phone number — REPLACED
+`(840) 688-2967` → **`(909) 415-8481`** · links `tel:+19094158481`
+
+840 is not an assigned NANP area code, so the old number could not be dialed —
+the site's loudest CTA pointed at a dead line. Replaced across all 7 pages that
+carried it (display text, `tel:` links, and the `telephone` field in the
+Organization JSON-LD on both `index.html` and `es/index.html`).
+
+### Location wording — SPLIT (option A)
+**Visible footer** on all 12 pages: `Menifee, CA` → **`Southern California Based`**
+**Organization JSON-LD**: `addressLocality: "Menifee"`, `addressRegion: "CA"` — **UNCHANGED**
+
+**This deviates from CLAUDE.md**, which locks the footer as
+`© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA`.
+Michael approved the deviation explicitly on Aug 3, 2026.
+
+**Why the split rather than removing Menifee outright:** `addressLocality` is the
+strongest local-relevance signal in Organization schema. Stripping the city while
+selling Local SEO would tell Google this is not a local business and likely cost
+map-pack and "near me" ranking. Keeping it in structured data preserves that
+signal and the verifiable address A2P/carrier registration expects, while every
+human-visible surface reads Southern California.
+
+**Note for Jose at cutover:** CLAUDE.md still specifies the Menifee footer.
+Either update CLAUDE.md to match, or this reads as drift in a later audit.
 
 ---
 

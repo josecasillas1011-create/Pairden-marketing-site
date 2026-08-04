@@ -64,6 +64,22 @@
   to = "/"
   status = 301
 
+# ── Booking → GHL calendar ─────────────────────────────────────────
+# Single source of truth for the booking link. Every booking CTA on the
+# site points at /book (or /es/reservar), never at the vendor URL directly —
+# so if the calendar ever moves, it changes here and nowhere else.
+[[redirects]]
+  from = "/book"
+  to = "https://api.leadconnectorhq.com/widget/booking/GICmHjNXus2auxqe65re"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/es/reservar"
+  to = "https://api.leadconnectorhq.com/widget/booking/GICmHjNXus2auxqe65re"
+  status = 302
+  force = true
+
 # ── Short links → plan deep links (Phase 3) ────────────────────────
 [[redirects]]
   from = "/growth"

@@ -35,7 +35,7 @@
     "logo": "https://pairden.com/assets/brand/pairden-icon.png",
     "image": "https://pairden.com/assets/brand/og-card.png",
     "description": "Sitios web, citas, reseñas, llamadas perdidas y sistemas telefónicos con IA para negocios de servicio locales.",
-    "telephone": "+1-840-688-2967",
+    "telephone": "+1-909-415-8481",
     "email": "Admin@pairden.com",
     "address": {
       "@type": "PostalAddress",
@@ -314,7 +314,7 @@
           </p>
           <div class="hero-actions reveal reveal-d3">
             <a href="#contact" class="btn-primary">Solicite su Diagnóstico Gratis →</a>
-            <a href="tel:+18406882967" class="btn-ghost">Llame a la Demo con IA</a>
+            <a href="tel:+19094158481" class="btn-ghost">Llame a la Demo con IA</a>
           </div>
           <div class="hero-trust reveal reveal-d3">
             <div class="trust-item"><div class="trust-check">✓</div> Hecho para negocios de servicio</div>
@@ -552,7 +552,7 @@
           <p>Cuéntenos cómo lo encuentran, lo llaman y agendan hoy sus clientes. Identificaremos la fuga más clara y le recomendaremos el sistema más sencillo que la resuelva.</p>
           <div class="contact-direct">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+18406882967">Llame a la demo: (840) 688-2967</a>
+            <a href="tel:+19094158481">Llame a la demo: (909) 415-8481</a>
           </div>
         </div>
 
@@ -574,16 +574,16 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="businessType">Tipo de negocio *</label>
-                <select id="businessType" name="business_type" required>
-                  <option value="">— Seleccione —</option>
-                  <option>Acarreo / Limpieza de escombros</option>
-                  <option>Plomería / HVAC / Techos</option>
-                  <option>Restauración / Reparaciones</option>
-                  <option>Jardinería / Limpieza</option>
-                  <option>Barbería / Detallado</option>
-                  <option>Restaurante / Alimentos</option>
-                  <option>Otro</option>
-                </select>
+                <input id="businessType" name="business_type" type="text" list="businessTypeOptions"
+                       placeholder="Escriba el suyo o elija uno" autocomplete="off" required />
+                <datalist id="businessTypeOptions">
+                  <option value="Acarreo / Limpieza de escombros"></option>
+                  <option value="Plomería / HVAC / Techos"></option>
+                  <option value="Restauración / Reparaciones"></option>
+                  <option value="Jardinería / Limpieza"></option>
+                  <option value="Barbería / Detallado"></option>
+                  <option value="Restaurante / Alimentos"></option>
+                </datalist>
               </div>
               <div class="form-group">
                 <label for="packageInterest">¿Qué le interesa más?</label>
@@ -595,10 +595,6 @@
                   <option>Un servicio individual</option>
                 </select>
               </div>
-            </div>
-            <div class="form-group" id="businessTypeOtherGroup" style="display:none">
-              <label for="businessTypeOther">Díganos su tipo de negocio *</label>
-              <input id="businessTypeOther" name="business_type_other" type="text" placeholder="ej. Limpieza de albercas" />
             </div>
             <div class="form-row">
               <div class="form-group">
@@ -651,7 +647,7 @@
       <h2 class="reveal">Llame a la Recepcionista con IA.<br>Trate de Confundirla.</h2>
       <p class="reveal reveal-d1">Haga las mismas preguntas que hacen sus clientes. Pruebe con un trabajo urgente, una duda sobre el área de cobertura o una llamada fuera de horario.</p>
       <div class="cta-actions reveal reveal-d2">
-        <a href="tel:+18406882967" class="btn-primary" style="font-size:16px;min-height:58px;padding:0 36px">Llame al (840) 688-2967</a>
+        <a href="tel:+19094158481" class="btn-primary" style="font-size:16px;min-height:58px;padding:0 36px">Llame al (909) 415-8481</a>
         <a href="#contact" class="btn-ghost" style="font-size:16px;min-height:58px;padding:0 36px">
           Diagnóstico Gratuito →
         </a>
@@ -668,7 +664,7 @@
           <p>Sitios web, citas, reseñas, seguimiento de llamadas perdidas y recepción telefónica con IA para negocios de servicio del Inland Empire y el Sur de California.</p>
           <div class="footer-contact">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+18406882967">(840) 688-2967</a>
+            <a href="tel:+19094158481">(909) 415-8481</a>
           </div>
           <div class="footer-social" aria-label="PAIRDEN en redes sociales">
             <a href="https://instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
@@ -701,7 +697,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA</span>
+        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Southern California Based</span>
         <span><a href="/es/privacidad">Política de Privacidad</a> · <a href="/es/terminos">Términos de Servicio</a></span>
       </div>
     </div>
@@ -886,15 +882,8 @@
       });
     });
 
-    /* ── Campo "Otro" del tipo de negocio ── */
-    const businessTypeSelect     = document.getElementById("businessType");
-    const businessTypeOtherGroup = document.getElementById("businessTypeOtherGroup");
-    const businessTypeOtherInput = document.getElementById("businessTypeOther");
-    businessTypeSelect.addEventListener("change", () => {
-      const isOther = businessTypeSelect.value === "Otro";
-      businessTypeOtherGroup.style.display = isOther ? "block" : "none";
-      if (!isOther) businessTypeOtherInput.value = "";
-    });
+    /* El tipo de negocio es un campo de texto libre con sugerencias (datalist):
+       el usuario puede escribir lo que sea. No hace falta la opción "Otro". */
 
     /* ── Formulario ── */
     const form        = document.getElementById("leadForm");
@@ -909,8 +898,7 @@
 
       const firstName        = document.getElementById("firstName").value.trim();
       const company          = document.getElementById("company").value.trim();
-      const businessTypeSel  = document.getElementById("businessType").value;
-      const businessTypeOther = document.getElementById("businessTypeOther").value.trim();
+      const businessType     = document.getElementById("businessType").value.trim();
       const email            = document.getElementById("email").value.trim();
       const phone            = document.getElementById("phone").value.trim();
       const packageInterest  = document.getElementById("packageInterest").value;
@@ -918,13 +906,12 @@
 
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const phoneValid = /^[\d\s\-\+\(\)\.]{7,20}$/.test(phone);
-      const businessTypeValid = businessTypeSel && (businessTypeSel !== "Otro" || businessTypeOther);
+      const businessTypeValid = businessType.length >= 2;
       if (!firstName || !company || !businessTypeValid || !email || !phone || !emailValid || !phoneValid || !smsConsent) {
         formError.style.display = "block";
         return;
       }
 
-      const businessType = businessTypeSel === "Otro" ? businessTypeOther : businessTypeSel;
       const services = [packageInterest || "Needs recommendation"];
       const budget   = "";
       const goal     = document.getElementById("goal").value.trim();
