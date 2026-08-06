@@ -545,6 +545,24 @@ footer {
   .tools-tab { flex-shrink: 0; }
   .tool-card { padding: 24px 20px; }
 }
+/* Tools tabs stack vertically on phones. Above this width they scroll
+   sideways, which hides the second and third tool behind a drag gesture
+   most people never discover. */
+@media (max-width: 640px) {
+  .tools-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: stretch;
+    overflow-x: visible;
+  }
+  .tools-tab {
+    border-radius: 12px;
+    flex: 1 1 100%;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .container { padding: 0 16px; }
   .section-pad { padding: 56px 0; }

@@ -156,6 +156,18 @@
     .package-list li { color: #D7E1EF; font-size: 13px; line-height: 1.5; padding-left: 22px; position: relative; }
     .package-list li::before { color: var(--accent-bright); content: "✓"; font-weight: 900; left: 0; position: absolute; }
     .package-card .btn-primary, .package-card .btn-ghost { margin-top: auto; width: 100%; }
+    /* Ruta secundaria de agendado bajo cada CTA de plan. Deliberadamente más
+       discreta que el CTA de arriba para que el formulario siga siendo la
+       acción principal. El !important anula el margin-top:auto anterior. */
+    .package-book {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-top: 10px !important;
+      min-height: 46px;
+      opacity: 0.88;
+      width: 100%;
+    }
+    .package-book:hover { opacity: 1; }
     .package-note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 24px auto 0; max-width: 780px; text-align: center; }
     .reporting-strip { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-top: 26px; }
     .reporting-item { border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
@@ -413,6 +425,7 @@
             <li>Reporte mensual de llamadas y solicitudes</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="Online Foundation">Elegir Foundation</a>
+          <a href="/es/reservar" class="btn-ghost package-book">Agendar una llamada</a>
         </article>
 
         <article class="package-card glass-card featured reveal reveal-d1" id="plan-growth">
@@ -431,6 +444,7 @@
             <li>Reporte mensual de resultados</li>
           </ul>
           <a href="#contact" class="btn-primary package-select" data-package="Growth Engine">Elegir Growth Engine</a>
+          <a href="/es/reservar" class="btn-ghost package-book">Agendar una llamada</a>
         </article>
 
         <article class="package-card glass-card reveal reveal-d2" id="plan-frontoffice">
@@ -448,6 +462,7 @@
             <li>Soporte prioritario y llamada mensual de estrategia</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="AI Front Office">Elegir AI Front Office</a>
+          <a href="/es/reservar" class="btn-ghost package-book">Agendar una llamada</a>
         </article>
       </div>
       <p class="package-note reveal">AI Front Office incluye hasta 1,000 minutos de recepcionista al mes. Los minutos adicionales cuestan $0.50 cada uno. Algunos servicios también están disponibles por separado.</p>
@@ -810,6 +825,18 @@
           ? `<a class="service-detail-link" href="${detail.action.href}">${detail.action.label}</a>`
           : "";
         panel.classList.add("open");
+
+        // En móvil el panel se abre debajo de las tarjetas, muchas veces fuera
+        // de pantalla — tocar una tarjeta parece no hacer nada. Lo traemos a la
+        // vista una vez que terminó de expandirse, para que la altura sea real.
+        const reduceMotion = window.matchMedia
+          && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.setTimeout(() => {
+          panel.scrollIntoView({
+            behavior: reduceMotion ? "auto" : "smooth",
+            block: "nearest"
+          });
+        }, reduceMotion ? 0 : 300);
       }
 
       tiles.forEach(tile => {

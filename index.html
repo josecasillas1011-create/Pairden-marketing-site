@@ -175,6 +175,19 @@
     .package-list li { color: #D7E1EF; font-size: 13px; line-height: 1.5; padding-left: 22px; position: relative; }
     .package-list li::before { color: var(--accent-bright); content: "✓"; font-weight: 900; left: 0; position: absolute; }
     .package-card .btn-primary, .package-card .btn-ghost { margin-top: auto; width: 100%; }
+    /* Secondary booking path under each plan CTA. Deliberately quieter than the
+       CTA above it so the audit form stays the primary action. The !important
+       overrides margin-top:auto above, which would otherwise push the two
+       buttons apart instead of stacking them. */
+    .package-book {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-top: 10px !important;
+      min-height: 46px;
+      opacity: 0.88;
+      width: 100%;
+    }
+    .package-book:hover { opacity: 1; }
     .package-note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 24px auto 0; max-width: 780px; text-align: center; }
     .reporting-strip { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-top: 26px; }
     .reporting-item { border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
@@ -449,6 +462,7 @@
             <li>Monthly calls-and-leads snapshot</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="Online Foundation">Choose Foundation</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
 
         <article class="package-card glass-card featured reveal reveal-d1" id="plan-growth">
@@ -467,6 +481,7 @@
             <li>Monthly performance report</li>
           </ul>
           <a href="#contact" class="btn-primary package-select" data-package="Growth Engine">Choose Growth Engine</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
 
         <article class="package-card glass-card reveal reveal-d2" id="plan-frontoffice">
@@ -484,6 +499,7 @@
             <li>Priority support and monthly strategy call</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="AI Front Office">Choose AI Front Office</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
       </div>
       <p class="package-note reveal">AI Front Office includes up to 1,000 receptionist minutes per month. Additional minutes are $0.50 each. Select services are also available individually.</p>
@@ -871,6 +887,18 @@
           ? `<a class="service-detail-link" href="${detail.action.href}">${detail.action.label}</a>`
           : "";
         panel.classList.add("open");
+
+        // On a phone the panel opens below the tile grid, often entirely off
+        // screen — tapping a tile looks like nothing happened. Bring it into
+        // view once it has finished expanding, so the height is correct.
+        const reduceMotion = window.matchMedia
+          && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.setTimeout(() => {
+          panel.scrollIntoView({
+            behavior: reduceMotion ? "auto" : "smooth",
+            block: "nearest"
+          });
+        }, reduceMotion ? 0 : 300);
       }
 
       tiles.forEach(tile => {
