@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# ENGLISH-ONLY LAUNCH.
+# The Spanish pages are built and deployed but held pending a native-speaker
+# review — es/privacidad.html and es/terminos.html still carry visible
+# [MICHAEL: verify] banners and must not be indexed. Remove this Disallow
+# when Spanish ships. See HANDOFF.md §7.
+Disallow: /es/
+
 Sitemap: https://pairden.com/sitemap.xml

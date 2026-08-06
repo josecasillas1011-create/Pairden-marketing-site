@@ -37,7 +37,7 @@ from urllib.parse import urlparse
 PORT = 8099
 
 # Single source of truth, mirrored from netlify.toml.
-BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/GICmHjNXus2auxqe65re"
+BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
 
 REDIRECTS = {
     "/book":        BOOKING_URL,
@@ -145,6 +145,7 @@ def main():
 
   English   /            /frontdesk   /faq
             /tools       /privacy     /terms
+            /text-us     (A2P opt-in page)
   Spanish   /es/         /es/frontdesk  /es/faq
             /es/privacidad            /es/terminos
   Booking   /book        /es/reservar     -> GHL calendar (302)

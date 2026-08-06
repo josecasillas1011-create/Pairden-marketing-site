@@ -87,17 +87,74 @@ All five Spanish pages were written **without** the pre-review BUILD-SPEC requir
 
 ---
 
+## 4a · A2P REJECTION — CAUSE IS KNOWN. DO NOT RE-LITIGATE.
+
+**Verbatim from TCR:**
+> "The submitted legal company name does not match with US EIN."
+
+**The submission matched the CP 575 exactly.** The root cause is **IRS propagation lag on a
+newly issued EIN** — TCR's lookup had not yet picked up the registration. Nothing on the site
+and nothing in the submission was wrong.
+
+**Resubmission waits ~30 days from EIN issuance.** There is no site change that fixes this and
+no site change that was ever required for it.
+
+**This was NOT a consent-scope rejection.** Earlier sessions repeatedly speculated that the
+narrow "…about this request" consent line might have caused it. **That speculation was wrong.**
+Do not raise it again as a rejection cause. The consent-scope question (narrow vs. wider
+wording) remains an open *product* decision tied to the missing `a2p-answer-kit.md` — but it is
+unrelated to why the campaign was rejected.
+
+---
+
 ## 4b · DECISIONS MADE — logged (Aug 3, 2026)
 
-### Demo phone number — REPLACED
-`(840) 688-2967` → **`(909) 415-8481`** · links `tel:+19094158481`
+### Phone numbers — THREE numbers, three jobs, none overwriting another
+| Number | Role | Where it lives |
+|---|---|---|
+| **(951) 477-5918** | Registered A2P business contact | Footer legal line ONLY, all 13 pages |
+| **(951) 651-3966** | Vapi AI receptionist demo line | All demo CTAs, hero, demo cards, contact blocks, CTA bands, JSON-LD `telephone`, every `tel:` outside the footer |
+| ~~(909) 415-8481~~ | superseded | retired |
+| ~~(840) 688-2967~~ | never dialable — 840 is not an assigned NANP area code | retired |
 
-840 is not an assigned NANP area code, so the old number could not be dialed —
-the site's loudest CTA pointed at a dead line. Replaced across all 7 pages that
-carried it (display text, `tel:` links, and the `telephone` field in the
-Organization JSON-LD on both `index.html` and `es/index.html`).
+**The footer number must always match GHL's Business Profile.** Changing one without
+the other can fail the pending A2P 10DLC campaign. The demo line has no such
+dependency and can change freely.
 
-### Location wording — SPLIT (option A)
+### Business address — CHANGED after A2P rejection (Aug 3, 2026)
+`32880 Earlsburn Circle, Menifee, CA 92584` → **`41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590`**
+
+The first A2P 10DLC campaign was **rejected**. The site was corrected to the Temecula
+address before resubmission. Updated in both places that carry it: the footer legal line
+(13 pages) and the JSON-LD `PostalAddress` (`index.html`, `es/index.html`, `frontdesk.html`,
+where `addressLocality` also moved Menifee → Temecula).
+
+**Must always match GHL Business Profile and the A2P registration. Never change in one
+place alone.** Service-area copy ("Inland Empire", "Southern California") is unrelated and
+deliberately unchanged.
+
+### Receptionist overage — $0.40 → **$0.50/min** (Aug 3 2026)
+**LOCKED PENDING VERIFICATION.** A live call-cost matrix runs separately; the 3× margin bar
+is **$0.167/min**, so $0.50 clears it comfortably. Publish $0.50, but expect one more
+revision once real per-minute costs land.
+
+🔴 **The Client Service Agreement still says $0.40.** The site and the contract now disagree.
+**Michael must update the CSA before any client signs** — a signed agreement at $0.40 is
+enforceable at $0.40 regardless of what the website says. This is the highest-consequence
+open item on this list.
+
+**Where it lives on the site — 4 places, not 6:**
+| File | Location |
+|---|---|
+| `index.html` | plan note under the package ladder |
+| `es/index.html` | same |
+| `frontdesk.html` | receptionist usage note under the tier grid |
+| `es/frontdesk.html` | same |
+
+It does **not** appear in any JSON-LD, in the FAQ pages, or in `tools.html`. An earlier note
+in this file claimed 6 places including the FAQ answers; that was wrong.
+
+### Location wording — SPLIT (option A, later superseded by the A2P footer)
 **Visible footer** on all 12 pages: `Menifee, CA` → **`Southern California Based`**
 **Organization JSON-LD**: `addressLocality: "Menifee"`, `addressRegion: "CA"` — **UNCHANGED**
 

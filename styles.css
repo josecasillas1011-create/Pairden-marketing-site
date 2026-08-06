@@ -209,6 +209,15 @@ section { position: relative; }
 }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--accent-bright); }
 .nav-cta { flex-shrink: 0; min-height: 42px; font-size: 12px; padding: 0 20px; }
+/* ═══════════════════════════════════════════════════════════════
+   ENGLISH-ONLY LAUNCH — the EN ⇄ ES toggle is hidden site-wide.
+   The Spanish pages exist and work; they are held pending a
+   native-speaker review. TO SHIP SPANISH: delete the single rule
+   immediately below, restore the /es/ URLs in sitemap.xml, and put
+   the hreflang trios back on the 5 EN pages. See HANDOFF.md §7.
+   ═══════════════════════════════════════════════════════════════ */
+.lang-toggle { display: none !important; }
+
 /* EN ⇄ ES language toggle */
 .lang-toggle {
   align-items: center; display: inline-flex; flex-shrink: 0; gap: 4px;
@@ -270,6 +279,15 @@ footer {
   font-size: 12px; gap: 20px; justify-content: space-between; padding-top: 24px;
 }
 .footer-bottom a:hover { color: var(--text); }
+/* A2P 10DLC — registered business identity. Carriers re-scan the site during
+   campaign review; this line must appear on every page. Do not remove. */
+.footer-legal {
+  color: var(--slate);
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 6px;
+}
 
 /* ── Forms ──────────────────────────────────────────────────── */
 .form-group { margin-bottom: 13px; }

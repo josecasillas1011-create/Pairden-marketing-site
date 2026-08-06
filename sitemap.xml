@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<!--
+  ENGLISH-ONLY LAUNCH.
+  The Spanish pages exist in the repo under /es/ but are deliberately excluded
+  from this sitemap, from hreflang, and from the nav until they have had a
+  native-speaker review. When Spanish ships, restore the /es/ <url> entries and
+  the xhtml:link alternates on the EN/ES pairs (index, frontdesk, faq, privacy,
+  terms) — see HANDOFF.md §7.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://pairden.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/" />
   </url>
 
   <url>
     <loc>https://pairden.com/frontdesk</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/frontdesk" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/frontdesk" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/frontdesk" />
+  </url>
+
+  <url>
+    <loc>https://pairden.com/text-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://pairden.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/faq" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/faq" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/faq" />
   </url>
 
   <url>
@@ -39,49 +43,10 @@
     <loc>https://pairden.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/privacidad" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/privacy" />
   </url>
 
   <url>
     <loc>https://pairden.com/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/terms" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/terminos" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/terms" />
-  </url>
-
-  <url>
-    <loc>https://pairden.com/es/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pairden.com/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pairden.com/es/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://pairden.com/" />
-  </url>
-
-  <url>
-    <loc>https://pairden.com/es/frontdesk</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://pairden.com/es/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://pairden.com/es/privacidad</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://pairden.com/es/terminos</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -7,6 +7,76 @@
   command = ""
 
 # ═══════════════════════════════════════════════════════════════════
+# INTERNAL DOCS — MUST NOT BE PUBLICLY READABLE
+# The repo root IS the site root, so every .md file here would otherwise be
+# served at pairden.com/<name>.md. These contain locked pricing, margin
+# targets, and internal strategy.
+#
+# Placed FIRST so nothing downstream can match a .md path before this does.
+# No conflict with the clean-URL rewrites below — those match extensionless
+# paths only (/frontdesk, /faq), never a .md suffix.
+#
+# NOTE ON THE WILDCARD: Netlify expects the splat at the END of a path, so
+# "/*.md" is not a documented pattern and may match nothing. It is kept as a
+# catch-all for any future .md file, but the explicit per-file rules below are
+# the ones actually guaranteed to fire. If you add a new root-level .md, add
+# an explicit rule for it too — do not rely on the wildcard alone.
+# ═══════════════════════════════════════════════════════════════════
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/BUILD-SPEC.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/MASTER-LIST.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/HANDOFF.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/PENDING-INPUTS.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/ASSETS-README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/NEXT-SESSION-PROMPT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Belt and braces: even if a .md were served, keep it out of search results.
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# ═══════════════════════════════════════════════════════════════════
 # AXIS DOMAIN MIGRATION — ported VERBATIM from reference/legacy/netlify.toml
 # Do not edit without Michael's approval. Preserve every path while
 # permanently moving the former Axis domain to PAIRDEN.
@@ -70,13 +140,13 @@
 # so if the calendar ever moves, it changes here and nowhere else.
 [[redirects]]
   from = "/book"
-  to = "https://api.leadconnectorhq.com/widget/booking/GICmHjNXus2auxqe65re"
+  to = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
   status = 302
   force = true
 
 [[redirects]]
   from = "/es/reservar"
-  to = "https://api.leadconnectorhq.com/widget/booking/GICmHjNXus2auxqe65re"
+  to = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
   status = 302
   force = true
 
@@ -115,6 +185,13 @@
 [[redirects]]
   from = "/tools"
   to = "/tools.html"
+  status = 200
+
+# A2P 10DLC registered opt-in URL. This route is named in the campaign
+# registration — never remove, rename, or redirect it elsewhere.
+[[redirects]]
+  from = "/text-us"
+  to = "/text-us.html"
   status = 200
 
 [[redirects]]
@@ -170,3 +247,15 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# ── ENGLISH-ONLY LAUNCH — keep /es/ out of search results ──────────
+# The Spanish pages deploy with the site but are held pending a native-speaker
+# review. robots.txt asks crawlers not to fetch them; this header is the harder
+# guarantee, since a Disallow does not stop a page already discovered from being
+# indexed. es/privacidad.html and es/terminos.html still show [MICHAEL: verify]
+# banners and must not appear in search.
+# REMOVE THIS BLOCK when Spanish ships. See HANDOFF.md §7.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

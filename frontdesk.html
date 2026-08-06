@@ -10,9 +10,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
   <meta name="theme-color" content="#040C1F" />
   <link rel="canonical" href="https://pairden.com/frontdesk" />
-  <link rel="alternate" hreflang="en" href="https://pairden.com/frontdesk" />
-  <link rel="alternate" hreflang="es" href="https://pairden.com/es/frontdesk" />
-  <link rel="alternate" hreflang="x-default" href="https://pairden.com/frontdesk" />
+  <!-- hreflang removed for the English-only launch. Restore the en/es/x-default
+       trio here when the Spanish site ships. See HANDOFF.md §7. -->
   <meta property="og:title" content="AI Front Desk for Local Service Businesses | PAIRDEN" />
   <meta property="og:description" content="Call the demo line and hear an AI receptionist capture a real local-service lead." />
   <meta property="og:type" content="website" />
@@ -37,8 +36,10 @@
       "url": "https://pairden.com/",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Menifee",
+        "streetAddress": "41877 Enterprise Circle N., 2nd Floor",
+        "addressLocality": "Temecula",
         "addressRegion": "CA",
+        "postalCode": "92590",
         "addressCountry": "US"
       }
     },
@@ -494,7 +495,7 @@
       <a href="/es/frontdesk" class="lang-toggle" hreflang="es" aria-label="Ver esta página en español">
         <span class="is-current">EN</span> ⇄ <span>ES</span>
       </a>
-      <a href="tel:+19094158481" class="btn-primary nav-cta">Call Demo -&gt;</a>
+      <a href="tel:+19516513966" class="btn-primary nav-cta">Call Demo -&gt;</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
         <span></span><span></span><span></span>
       </button>
@@ -511,7 +512,7 @@
       <li><a href="#book">Contact</a></li>
     </ul>
     <a href="/es/frontdesk" class="lang-toggle" hreflang="es"><span class="is-current">EN</span> ⇄ <span>ES</span></a>
-    <a href="tel:+19094158481" class="btn-primary">Call Demo -&gt;</a>
+    <a href="tel:+19516513966" class="btn-primary">Call Demo -&gt;</a>
   </div>
 
   <main>
@@ -528,7 +529,7 @@
               PAIRDEN AI Receptionist covers after-hours, overflow, or every call. It answers approved questions, captures job details, can connect to booking, and routes urgent leads before they move on.
             </p>
             <div class="frontdesk-actions reveal reveal-d3">
-              <a href="tel:+19094158481" class="btn-primary">Call the Live Demo -&gt;</a>
+              <a href="tel:+19516513966" class="btn-primary">Call the Live Demo -&gt;</a>
               <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
               <a href="/book" class="btn-ghost">Book a Setup Call</a>
             </div>
@@ -547,9 +548,9 @@
             </div>
             <h2>Test it like a real caller.</h2>
             <p>Call the demo line and ask about a burst pipe, a weekend repair, pricing, or a service question. The agent should collect the lead without inventing details.</p>
-            <a href="tel:+19094158481" class="demo-number">(909) 415-8481</a>
+            <a href="tel:+19516513966" class="demo-number">(951) 651-3966</a>
             <div class="demo-card-actions">
-              <a href="tel:+19094158481" class="btn-primary">Call Now</a>
+              <a href="tel:+19516513966" class="btn-primary">Call Now</a>
               <a href="#demo" class="btn-ghost">How to Test</a>
             </div>
             <div class="call-transcript" aria-label="Example call flow">
@@ -637,12 +638,12 @@
             <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
             <h3>Demo line details</h3>
             <div class="demo-facts">
-              <div><span>Demo number</span><strong>(909) 415-8481</strong></div>
+              <div><span>Demo number</span><strong>(951) 651-3966</strong></div>
               <div><span>Demo niche</span><strong>Restoration and home repair</strong></div>
               <div><span>Agent name</span><strong>Chip</strong></div>
               <div><span>Best test prompt</span><strong>"I think a pipe burst under my kitchen sink."</strong></div>
             </div>
-            <a href="tel:+19094158481" class="btn-primary">Call Demo Line -&gt;</a>
+            <a href="tel:+19516513966" class="btn-primary">Call Demo Line -&gt;</a>
           </article>
 
           <article class="demo-guide-card glass-card reveal reveal-d1">
@@ -765,7 +766,7 @@
             <a href="/book" class="btn-ghost">Choose High Volume</a>
           </article>
         </div>
-        <p class="usage-note" style="max-width:760px;margin:22px auto 0;text-align:center">Additional receptionist minutes are $0.40 each. Receptionist plans start with the live demo and a fit review.</p>
+        <p class="usage-note" style="max-width:760px;margin:22px auto 0;text-align:center">Additional receptionist minutes are $0.50 each. Receptionist plans start with the live demo and a fit review.</p>
         <div class="full-office-callout glass-card reveal">
           <p>Need the website, booking, reviews, local SEO, and 24/7 receptionist together? <a href="/#plans">See the complete AI Front Office package for $997/month.</a></p>
         </div>
@@ -842,7 +843,7 @@
             <div class="book-actions">
               <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
               <a href="/book" class="btn-primary">Book Setup Call -&gt;</a>
-              <a href="tel:+19094158481" class="btn-ghost">Call the Demo</a>
+              <a href="tel:+19516513966" class="btn-ghost">Call the Demo</a>
             </div>
           </div>
           <aside class="contact-panel glass-card reveal reveal-d1">
@@ -850,8 +851,8 @@
             <p>Use this if you already know the business you want to test, or if a referral partner sent you here.</p>
             <div class="contact-links">
               <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-              <a href="tel:+19094158481">(909) 415-8481</a>
-              <a href="tel:+19094158481">Demo: (909) 415-8481</a>
+              <a href="tel:+19516513966">(951) 651-3966</a>
+              <a href="tel:+19516513966">Demo: (951) 651-3966</a>
             </div>
           </aside>
         </div>
@@ -867,14 +868,14 @@
           <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
           <div class="footer-contact">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+19094158481">(909) 415-8481</a>
+            <a href="tel:+19516513966">(951) 651-3966</a>
           </div>
           <div class="footer-social" aria-label="PAIRDEN on social media">
-            <a href="https://instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
-            <a href="https://facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
             <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
-            <a href="https://tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
-            <a href="https://linkedin.com/company/pairdenai" rel="noopener" target="_blank">LinkedIn</a>
+            <a href="https://www.tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/pairden-ai-659501426/" rel="noopener" target="_blank">LinkedIn</a>
           </div>
         </div>
         <div class="footer-col">
@@ -894,13 +895,14 @@
             <li><a href="/#plans">Plans</a></li>
             <li><a href="/#about">Why PAIRDEN</a></li>
             <li><a href="/tools">Free Tools</a></li>
+            <li><a href="/text-us">Text Us</a></li>
             <li><a href="/faq">FAQ</a></li>
             <li><a href="#book">Contact</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Southern California Based</span>
+        <span>© 2026 PAIRDEN, a d/b/a of Pairden Technologies LLC<br /><span class="footer-legal">Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · Admin@pairden.com · (951) 477-5918</span></span>
         <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
       </div>
     </div>

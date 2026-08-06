@@ -73,6 +73,26 @@ Netlify publishes the repo root exactly as-is.
 
 ---
 
+## 3b. Live preview — where to look before you touch anything
+
+**https://curious-kulfi-dcaa51.netlify.app**
+
+⚠️ **This is a manual drag-and-drop deploy. It is NOT connected to any git repo.**
+
+That matters more than it sounds:
+- **Nothing you push to git will appear there.** The preview only changes if someone
+  drags the folder onto Netlify again. It is a snapshot, not a branch.
+- **It will drift from the repo silently.** Treat the repo as the source of truth and this
+  URL as a dated screenshot. When in doubt, redeploy rather than assume it is current.
+- **It is not the cutover target.** Do not point `pairden.com` at this site. Use one of the
+  two options in §4, both of which deploy from git.
+- The random Netlify subdomain is fine for review, but it should not be shared with
+  clients or submitted anywhere — including in the A2P registration, which must reference
+  the real domain.
+
+Use it to check the render, click the nav, open `/text-us` and confirm the LeadConnector
+bubble appears, and read the footer legal line. Then come back to the repo for the actual work.
+
 ## 4. Cutover options
 
 ### Option A — merge v2 into the existing repo + Netlify site (**recommended**)
@@ -89,9 +109,61 @@ Keeps domains, DNS, and the live axis redirects exactly where they are. Lowest r
 
 ---
 
-## 5. ⚠️ Placeholders — the site is NOT ship-ready until these are resolved
+## 5. Booking, pricing, and phone — resolved
 
-**`BOOKING_URL` — hard blocker.** All five booking CTAs on `frontdesk.html` and the two on `es/frontdesk.html` currently have `href="BOOKING_URL"`, which is not a real link. **These buttons do nothing.** Michael supplies the Pairden GHL calendar link. Never restore the old cal.com/axis link.
+**Booking is wired.** Every booking CTA points at `/book` (English, 5) or `/es/reservar`
+(Spanish, 5). Both 302-redirect to the GHL calendar via `netlify.toml`. **No page hardcodes
+the vendor URL** — if the calendar moves, it changes in one place. Do not "simplify" this by
+inlining the GHL link into the buttons.
+
+**Two phone numbers, deliberately separate — do not merge them.**
+- **(951) 477-5918** is the registered A2P business contact. It appears in the footer legal
+  line on all 13 pages and **nowhere else**. It must always match GHL's Business Profile.
+- **(951) 651-3966** / `tel:+19516513966` is the Vapi AI receptionist demo line. It appears in
+  every demo CTA, hero, demo card, contact block, CTA band, and the JSON-LD `telephone` field.
+
+Retired and never to be reintroduced: (909) 415-8481 and (840) 688-2967 — the latter was never
+dialable, since 840 is not an assigned NANP area code.
+
+**All à la carte prices are verified** against the Master Brain and locked in CLAUDE.md.
+That table is the source of truth, not the legacy site.
+
+**Receptionist trial:** source docs mention a capped 14-day receptionist trial. It is
+**deliberately absent from every page** pending attorney review of the auto-conversion
+language. It was removed from four places, including the FAQPage JSON-LD where Google would
+have ingested it. Do not re-add it.
+
+---
+
+## 5b · ⚠️ A2P 10DLC — DO NOT BREAK THESE AT CUTOVER
+
+**Why the first campaign was rejected — it was not the site.** TCR's verbatim reason was
+*"The submitted legal company name does not match with US EIN."* The submission matched the
+CP 575 exactly; the cause was IRS propagation lag on a newly issued EIN. Resubmission waits
+roughly 30 days from EIN issuance. **No site change fixes this and none was ever required.**
+
+That said, carriers re-scan the live site during review, so four things below are load-bearing
+for the resubmission. Breaking any of them can fail it for a *new* reason.
+
+**1. `/text-us` is the registered opt-in URL.**
+Never rename, remove, or redirect it elsewhere. It must keep its `netlify.toml` 200-rewrite
+and its sitemap entry. The page must contain **zero form elements** and must load **only**
+the LeadConnector widget — never the site's own chat widget.
+
+**2. The footer legal line must appear on all 13 pages**, exactly:
+`Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · Admin@pairden.com · (951) 477-5918`
+English on the Spanish pages too — it is a legal-entity string, not marketing copy.
+
+**3. The address must match everywhere.** The footer line and the JSON-LD `PostalAddress`
+(on `index.html`, `es/index.html`, `frontdesk.html`) must agree character for character, and
+both must match GHL's Business Profile and the A2P registration. **Never change one alone.**
+
+**4. Two phone numbers, never merged.** `(951) 477-5918` is the registered business contact
+and appears in the footer legal line *only*. `(951) 651-3966` is the Vapi demo line and appears
+in every demo CTA and the JSON-LD `telephone` field. Keeping them separate is deliberate.
+
+Also unchanged and not to be touched: the SMS consent checkbox and its exact wording on both
+`index.html` and `es/index.html` — unchecked by default, required, verbatim.
 
 The remaining open items are tracked in **`PENDING-INPUTS.md`** in this repo — including unverified social profile URLs, the demo phone number, individual service prices carried over from legacy without verification, and the Spanish copy sign-off. **Read that file before deploying.**
 
@@ -112,7 +184,42 @@ The remaining open items are tracked in **`PENDING-INPUTS.md`** in this repo —
 
 ---
 
-## 7. Known gaps at handoff
+## 7. Spanish is BUILT but HELD — English-only launch
+
+All five Spanish pages (`es/index`, `es/frontdesk`, `es/faq`, `es/privacidad`, `es/terminos`)
+are complete, styled, and working. **They are deliberately held back pending a native-speaker
+review.** No Spanish copy has been read by anyone who speaks Spanish, and the two legal pages
+still display visible `[MICHAEL: verify]` banners naming the English as controlling.
+
+**The files still deploy.** They were not deleted — this is a soft launch gate, not a removal.
+Four things hold them back:
+
+| # | Where | What was done |
+|---|---|---|
+| 1 | `sitemap.xml` | all `/es/` URLs and hreflang alternates removed |
+| 2 | 5 EN pages | `hreflang` en/es/x-default trios removed (`index`, `frontdesk`, `faq`, `privacy`, `terms`) |
+| 3 | `styles.css` | `.lang-toggle { display: none !important; }` hides the EN ⇄ ES switch site-wide |
+| 4 | `robots.txt` + `netlify.toml` | `Disallow: /es/` plus an `X-Robots-Tag: noindex, nofollow` header on `/es/*` |
+
+Items 1–3 stop the Spanish pages being *linked or advertised*. **Item 4 is the one that matters
+for risk** — without it, `/es/privacidad` would still resolve publicly and could be indexed with
+an unreviewed-translation banner on it. A `Disallow` alone does not deindex a page that has
+already been discovered, so the header is the real guarantee.
+
+### To ship Spanish later — four reversals, in this order
+1. Delete the `.lang-toggle { display: none !important; }` rule in `styles.css`.
+2. Restore the `/es/` `<url>` entries and `xhtml:link` alternates in `sitemap.xml`.
+3. Restore the `hreflang` trios on the 5 English pages (each has a comment marking the spot).
+4. Remove `Disallow: /es/` from `robots.txt` **and** the `/es/*` header block from `netlify.toml`.
+
+**Do not do any of that before the Spanish copy has been reviewed and the two
+`[MICHAEL: verify]` banners removed from `es/privacidad.html` and `es/terminos.html`.**
+
+Also outstanding on the Spanish side: `es/index.html` has no chat widget (the English homepage
+does), there is no `es/tools.html` (Spanish footers link to the English `/tools`), and there is
+no Spanish `/text-us`, which matters if the A2P campaign is meant to cover Spanish-language opt-in.
+
+## 8. Known gaps at handoff
 
 - **No git history.** This build was produced as files; the repo was never initialized, so there are no commits, branches, or diffs behind it. Recommend `git init` and one baseline commit before any further edits.
 - **No browser or device testing has been performed.** The pages have not been opened in a browser, rendered, or checked at any breakpoint. Responsive CSS is ported from the legacy site (which was tested), but v2 itself is **verified by static inspection and grep only**. Treat §6 as real work, not a formality.
