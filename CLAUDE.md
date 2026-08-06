@@ -104,10 +104,16 @@ Structured data and the visible footer must agree character for character.
 `addressLocality` is also the strongest local-relevance signal Google reads — never strip it.
 
 ### Two phone numbers — they do NOT overwrite each other
-- **(951) 477-5918** — **registered A2P business contact.** Footer legal line only, all 13 pages.
+- **(951) 477-5918** — **registered A2P business contact.**
   **This number must always match GHL's Business Profile.** Changing it in one place and not the
   other can fail or invalidate the A2P 10DLC campaign. Never change it here without updating GHL
-  in the same pass — and vice versa. It appears nowhere else on the site.
+  in the same pass — and vice versa.
+  It may appear in **exactly two places and nowhere else**:
+  1. the footer legal line, all 13 pages;
+  2. the "Office:" line in the Direct-contact card on `frontdesk.html` and `es/frontdesk.html`
+     *(added Aug 3 2026 — that card previously showed the demo number twice)*.
+  **It must never appear in a hero, demo card, CTA band, or any other `tel:` link.** Those are
+  all the demo line.
 - **(951) 651-3966** — Vapi AI receptionist demo line (`tel:+19516513966`). All demo CTAs, hero,
   demo cards, contact blocks, CTA bands, every `tel:` link outside the footer, and the JSON-LD
   `telephone` field. **This one can change freely** — it carries no registration dependency.
