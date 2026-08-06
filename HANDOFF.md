@@ -1,227 +1,102 @@
-# HANDOFF.md — PAIRDEN Marketing Site v2
-
-**For:** Jose (jose@pairden.com) · **From:** Michael · **Built:** August 2, 2026
-
-This is a complete, from-scratch rebuild of the PAIRDEN public marketing site.
-It is **static HTML + one shared CSS file + vanilla JS** — no framework, no build step.
-Netlify publishes the repo root exactly as-is.
-
-> **Status: NOT YET DEPLOYED.** Placeholders remain (see §5). Read §5 before pushing anything live.
+# HANDOFF — PAIRDEN SITE V2 → JOSE
+**From:** Michael · **Date:** Aug 5, 2026
+**Live preview:** https://curious-kulfi-dcaa51.netlify.app
+**Repo:** `~/Desktop/pairden-site-v2-setup/marketing-site/` · branch `session-2-wiring`
 
 ---
 
-## 1. What's in the repo
+## 1. WHAT THIS IS
 
-```
-/                  index.html · frontdesk.html · tools.html · faq.html
-                   privacy.html · terms.html · 404.html
-/es/               index.html · frontdesk.html · faq.html
-                   privacidad.html · terminos.html
-/assets/brand/     new logo kit (icon, lockups, favicons, og-card)
-/styles.css        shared design system — all brand tokens live here
-/site.js           shared behaviors (nav, reveal, scroll-top, FAQ, ?plan= deep links)
-/netlify.toml      redirects, rewrites, security headers
-/robots.txt  /sitemap.xml
-/reference/legacy/ the OLD site — read-only source, git-ignored, never shipped
-```
+V2 of the marketing site, built in a parallel repo using your V1 as read-only reference. Your structure and page skeleton were kept — they convert. What changed is the brand, the business address, the phone numbers, the A2P setup, and a long list of bugs.
 
-**12 pages total** — 7 English, 5 Spanish.
+**This is not a redesign.** Legal pages, consent language, the Make webhook, the honeypot, the intentScore function, and the axismarketingai.net 301 block are all ported byte-identical from your V1.
+
+**You own cutover.** Nothing here has touched Netlify, DNS, GHL, Make, or Vapi.
 
 ---
 
-## 2. What changed vs. the legacy site
+## 2. WHAT CHANGED VS V1
 
-### Brand — completely new kit
-- New palette: Deep Navy `#071A3D` · Electric Blue `#0A84FF` · Cyan `#17C8F4` · Slate `#5D6B82` · Soft White `#F4F7FB` · page background `#040C1F`.
-- **Every retired brand color is gone** from the codebase — verified by grep across all 12 pages.
-- All logos now come from `/assets/brand/`. The old logo files in `reference/legacy/assets/` are retired and referenced nowhere.
-- Fonts unchanged: Space Grotesk (headings) · Inter (body) · JetBrains Mono (numbers).
-
-### Content and compliance corrections
-| # | Change | Why |
+### Fixed (these were broken or wrong on V1)
+| Item | Was | Now |
 |---|---|---|
-| 1 | **Local SEO now reads "6- or 12-month terms"** | Legacy `index.html` said `"3-month minimum"`, which contradicts the locked business rule. Corrected in EN and ES, plus a new FAQ entry explaining the term. |
-| 2 | **Form input `name="business_name"` → `name="company"`** | `business_name` is not a real GHL field. The webhook payload key was already `company`, so **the Make scenario and GHL are unaffected**. Visible label ("Business name") unchanged. |
-| 3 | **Footer is now the LLC line** on every page | `© 2026 Pairden Technologies LLC, d/b/a PAIRDEN · Menifee, CA` |
-| 4 | **Organization JSON-LD now carries the Menifee, CA address** | Was missing entirely. Also added `legalName`. |
-| 5 | **Clean URLs everywhere** | Internal links are now `/faq`, `/frontdesk`, `/privacy` etc. rather than `.html`. `netlify.toml` has matching 200-rewrites. |
+| Local SEO terms | "3-month minimum" | **"6- or 12-month terms"** — the 3-month version isn't in the contract |
+| Booking CTAs | `cal.com/jose-c-upt1mi/axis-setup` (×5) | `/book` → GHL Discovery Call calendar |
+| Demo number | (840) 688-2967 — **unassigned area code, could not connect** | (951) 651-3966 |
+| Legal entity | absent from every page | Full legal footer line on all 13 pages |
+| Receptionist trial | "capped 14-day trial" in 4 places incl. FAQ JSON-LD | removed — no advertised trial on the receptionist |
+| Receptionist overage | $0.40/min | **$0.50/min** |
 
-### New in v2 (not in legacy)
-- **Full Spanish site** at `/es/` with reciprocal `hreflang` on every EN/ES pair and an EN ⇄ ES toggle in the nav.
-- **`?plan=` deep links** — `?plan=foundation|growth|frontoffice` scrolls to the plan ladder, highlights the matching card, and preselects it in the audit form. Unknown values are a silent no-op.
-- **Short links** — `/growth`, `/foundation`, `/frontoffice`, `/demo` (302s).
-- **Social row** in the footer (Instagram, Facebook, X, TikTok, LinkedIn).
-- **FAQPage JSON-LD** on `faq.html` for rich results.
-- `sitemap.xml` and `robots.txt` (legacy had these; regenerated with ES URLs and hreflang alternates).
+### Added
+- **`/text-us`** — LeadConnector chat page, zero form elements. This is the **registered A2P opt-in URL.**
+- New brand: Deep Navy `#071A3D`, Electric Blue `#0A84FF`, Cyan `#17C8F4`, Soft White `#F4F7FB`, page bg `#040C1F`. New logo kit with transparent cuts, favicons, and a composed 1200×630 OG card.
+- Business address: **41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590** (Regus) — in the footer and in the Organization JSON-LD, character-for-character identical.
+- Business type field is now a free-text input with a datalist, so prospects aren't excluded by a fixed industry list.
+- "Book a Call" secondary CTA under each of the three plan cards.
+- Deep links: `/growth`, `/foundation`, `/frontoffice`, `/demo`, `/book`.
 
-### Ported unchanged — do not "fix" these
-- **The Make.com webhook URL and all 13 payload keys** are byte-identical to legacy:
-  `firstName, lastName, company, businessType, email, phone, services[], goal, budget, smsConsent, intentScore, honeypot, submittedAt`
-  Renaming any key silently breaks the lead pipeline.
-- **The `hp_field` honeypot** and the **`calculateIntentScore()`** function — logic untouched.
-- **`privacy.html` and `terms.html` are word-for-word ports.** The only edit is the LLC line in the header. Do not rewrite, summarize, or modernize these.
-- **The entire `axismarketingai.net` 301 block** in `netlify.toml`, verbatim, including the `force = true` flags.
+### Held back
+Five Spanish pages (`es/index`, `es/frontdesk`, `es/faq`, `es/privacidad`, `es/terminos`) are **built but not launching.** No native speaker has reviewed them, and the legal pages carry visible `[MICHAEL: verify]` banners. They're excluded four ways: out of sitemap, hreflang stripped, nav toggle hidden, robots + `X-Robots-Tag` noindex. The deploy script also deletes `/es/` outright, which is the real guarantee.
 
 ---
 
-## 3. A2P / SMS compliance — the highest-stakes part of this site
+## 3. HARD CONSTRAINTS — DO NOT BREAK THESE
 
-- Every form that collects a phone number has a consent checkbox that is **unchecked by default and required**. Verified on both `index.html` and `es/index.html`.
-- The English consent sentence is **verbatim**; the Spanish is the approved translation. Neither may be paraphrased, shortened, or reflowed into marketing copy.
-- **The chat widget collects name, company, and email only — never a phone number.** This is deliberate. If chat is ever changed to collect a phone, it must get the full consent line first.
-- The free tools collect no PII beyond what legacy collected.
+**A2P.** The 10DLC brand was rejected on Aug 4 for a name/EIN mismatch — root cause is IRS propagation lag on a newly issued EIN, not a website problem. Resubmission is planned ~30 days from EIN issuance. Three things must stay exactly as they are:
 
----
+1. **`/text-us` must remain reachable at that exact path.** It's the registered opt-in URL. Never rename, never remove.
+2. **The footer legal line must stay on all 13 pages, unchanged**, and must always match GHL's Business Profile. Never change it in one place alone.
+3. **Consent language is verbatim CTIA text.** Don't paraphrase, shorten, or reflow it. Privacy §3 contains the no-third-party-sharing-of-mobile-data clause carriers check for.
 
-## 3b. Live preview — where to look before you touch anything
+**Phone numbers — three, with separate jobs:**
+- **(951) 477-5918** — registered business contact. Footer legal line on all 13 pages, plus the "Office" line on the two FrontDesk contact cards. **Nowhere else.**
+- **(951) 651-3966** — Vapi AI receptionist demo line. All demo CTAs, hero, demo cards, CTA bands, tel: links, JSON-LD `telephone`.
+- Zero references to the retired (840) 688-2967 or (909) 415-8481 remain. Please keep it that way.
 
-**https://curious-kulfi-dcaa51.netlify.app**
+**Form routing.** The audit form and chatbot POST to the existing Make webhook with the 13-key payload unchanged (`firstName, lastName, company, businessType, email, phone, services[], goal, budget, smsConsent, intentScore, honeypot, submittedAt`). The GHL handoff belongs **inside Make**, not in the site. Don't reroute the page.
 
-⚠️ **This is a manual drag-and-drop deploy. It is NOT connected to any git repo.**
+**GHL field mapping.** `company` maps to `contact.company_name`. A field called `business_name` **does not exist in GHL** — confirmed live. Don't introduce that string anywhere.
 
-That matters more than it sounds:
-- **Nothing you push to git will appear there.** The preview only changes if someone
-  drags the folder onto Netlify again. It is a snapshot, not a branch.
-- **It will drift from the repo silently.** Treat the repo as the source of truth and this
-  URL as a dated screenshot. When in doubt, redeploy rather than assume it is current.
-- **It is not the cutover target.** Do not point `pairden.com` at this site. Use one of the
-  two options in §4, both of which deploy from git.
-- The random Netlify subdomain is fine for review, but it should not be shared with
-  clients or submitted anywhere — including in the A2P registration, which must reference
-  the real domain.
+**Locked pricing.** Online Foundation $250/$147 · Growth Engine $500/$397 · AI Front Office $997/$997. Setup waived at 6 months (12 for AI Front Office). Monthly is never discounted. 30-day trials on exactly three services: missed-call text-back, review engine, website chat. FrontDesk tiers $197/$397/$797 with setup $250/$497/$997.
 
-Use it to check the render, click the nav, open `/text-us` and confirm the LeadConnector
-bubble appears, and read the footer legal line. Then come back to the repo for the actual work.
-
-## 4. Cutover options
-
-### Option A — merge v2 into the existing repo + Netlify site (**recommended**)
-Keeps domains, DNS, and the live axis redirects exactly where they are. Lowest risk.
-1. Branch off the current live repo.
-2. Copy in all 12 pages, `styles.css`, `site.js`, `netlify.toml`, `robots.txt`, `sitemap.xml`, `assets/brand/`.
-3. Delete the retired logo files from the old `assets/` folder once nothing references them.
-4. Deploy preview → check §6 → merge.
-
-### Option B — new Netlify site, then move the domains
-1. Create a new Netlify site from this repo, publish directory `.`.
-2. Move `pairden.com` **and** `axismarketingai.net` to the new site.
-3. The axis redirect block is already in our `netlify.toml`, so the redirects survive the move — **but they only work while `axismarketingai.net` stays assigned to the Netlify site serving this config.** Do not release that domain.
+**`netlify.toml` blocks that must survive:** the axismarketingai.net 301s (ported verbatim from your V1), the legacy filename 301s, the `.md` doc guards, and the `/book` → `qdwamJ3e9xLaooRS8t8g` redirect.
 
 ---
 
-## 5. Booking, pricing, and phone — resolved
+## 4. CUTOVER — TWO OPTIONS
 
-**Booking is wired.** Every booking CTA points at `/book` (English, 5) or `/es/reservar`
-(Spanish, 5). Both 302-redirect to the GHL calendar via `netlify.toml`. **No page hardcodes
-the vendor URL** — if the calendar moves, it changes in one place. Do not "simplify" this by
-inlining the GHL link into the buttons.
+**Option A — merge into your existing repo. Recommended.**
+Keeps pairden.com, DNS, SSL, the axis redirects, and your deploy pipeline exactly where they are. Nothing to reassign. Bring the V2 files in, review the diff, push.
 
-**Two phone numbers, deliberately separate — do not merge them.**
-- **(951) 477-5918** is the registered A2P business contact. It appears in the footer legal
-  line on all 13 pages and **nowhere else**. It must always match GHL's Business Profile.
-- **(951) 651-3966** / `tel:+19516513966` is the Vapi AI receptionist demo line. It appears in
-  every demo CTA, hero, demo card, contact block, CTA band, and the JSON-LD `telephone` field.
+**Option B — new Netlify site, move the domains.**
+`netlify.toml` already carries the full axis redirect block, so nothing is lost — but you'd be reassigning pairden.com and axismarketingai.net, and re-issuing SSL.
 
-Retired and never to be reintroduced: (909) 415-8481 and (840) 688-2967 — the latter was never
-dialable, since 840 is not an assigned NANP area code.
-
-**All à la carte prices are verified** against the Master Brain and locked in CLAUDE.md.
-That table is the source of truth, not the legacy site.
-
-**Receptionist trial:** source docs mention a capped 14-day receptionist trial. It is
-**deliberately absent from every page** pending attorney review of the auto-conversion
-language. It was removed from four places, including the FAQPage JSON-LD where Google would
-have ingested it. Do not re-add it.
+Either way, publish directory is the repo root. `reference/` and all `.md` files are gitignored or blocked; they must never deploy.
 
 ---
 
-## 5b · ⚠️ A2P 10DLC — DO NOT BREAK THESE AT CUTOVER
+## 5. OPEN ITEMS
 
-**Why the first campaign was rejected — it was not the site.** TCR's verbatim reason was
-*"The submitted legal company name does not match with US EIN."* The submission matched the
-CP 575 exactly; the cause was IRS propagation lag on a newly issued EIN. Resubmission waits
-roughly 30 days from EIN issuance. **No site change fixes this and none was ever required.**
-
-That said, carriers re-scan the live site during review, so four things below are load-bearing
-for the resubmission. Breaking any of them can fail it for a *new* reason.
-
-**1. `/text-us` is the registered opt-in URL.**
-Never rename, remove, or redirect it elsewhere. It must keep its `netlify.toml` 200-rewrite
-and its sitemap entry. The page must contain **zero form elements** and must load **only**
-the LeadConnector widget — never the site's own chat widget.
-
-**2. The footer legal line must appear on all 13 pages**, exactly:
-`Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · Admin@pairden.com · (951) 477-5918`
-English on the Spanish pages too — it is a legal-entity string, not marketing copy.
-
-**3. The address must match everywhere.** The footer line and the JSON-LD `PostalAddress`
-(on `index.html`, `es/index.html`, `frontdesk.html`) must agree character for character, and
-both must match GHL's Business Profile and the A2P registration. **Never change one alone.**
-
-**4. Two phone numbers, never merged.** `(951) 477-5918` is the registered business contact
-and appears in the footer legal line *only*. `(951) 651-3966` is the Vapi demo line and appears
-in every demo CTA and the JSON-LD `telephone` field. Keeping them separate is deliberate.
-
-Also unchanged and not to be touched: the SMS consent checkbox and its exact wording on both
-`index.html` and `es/index.html` — unchecked by default, required, verbatim.
-
-The remaining open items are tracked in **`PENDING-INPUTS.md`** in this repo — including unverified social profile URLs, the demo phone number, individual service prices carried over from legacy without verification, and the Spanish copy sign-off. **Read that file before deploying.**
-
----
-
-## 6. Pre-deploy checklist
-
-- [ ] `BOOKING_URL` replaced in `frontdesk.html` and `es/frontdesk.html` (7 spots)
-- [ ] Everything in `PENDING-INPUTS.md` resolved
-- [ ] Spanish copy reviewed and the two `[MICHAEL: verify]` banners removed from `es/privacidad.html` and `es/terminos.html`
-- [ ] Submit the audit form and confirm it lands in the Make scenario
-- [ ] Test `?plan=foundation`, `?plan=growth`, `?plan=frontoffice`
-- [ ] Test `/growth`, `/foundation`, `/frontoffice`, `/demo`
-- [ ] Check every page at 375px / 768px / 1440px
-- [ ] Confirm an `axismarketingai.net` URL still 301s to `pairden.com`
-- [ ] Lighthouse ≥ 90 performance and SEO
-- [ ] OG card preview renders on one social platform
-
----
-
-## 7. Spanish is BUILT but HELD — English-only launch
-
-All five Spanish pages (`es/index`, `es/frontdesk`, `es/faq`, `es/privacidad`, `es/terminos`)
-are complete, styled, and working. **They are deliberately held back pending a native-speaker
-review.** No Spanish copy has been read by anyone who speaks Spanish, and the two legal pages
-still display visible `[MICHAEL: verify]` banners naming the English as controlling.
-
-**The files still deploy.** They were not deleted — this is a soft launch gate, not a removal.
-Four things hold them back:
-
-| # | Where | What was done |
+| Item | Owner | Notes |
 |---|---|---|
-| 1 | `sitemap.xml` | all `/es/` URLs and hreflang alternates removed |
-| 2 | 5 EN pages | `hreflang` en/es/x-default trios removed (`index`, `frontdesk`, `faq`, `privacy`, `terms`) |
-| 3 | `styles.css` | `.lang-toggle { display: none !important; }` hides the EN ⇄ ES switch site-wide |
-| 4 | `robots.txt` + `netlify.toml` | `Disallow: /es/` plus an `X-Robots-Tag: noindex, nofollow` header on `/es/*` |
+| **Form → Make round trip untested** | Michael | Payload verified by source inspection only. One real submission needs to land in the scenario. This is the last unverified path in the system. |
+| Vapi margin test — actual cost/min | Jose | 3× bar is $0.167/min against the $0.50 overage |
+| Make → GHL module | Jose | The site posts to Make; the CRM handoff happens there |
+| CSA still says $0.40 | Michael | Contract exposure before the next signature |
+| Spanish native review | Michael | 5 pages incl. 2 legal docs |
+| A2P resubmission | Michael | ~30 days from EIN issuance |
+| Vapi account ownership | Both | Whose account holds client numbers long-term |
 
-Items 1–3 stop the Spanish pages being *linked or advertised*. **Item 4 is the one that matters
-for risk** — without it, `/es/privacidad` would still resolve publicly and could be indexed with
-an unreviewed-translation banner on it. A `Disallow` alone does not deindex a page that has
-already been discovered, so the header is the real guarantee.
+**Please don't publish the site and resubmit A2P in the same motion.** If the brand fails again, we need to isolate which variable caused it.
 
-### To ship Spanish later — four reversals, in this order
-1. Delete the `.lang-toggle { display: none !important; }` rule in `styles.css`.
-2. Restore the `/es/` `<url>` entries and `xhtml:link` alternates in `sitemap.xml`.
-3. Restore the `hreflang` trios on the 5 English pages (each has a comment marking the spot).
-4. Remove `Disallow: /es/` from `robots.txt` **and** the `/es/*` header block from `netlify.toml`.
+---
 
-**Do not do any of that before the Spanish copy has been reviewed and the two
-`[MICHAEL: verify]` banners removed from `es/privacidad.html` and `es/terminos.html`.**
+## 6. VERIFIED BEFORE HANDOFF
 
-Also outstanding on the Spanish side: `es/index.html` has no chat widget (the English homepage
-does), there is no `es/tools.html` (Spanish footers link to the English `/tools`), and there is
-no Spanish `/text-us`, which matters if the A2P campaign is meant to cover Spanish-language opt-in.
+Rendered and measured at 320 / 375 / 414px across all 13 pages: zero horizontal overflow, `scrollWidth === clientWidth` everywhere, no phantom whitespace, all overlays fully on-screen, sticky header working, 45 eyebrow headings audited. Booking CTA confirmed landing on the Discovery Call calendar with correct availability rules. Demo line confirmed answering and booking correctly. Positive grep gate passed on prices, consent text, legal line, trials, and phone-number placement.
 
-## 8. Known gaps at handoff
+**One notable bug worth knowing about** (logged as MASTER-LIST §0): a stacking rule listed `.nav`, `.nav-mobile-menu`, `.chat-panel`, `.chat-bubble`, and `.scroll-top-btn` with `position: relative`, silently overriding their `position: fixed` at equal specificity. It broke every overlay, the sticky header, and added dead space to every page bottom — and was invisible in source review. Fixed, but easy to reintroduce if that selector list grows.
 
-- **No git history.** This build was produced as files; the repo was never initialized, so there are no commits, branches, or diffs behind it. Recommend `git init` and one baseline commit before any further edits.
-- **No browser or device testing has been performed.** The pages have not been opened in a browser, rendered, or checked at any breakpoint. Responsive CSS is ported from the legacy site (which was tested), but v2 itself is **verified by static inspection and grep only**. Treat §6 as real work, not a formality.
-- **Lighthouse has not been run.**
-- `/tools` has no Spanish counterpart — the calculators are English-only by design. `es/` pages link to the English `/tools`.
+---
+
+*Questions → Michael. Repo docs: `CLAUDE.md` (locked rules), `MASTER-LIST.md` (decision log), `PENDING-INPUTS.md` (open checklist).*
