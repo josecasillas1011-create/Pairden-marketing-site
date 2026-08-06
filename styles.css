@@ -604,9 +604,16 @@ body::before {
    scroll frame, and it contradicted the flat brand system on the guideline
    flyer. Deleted deliberately — do not reintroduce. */
 
-/* Stacking order for real content */
-.nav, .nav-mobile-menu, section, footer, .doc, .chat-panel,
-.chat-bubble, .scroll-top-btn, .page-head, main { position: relative; z-index: 2; }
+/* Stacking order for in-flow content only.
+   ⚠️ NEVER add a fixed-position element to this selector list. It sets
+   `position: relative`, which silently overrides `position: fixed` declared
+   earlier in this file (equal specificity, later rule wins). Doing so drops
+   .nav, .nav-mobile-menu, .chat-panel, .chat-bubble and .scroll-top-btn into
+   document flow — the mobile menu and chat panel get clipped at the viewport
+   edge, the header stops being sticky, and the invisible chat panel adds ~520px
+   of phantom whitespace to the bottom of every page. That regression shipped
+   once; do not reintroduce it. */
+section, footer, .doc, .page-head, main { position: relative; z-index: 2; }
 
 /* ── 3. Scroll progress bar (injected by site.js) ───────────── */
 .scroll-progress {
@@ -650,7 +657,19 @@ h2 { font-size: clamp(1.95rem, 3.9vw, 3.05rem); letter-spacing: -0.026em; }
   content: ""; width: 26px; height: 1px; flex: 0 0 26px;
   background: linear-gradient(90deg, transparent, var(--accent-bright));
 }
-.section-header .eyebrow::after {
+/* Trailing rule ONLY in centered containers. Deliberately scoped: on a
+   left-aligned eyebrow a trailing rule dangles into empty space and reads as a
+   bug rather than as symmetry. Left-aligned eyebrows that intentionally keep a
+   single leading rule: "Legal" (privacy/terms), "Coverage"/"Most popular"/
+   "Busy lines" (FrontDesk pricing cards), "Start with a demo line" (FrontDesk),
+   and "Free systems audit" (index contact block) — reviewed and accepted
+   Aug 3 2026, not a defect.
+   If a new CENTERED section is added, add its container here — otherwise its
+   eyebrow renders with a left rule only. Verified across all 13 pages: 45
+   eyebrows, 0 centered ones missing the trailing rule. */
+.section-header .eyebrow::after,
+.page-head .eyebrow::after,
+.cta-band .eyebrow::after {
   content: ""; width: 26px; height: 1px; flex: 0 0 26px;
   background: linear-gradient(90deg, var(--accent-bright), transparent);
 }

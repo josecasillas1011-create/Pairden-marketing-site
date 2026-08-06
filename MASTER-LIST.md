@@ -87,6 +87,62 @@ All five Spanish pages were written **without** the pre-review BUILD-SPEC requir
 
 ---
 
+## 0 · KNOWN DEFECT (FIXED) — `position: fixed` silently overridden
+### The single most consequential bug in this build. Do not reintroduce it.
+
+**What shipped.** The visual elevation layer added a stacking rule in `styles.css`:
+
+```css
+/* Stacking order for real content */
+.nav, .nav-mobile-menu, section, footer, .doc, .chat-panel,
+.chat-bubble, .scroll-top-btn, .page-head, main { position: relative; z-index: 2; }
+```
+
+Five of those selectors — `.nav`, `.nav-mobile-menu`, `.chat-panel`, `.chat-bubble`,
+`.scroll-top-btn` — were declared `position: fixed` earlier in the same file. **Equal
+specificity (one class each), later rule wins.** Every fixed overlay on the site silently
+became `position: relative`.
+
+**What it broke.**
+- **Mobile nav menu** — on a relative element `right` is ignored in LTR, so `left: 12px`
+  shifted it 12px right at full body width. Constant 12px clipped off the right edge at
+  every viewport (320 / 375 / 414). Looked "cut off and not centered."
+- **Chat panel** — `right: 14px` shifted it *left* by 14px, clipping its left edge, and it
+  dropped into document flow instead of anchoring to the viewport.
+- **Sticky header** — `.nav` scrolled away with the page instead of pinning.
+- **Phantom whitespace** — the chat panel is `opacity: 0` but was still in flow, adding up
+  to ~520px of dead space to the bottom of **every page**. The bubble and scroll-top button
+  joined the flow too.
+
+**Why it survived two rounds of fixes.** Every symptom looked like a sizing problem, so the
+attempted fixes were width tweaks — which cannot work, because width was never the cause.
+It is also **invisible in source review**: both rules are individually correct and sit ~350
+lines apart. Only a computed-style check on the rendered page reveals it.
+
+**The fix** — narrow the selector to in-flow containers only:
+```css
+section, footer, .doc, .page-head, main { position: relative; z-index: 2; }
+```
+The rule existed to lift content above a film-grain overlay that has since been deleted. The
+aurora sits at `z-index: -2`, so in-flow content needs no z-index bump to clear it. The rule
+could arguably be removed outright.
+
+**Verified after fix** (rendered pages, computed styles, not source):
+`position: fixed` restored on all five · nav menu 12/12 margins at 320/375/414 · chat panel
+fully on-screen at all three · zero horizontal overflow on all 13 pages · gap after footer
+between −0.6px and +0.2px.
+
+### 🚨 THE RULE FOR FUTURE SESSIONS
+**Never add a fixed-position element to that selector list.** If a new overlay is added, do
+not "fix" its stacking by appending it there — set its `z-index` on its own rule instead.
+A warning comment sits above the selector in `styles.css`; leave it there.
+
+**General lesson:** a shared `position:` declaration applied to a broad selector list can
+silently overwrite positioning set elsewhere at equal specificity. When an overlay misbehaves,
+**check its computed `position` before touching its width.**
+
+---
+
 ## 4a · A2P REJECTION — CAUSE IS KNOWN. DO NOT RE-LITIGATE.
 
 **Verbatim from TCR:**
