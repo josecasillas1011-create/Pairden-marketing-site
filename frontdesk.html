@@ -5,27 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Front Desk for Local Service Businesses | PAIRDEN</title>
   <meta name="description" content="A 24/7 AI receptionist for local service businesses that answers missed calls, captures job details, handles common questions, and helps route urgent leads." />
-  <link rel="icon" type="image/png" href="assets/pairden-icon.png" />
-  <meta name="theme-color" content="#020711" />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
   <link rel="canonical" href="https://pairden.com/frontdesk" />
+  <!-- hreflang removed for the English-only launch. Restore the en/es/x-default
+       trio here when the Spanish site ships. See HANDOFF.md §7. -->
   <meta property="og:title" content="AI Front Desk for Local Service Businesses | PAIRDEN" />
   <meta property="og:description" content="Call the demo line and hear an AI receptionist capture a real local-service lead." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pairden.com/frontdesk" />
-  <meta property="og:image" content="https://pairden.com/assets/pairden-social-card.png" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Front Desk for Local Service Businesses | PAIRDEN" />
   <meta name="twitter:description" content="A 24/7 AI receptionist that helps local service businesses answer missed calls and capture job details." />
-  <meta name="twitter:image" content="https://pairden.com/assets/pairden-social-card.png" />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
   <meta name="robots" content="index, follow" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "PAIRDEN AI Receptionist",
-    "provider": { "@type": "Organization", "name": "PAIRDEN", "url": "https://pairden.com/" },
+    "provider": {
+      "@type": "Organization",
+      "name": "PAIRDEN",
+      "legalName": "Pairden Technologies LLC",
+      "url": "https://pairden.com/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "41877 Enterprise Circle N., 2nd Floor",
+        "addressLocality": "Temecula",
+        "addressRegion": "CA",
+        "postalCode": "92590",
+        "addressCountry": "US"
+      }
+    },
     "areaServed": ["Inland Empire", "Southern California"],
     "serviceType": "AI receptionist and missed-call coverage for local service businesses",
     "url": "https://pairden.com/frontdesk"
@@ -34,7 +51,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     .frontdesk-hero {
       align-items: center;
@@ -45,8 +62,8 @@
     }
     .frontdesk-hero::before {
       background:
-        radial-gradient(600px circle at 78% 24%, rgba(57,199,255,0.18), transparent 62%),
-        radial-gradient(760px circle at 16% 18%, rgba(0,110,230,0.16), transparent 58%);
+        radial-gradient(600px circle at 78% 24%, rgba(23,200,244,0.18), transparent 62%),
+        radial-gradient(760px circle at 16% 18%, rgba(6,99,199,0.16), transparent 58%);
       content: "";
       inset: 0;
       pointer-events: none;
@@ -62,8 +79,8 @@
     }
     .frontdesk-badge {
       align-items: center;
-      background: rgba(19,157,255,0.1);
-      border: 1px solid rgba(57,199,255,0.42);
+      background: rgba(10,132,255,0.1);
+      border: 1px solid rgba(23,200,244,0.42);
       border-radius: 999px;
       color: var(--accent-bright);
       display: inline-flex;
@@ -79,14 +96,12 @@
       animation: blink 2s ease-in-out infinite;
       background: var(--accent-bright);
       border-radius: 50%;
-      box-shadow: 0 0 16px rgba(57,199,255,0.8);
+      box-shadow: 0 0 16px rgba(23,200,244,0.8);
       flex: 0 0 7px;
       height: 7px;
       width: 7px;
     }
-    .frontdesk-hero h1 {
-      max-width: 780px;
-    }
+    .frontdesk-hero h1 { max-width: 780px; }
     .frontdesk-sub {
       color: var(--muted);
       font-size: 18px;
@@ -101,9 +116,7 @@
       gap: 14px;
     }
     .frontdesk-actions .btn-primary,
-    .frontdesk-actions .btn-ghost {
-      min-height: 56px;
-    }
+    .frontdesk-actions .btn-ghost { min-height: 56px; }
     .trust-strip {
       display: flex;
       flex-wrap: wrap;
@@ -127,8 +140,8 @@
     }
     .trust-chip span {
       align-items: center;
-      background: rgba(57,199,255,0.14);
-      border: 1px solid rgba(57,199,255,0.38);
+      background: rgba(23,200,244,0.14);
+      border: 1px solid rgba(23,200,244,0.38);
       border-radius: 50%;
       color: var(--accent-bright);
       display: inline-flex;
@@ -143,7 +156,7 @@
       border-color: var(--glass-border-hi);
       padding: 24px;
       position: relative;
-      box-shadow: 0 0 76px rgba(19,157,255,0.18), var(--shadow);
+      box-shadow: 0 0 76px rgba(10,132,255,0.18), var(--shadow);
     }
     .demo-call-top {
       align-items: center;
@@ -165,8 +178,8 @@
       text-transform: uppercase;
     }
     .demo-call-pill {
-      background: rgba(57,199,255,0.1);
-      border: 1px solid rgba(57,199,255,0.28);
+      background: rgba(23,200,244,0.1);
+      border: 1px solid rgba(23,200,244,0.28);
       border-radius: 999px;
       color: var(--accent-pale);
       font-family: var(--font-mono);
@@ -214,10 +227,7 @@
       margin-top: 20px;
       padding: 16px;
     }
-    .transcript-line {
-      display: grid;
-      gap: 5px;
-    }
+    .transcript-line { display: grid; gap: 5px; }
     .transcript-label {
       color: var(--accent-pale);
       font-size: 11px;
@@ -237,52 +247,28 @@
       margin-top: 2px;
     }
     .capture-row span {
-      background: rgba(19,157,255,0.1);
-      border: 1px solid rgba(57,199,255,0.28);
+      background: rgba(10,132,255,0.1);
+      border: 1px solid rgba(23,200,244,0.28);
       border-radius: 999px;
       color: #DDF5FF;
       font-size: 11px;
       font-weight: 700;
       padding: 5px 9px;
     }
-    .problem-grid,
-    .include-grid,
-    .fit-grid {
-      display: grid;
-      gap: 16px;
-    }
-    .problem-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .include-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .fit-grid {
-      grid-template-columns: repeat(6, 1fr);
-    }
-    .front-card {
-      padding: 24px;
-    }
-    .front-card h3 {
-      font-size: 17px;
-      margin-bottom: 9px;
-    }
-    .front-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
+    .problem-grid, .include-grid, .fit-grid { display: grid; gap: 16px; }
+    .problem-grid { grid-template-columns: repeat(3, 1fr); }
+    .include-grid { grid-template-columns: repeat(3, 1fr); }
+    .fit-grid { grid-template-columns: repeat(6, 1fr); }
+    .front-card { padding: 24px; }
+    .front-card h3 { font-size: 17px; margin-bottom: 9px; }
+    .front-card p { color: var(--muted); font-size: 14px; line-height: 1.65; }
     .workflow-steps {
       counter-reset: step;
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(3, 1fr);
     }
-    .workflow-step {
-      min-height: 240px;
-      padding: 28px;
-      position: relative;
-    }
+    .workflow-step { min-height: 240px; padding: 28px; position: relative; }
     .workflow-step::before {
       align-items: center;
       background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
@@ -313,15 +299,8 @@
       gap: 18px;
       grid-template-columns: 1fr 1fr;
     }
-    .demo-test-card {
-      border-color: var(--glass-border-hi);
-      padding: 30px;
-    }
-    .demo-facts {
-      display: grid;
-      gap: 10px;
-      margin: 24px 0;
-    }
+    .demo-test-card { border-color: var(--glass-border-hi); padding: 30px; }
+    .demo-facts { display: grid; gap: 10px; margin: 24px 0; }
     .demo-facts div {
       align-items: center;
       border-bottom: 1px solid var(--line);
@@ -337,29 +316,17 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .demo-facts strong {
-      color: var(--text);
-      font-size: 14px;
-      text-align: right;
-    }
-    .demo-guide-card {
-      align-content: center;
-      min-height: 100%;
-      padding: 30px;
-    }
+    .demo-facts strong { color: var(--text); font-size: 14px; text-align: right; }
+    .demo-guide-card { align-content: center; min-height: 100%; padding: 30px; }
     .receptionist-pricing-grid {
       display: grid;
       gap: 18px;
       grid-template-columns: repeat(3, 1fr);
     }
-    .pricing-single {
-      display: flex;
-      flex-direction: column;
-      padding: 34px;
-    }
+    .pricing-single { display: flex; flex-direction: column; padding: 34px; }
     .pricing-single.featured {
       border-color: var(--accent-bright);
-      box-shadow: 0 24px 70px rgba(0,2,8,0.68), 0 0 38px rgba(19,157,255,0.2), inset 0 1px 0 var(--highlight);
+      box-shadow: 0 24px 70px rgba(0,3,12,0.68), 0 0 38px rgba(10,132,255,0.2), inset 0 1px 0 var(--highlight);
     }
     .pricing-head {
       align-items: start;
@@ -383,8 +350,8 @@
       font-weight: 700;
     }
     .setup-note {
-      background: rgba(19,157,255,0.08);
-      border: 1px solid rgba(57,199,255,0.28);
+      background: rgba(10,132,255,0.08);
+      border: 1px solid rgba(23,200,244,0.28);
       border-radius: 12px;
       color: #DDEFFF;
       font-size: 14px;
@@ -392,12 +359,7 @@
       margin-bottom: 22px;
       padding: 14px 16px;
     }
-    .feature-list {
-      display: grid;
-      gap: 10px;
-      list-style: none;
-      margin: 0 0 24px;
-    }
+    .feature-list { display: grid; gap: 10px; list-style: none; margin: 0 0 24px; }
     .feature-list li {
       align-items: flex-start;
       color: #EAF4FF;
@@ -434,11 +396,7 @@
       padding: 18px 10px;
       text-align: center;
     }
-    .fit-card h3 {
-      font-size: 15px;
-      line-height: 1.25;
-      margin: 0;
-    }
+    .fit-card h3 { font-size: 15px; line-height: 1.25; margin: 0; }
     .weak-fit-note {
       color: var(--muted);
       font-size: 13px;
@@ -460,146 +418,54 @@
       margin: 16px 0 26px;
       max-width: 560px;
     }
-    .book-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .contact-panel {
-      padding: 28px;
-    }
-    .contact-panel h3 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
+    .book-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact-panel { padding: 28px; }
+    .contact-panel h3 { font-size: 19px; margin-bottom: 8px; }
     .contact-panel p {
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
       margin-bottom: 18px;
     }
-    .contact-links {
-      display: grid;
-      gap: 10px;
-    }
-    .contact-links a {
-      color: var(--accent-bright);
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-    .contact-links a:hover {
-      text-decoration: underline;
-    }
-    .footer-col .current-service {
-      color: var(--accent-bright);
-    }
+    .contact-links { display: grid; gap: 10px; }
+    .contact-links a { color: var(--accent-bright); font-weight: 700; overflow-wrap: anywhere; }
+    .contact-links a:hover { text-decoration: underline; }
+    .footer-col .current-service { color: var(--accent-bright); }
 
     @media (max-width: 1100px) {
-      .frontdesk-hero-grid {
-        gap: 34px;
-        grid-template-columns: 1fr;
-      }
-      .demo-call-card {
-        max-width: 760px;
-      }
-      .fit-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .frontdesk-hero-grid { gap: 34px; grid-template-columns: 1fr; }
+      .demo-call-card { max-width: 760px; }
+      .fit-grid { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 900px) {
-      .frontdesk-hero {
-        min-height: auto;
-        padding: 132px 0 58px;
-      }
-      .problem-grid,
-      .workflow-steps,
-      .include-grid,
-      .demo-proof-grid,
-      .book-wrap {
-        grid-template-columns: 1fr;
-      }
-      .workflow-step {
-        min-height: auto;
-      }
-      .pricing-head {
-        display: grid;
-        gap: 14px;
-      }
+      .frontdesk-hero { min-height: auto; padding: 132px 0 58px; }
+      .problem-grid, .workflow-steps, .include-grid, .demo-proof-grid, .book-wrap { grid-template-columns: 1fr; }
+      .workflow-step { min-height: auto; }
+      .pricing-head { display: grid; gap: 14px; }
       .receptionist-pricing-grid { grid-template-columns: 1fr; }
       .pricing-single { margin: 0 auto; max-width: 620px; width: 100%; }
-      .price {
-        white-space: normal;
-      }
+      .price { white-space: normal; }
     }
     @media (max-width: 600px) {
-      .frontdesk-hero {
-        padding: 104px 0 44px;
-      }
-      .frontdesk-hero h1 {
-        font-size: clamp(2.05rem, 10vw, 2.5rem);
-      }
-      .frontdesk-sub {
-        font-size: 16px;
-        line-height: 1.58;
-        margin: 18px 0 24px;
-      }
-      .trust-strip {
-        gap: 8px;
-        margin-top: 24px;
-      }
-      .trust-chip {
-        flex: 1 1 calc(50% - 4px);
-        font-size: 11px;
-        min-width: 0;
-        padding: 8px 9px;
-        white-space: normal;
-      }
-      .frontdesk-actions,
-      .book-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .frontdesk-actions .btn-primary,
-      .frontdesk-actions .btn-ghost,
-      .book-actions .btn-primary,
-      .book-actions .btn-ghost {
-        width: 100%;
-      }
-      .demo-call-card,
-      .front-card,
-      .workflow-step,
-      .demo-test-card,
-      .demo-guide-card,
-      .pricing-single,
-      .contact-panel {
-        padding: 20px 16px;
-      }
-      .demo-card-actions {
-        grid-template-columns: 1fr;
-      }
-      .demo-facts div {
-        align-items: flex-start;
-        display: grid;
-        gap: 4px;
-      }
-      .demo-facts strong {
-        text-align: left;
-      }
-      .fit-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .frontdesk-badge {
-        font-size: 9px;
-        padding: 7px 11px;
-      }
+      .frontdesk-hero { padding: 104px 0 44px; }
+      .frontdesk-hero h1 { font-size: clamp(2.05rem, 10vw, 2.5rem); }
+      .frontdesk-sub { font-size: 16px; line-height: 1.58; margin: 18px 0 24px; }
+      .trust-strip { gap: 8px; margin-top: 24px; }
+      .trust-chip { flex: 1 1 calc(50% - 4px); font-size: 11px; min-width: 0; padding: 8px 9px; white-space: normal; }
+      .frontdesk-actions, .book-actions { flex-direction: column; align-items: stretch; }
+      .frontdesk-actions .btn-primary, .frontdesk-actions .btn-ghost,
+      .book-actions .btn-primary, .book-actions .btn-ghost { width: 100%; }
+      .demo-call-card, .front-card, .workflow-step, .demo-test-card,
+      .demo-guide-card, .pricing-single, .contact-panel { padding: 20px 16px; }
+      .demo-card-actions { grid-template-columns: 1fr; }
+      .demo-facts div { align-items: flex-start; display: grid; gap: 4px; }
+      .demo-facts strong { text-align: left; }
+      .fit-grid { grid-template-columns: 1fr 1fr; }
+      .frontdesk-badge { font-size: 9px; padding: 7px 11px; }
     }
     @media (max-width: 390px) {
-      .fit-grid {
-        grid-template-columns: 1fr;
-      }
-      .trust-chip {
-        white-space: normal;
-      }
+      .fit-grid { grid-template-columns: 1fr; }
+      .trust-chip { white-space: normal; }
     }
   </style>
 </head>
@@ -616,7 +482,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <img src="assets/pairden-wordmark-white.png" alt="PAIRDEN" height="34" />
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" height="34" />
       </a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
@@ -626,7 +492,10 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#book">Contact</a></li>
       </ul>
-      <a href="tel:+18406882967" class="btn-primary nav-cta">Call Demo -></a>
+      <a href="/es/frontdesk" class="lang-toggle" hreflang="es" aria-label="Ver esta página en español">
+        <span class="is-current">EN</span> ⇄ <span>ES</span>
+      </a>
+      <a href="tel:+19516513966" class="btn-primary nav-cta">Call Demo -&gt;</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
         <span></span><span></span><span></span>
       </button>
@@ -642,7 +511,8 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#book">Contact</a></li>
     </ul>
-    <a href="tel:+18406882967" class="btn-primary">Call Demo -></a>
+    <a href="/es/frontdesk" class="lang-toggle" hreflang="es"><span class="is-current">EN</span> ⇄ <span>ES</span></a>
+    <a href="tel:+19516513966" class="btn-primary">Call Demo -&gt;</a>
   </div>
 
   <main>
@@ -659,8 +529,9 @@
               PAIRDEN AI Receptionist covers after-hours, overflow, or every call. It answers approved questions, captures job details, can connect to booking, and routes urgent leads before they move on.
             </p>
             <div class="frontdesk-actions reveal reveal-d3">
-              <a href="tel:+18406882967" class="btn-primary">Call the Live Demo -></a>
-              <a href="https://cal.com/jose-c-upt1mi/axis-setup" class="btn-ghost">Book a Setup Call</a>
+              <a href="tel:+19516513966" class="btn-primary">Call the Live Demo -&gt;</a>
+              <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
+              <a href="/book" class="btn-ghost">Book a Setup Call</a>
             </div>
             <div class="trust-strip reveal reveal-d3">
               <div class="trust-chip"><span>✓</span>After-hours or 24/7</div>
@@ -677,9 +548,9 @@
             </div>
             <h2>Test it like a real caller.</h2>
             <p>Call the demo line and ask about a burst pipe, a weekend repair, pricing, or a service question. The agent should collect the lead without inventing details.</p>
-            <a href="tel:+18406882967" class="demo-number">(840) 688-2967</a>
+            <a href="tel:+19516513966" class="demo-number">(951) 651-3966</a>
             <div class="demo-card-actions">
-              <a href="tel:+18406882967" class="btn-primary">Call Now</a>
+              <a href="tel:+19516513966" class="btn-primary">Call Now</a>
               <a href="#demo" class="btn-ghost">How to Test</a>
             </div>
             <div class="call-transcript" aria-label="Example call flow">
@@ -767,12 +638,12 @@
             <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
             <h3>Demo line details</h3>
             <div class="demo-facts">
-              <div><span>Demo number</span><strong>(840) 688-2967</strong></div>
+              <div><span>Demo number</span><strong>(951) 651-3966</strong></div>
               <div><span>Demo niche</span><strong>Restoration and home repair</strong></div>
               <div><span>Agent name</span><strong>Chip</strong></div>
               <div><span>Best test prompt</span><strong>"I think a pipe burst under my kitchen sink."</strong></div>
             </div>
-            <a href="tel:+18406882967" class="btn-primary">Call Demo Line -></a>
+            <a href="tel:+19516513966" class="btn-primary">Call Demo Line -&gt;</a>
           </article>
 
           <article class="demo-guide-card glass-card reveal reveal-d1">
@@ -854,7 +725,8 @@
               <li>Lead details and call summaries</li>
               <li>Urgent-call handoff rules</li>
             </ul>
-            <a href="https://cal.com/jose-c-upt1mi/axis-setup" class="btn-ghost">Choose After-Hours</a>
+            <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
+            <a href="/book" class="btn-ghost">Choose After-Hours</a>
           </article>
 
           <article class="pricing-single glass-card featured reveal reveal-d1">
@@ -872,7 +744,8 @@
               <li>Call summaries sent to your team</li>
               <li>Monthly tuning and QA</li>
             </ul>
-            <a href="https://cal.com/jose-c-upt1mi/axis-setup" class="btn-primary">Choose Full Receptionist</a>
+            <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
+            <a href="/book" class="btn-primary">Choose Full Receptionist</a>
           </article>
 
           <article class="pricing-single glass-card reveal reveal-d2">
@@ -889,10 +762,11 @@
               <li>Custom call flows and routing</li>
               <li>Usage alerts before overages</li>
             </ul>
-            <a href="https://cal.com/jose-c-upt1mi/axis-setup" class="btn-ghost">Choose High Volume</a>
+            <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
+            <a href="/book" class="btn-ghost">Choose High Volume</a>
           </article>
         </div>
-        <p class="usage-note" style="max-width:760px;margin:22px auto 0;text-align:center">Additional receptionist minutes are $0.40 each. A capped 14-day trial may be available after the live demo and fit review.</p>
+        <p class="usage-note" style="max-width:760px;margin:22px auto 0;text-align:center">Additional receptionist minutes are $0.50 each. Receptionist plans start with the live demo and a fit review.</p>
         <div class="full-office-callout glass-card reveal">
           <p>Need the website, booking, reviews, local SEO, and 24/7 receptionist together? <a href="/#plans">See the complete AI Front Office package for $997/month.</a></p>
         </div>
@@ -967,8 +841,9 @@
             <h2>Want a demo line with<br><span class="grad-text">your business name</span> on it?</h2>
             <p>Send the business details and PAIRDEN can map a personalized demo: voice, greeting, services, FAQ handling, booking rules, and human handoffs.</p>
             <div class="book-actions">
-              <a href="https://cal.com/jose-c-upt1mi/axis-setup" class="btn-primary">Book Setup Call -></a>
-              <a href="tel:+18406882967" class="btn-ghost">Call the Demo</a>
+              <!-- Booking → /book, redirected to the GHL calendar in netlify.toml -->
+              <a href="/book" class="btn-primary">Book Setup Call -&gt;</a>
+              <a href="tel:+19516513966" class="btn-ghost">Call the Demo</a>
             </div>
           </div>
           <aside class="contact-panel glass-card reveal reveal-d1">
@@ -976,8 +851,10 @@
             <p>Use this if you already know the business you want to test, or if a referral partner sent you here.</p>
             <div class="contact-links">
               <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-              <a href="tel:+18406882967">(840) 688-2967</a>
-              <a href="tel:+18406882967">Demo: (840) 688-2967</a>
+              <!-- Office line = the registered A2P business contact. This card is the ONLY
+                   place outside the footer legal line where (951) 477-5918 may appear. -->
+              <a href="tel:+19514775918">Office: (951) 477-5918</a>
+              <a href="tel:+19516513966">Demo: (951) 651-3966</a>
             </div>
           </aside>
         </div>
@@ -989,11 +866,18 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/pairden-wordmark-white.png" alt="PAIRDEN" class="footer-wordmark" />
+          <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" class="footer-wordmark" />
           <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
           <div class="footer-contact">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+18406882967">(840) 688-2967</a>
+            <a href="tel:+19516513966">(951) 651-3966</a>
+          </div>
+          <div class="footer-social" aria-label="PAIRDEN on social media">
+            <a href="https://www.instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+            <a href="https://www.tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/pairden-ai-659501426/" rel="noopener" target="_blank">LinkedIn</a>
           </div>
         </div>
         <div class="footer-col">
@@ -1012,21 +896,21 @@
           <ul>
             <li><a href="/#plans">Plans</a></li>
             <li><a href="/#about">Why PAIRDEN</a></li>
-            <li><a href="tools.html">Free Tools</a></li>
-            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="/tools">Free Tools</a></li>
+            <li><a href="/text-us">Text Us</a></li>
+            <li><a href="/faq">FAQ</a></li>
             <li><a href="#book">Contact</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 PAIRDEN. All rights reserved.</span>
-        <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+        <span>© 2026 PAIRDEN, a d/b/a of Pairden Technologies LLC<br /><span class="footer-legal">Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · Admin@pairden.com · (951) 477-5918</span></span>
+        <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
       </div>
     </div>
   </footer>
 
   <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top" title="Back to top">↑</button>
-
-  <script src="site.js" defer></script>
+  <script src="/site.js" defer></script>
 </body>
 </html>

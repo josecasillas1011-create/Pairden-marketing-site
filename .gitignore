@@ -1,17 +1,23 @@
-# OS / editor
+# Local reference material — never deployed (Netlify publishes the repo root)
+reference/
+
+# macOS
 .DS_Store
-**/.DS_Store
-Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
 
-# Local tooling / config
-.claude/
-**/.claude/
-.netlify/
-
-# Secrets (none should ever live in this static site, but just in case)
-.env
-.env.*
-
-# Logs / deps
-*.log
+# Editors / tooling
 node_modules/
+.vscode/
+*.log
+
+# Never commit prospect or client data, keys, or secrets
+*warm-list*
+*.csv
+*.tsv
+.env
+*.env
+*.key
+*.pem
+secrets/
