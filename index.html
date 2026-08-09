@@ -5,39 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PAIRDEN | More Calls Answered. More Jobs Booked.</title>
   <meta name="description" content="PAIRDEN builds connected websites, booking, review, missed-call, and AI phone systems for Inland Empire and Southern California service businesses." />
-  <link rel="icon" type="image/png" href="assets/pairden-icon.png" />
-  <meta name="theme-color" content="#020711" />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
   <link rel="canonical" href="https://pairden.com/" />
+  <!-- hreflang removed for the English-only launch. Restore the en/es/x-default
+       trio here when the Spanish site ships. See HANDOFF.md §7. -->
   <meta property="og:title" content="PAIRDEN | More Calls Answered. More Jobs Booked." />
   <meta property="og:description" content="Websites, booking, reviews, missed-call follow-up, and AI phone answering for local service businesses." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pairden.com/" />
-  <meta property="og:image" content="https://pairden.com/assets/pairden-social-card.png" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="PAIRDEN | More Calls Answered. More Jobs Booked." />
   <meta name="twitter:description" content="Connected lead systems for local service businesses in Inland Empire and Southern California." />
-  <meta name="twitter:image" content="https://pairden.com/assets/pairden-social-card.png" />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
   <meta name="robots" content="index, follow" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "PAIRDEN",
+    "legalName": "Pairden Technologies LLC",
     "url": "https://pairden.com/",
-    "logo": "https://pairden.com/assets/pairden-icon.png",
-    "image": "https://pairden.com/assets/pairden-social-card.png",
+    "logo": "https://pairden.com/assets/brand/pairden-icon.png",
+    "image": "https://pairden.com/assets/brand/og-card.png",
     "description": "Connected websites, booking, review, missed-call, and AI phone systems for local service businesses.",
-    "telephone": "+1-840-688-2967",
+    "telephone": "+1-951-651-3966",
     "email": "Admin@pairden.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "41877 Enterprise Circle N., 2nd Floor",
+      "addressLocality": "Temecula",
+      "addressRegion": "CA",
+      "postalCode": "92590",
+      "addressCountry": "US"
+    },
     "areaServed": ["Inland Empire", "Southern California"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     /* ── Homepage-specific styles ── */
 
@@ -45,11 +58,11 @@
     .hero { align-items: center; display: flex; min-height: 100vh; overflow: hidden; padding: 150px 0 60px; }
     .hero-bg { inset: 0; pointer-events: none; position: absolute; z-index: 0; }
     .hero-bg::before {
-      background: radial-gradient(ellipse at 72% 38%, rgba(19,157,255,0.14) 0%, transparent 52%);
+      background: radial-gradient(ellipse at 72% 38%, rgba(10,132,255,0.14) 0%, transparent 52%);
       content: ""; inset: 0; position: absolute;
     }
     .hero-bg::after {
-      background: radial-gradient(ellipse at 50% 100%, rgba(0,110,230,0.08) 0%, transparent 55%);
+      background: radial-gradient(ellipse at 50% 100%, rgba(6,99,199,0.08) 0%, transparent 55%);
       content: ""; inset: 0; position: absolute;
     }
     .hero-grid {
@@ -58,11 +71,11 @@
     }
     .hero-badge {
       align-items: center; display: inline-flex; gap: 8px;
-      background: rgba(19,157,255,0.1); border: 1px solid rgba(38,169,255,0.4);
+      background: rgba(10,132,255,0.1); border: 1px solid rgba(23,200,244,0.4);
       border-radius: 999px; color: var(--accent-bright);
       font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
       margin-bottom: 26px; padding: 8px 16px;
-      box-shadow: 0 0 18px rgba(19,157,255,0.12);
+      box-shadow: 0 0 18px rgba(10,132,255,0.12);
     }
     .hero-badge-dot { animation: blink 2s ease-in-out infinite; background: var(--accent-bright); border-radius: 50%; height: 7px; width: 7px; }
     .hero h1 { margin-bottom: 24px; }
@@ -73,23 +86,23 @@
     .trust-item { align-items: center; color: var(--muted); display: flex; font-size: 13px; gap: 8px; }
     .trust-check {
       align-items: center; display: flex; justify-content: center;
-      background: rgba(19,157,255,0.14); border: 1px solid rgba(38,169,255,0.4);
+      background: rgba(10,132,255,0.14); border: 1px solid rgba(23,200,244,0.4);
       border-radius: 50%; color: var(--accent-bright); font-size: 10px; font-weight: 800;
       height: 20px; width: 20px;
     }
 
-    /* ── Hero growth visual — brand render ── */
+    /* ── Hero brand visual ── */
     .growth-visual { align-items: center; display: flex; justify-content: center; min-height: 480px; position: relative; }
     .growth-visual::before {
-      background: radial-gradient(circle, rgba(19,157,255,0.24), transparent 66%);
+      background: radial-gradient(circle, rgba(10,132,255,0.24), transparent 66%);
       border-radius: 50%; content: ""; height: 78%; position: absolute; width: 78%;
     }
     .gv-render {
-      filter: drop-shadow(0 0 42px rgba(19,157,255,0.38));
+      filter: drop-shadow(0 0 42px rgba(10,132,255,0.38));
       position: relative; width: clamp(270px, 31vw, 420px); z-index: 2;
     }
 
-    /* ── Services row (mockup, under hero) ── */
+    /* ── Services row ── */
     .services-row-wrap { padding: 24px 0 88px; position: relative; z-index: 2; }
     .services-row-label {
       align-items: center; color: var(--muted); display: flex; gap: 18px;
@@ -97,10 +110,10 @@
       letter-spacing: 0.24em; margin-bottom: 28px; text-transform: uppercase;
     }
     .services-row-label::before, .services-row-label::after {
-      background: linear-gradient(90deg, transparent, rgba(38,169,255,0.5));
+      background: linear-gradient(90deg, transparent, rgba(23,200,244,0.5));
       content: ""; flex: 0 0 90px; height: 1px;
     }
-    .services-row-label::after { background: linear-gradient(90deg, rgba(38,169,255,0.5), transparent); }
+    .services-row-label::after { background: linear-gradient(90deg, rgba(23,200,244,0.5), transparent); }
     .services-row { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
     .service-tile {
       align-items: center; display: flex; flex-direction: column; gap: 14px; justify-content: flex-start;
@@ -113,7 +126,7 @@
     .service-tile span { font-family: var(--font-head); font-size: 14px; font-weight: 600; line-height: 1.35; }
     .service-tile.is-active {
       border-color: var(--glass-border-hi);
-      box-shadow: 0 24px 60px rgba(0,2,8,0.65), 0 0 30px rgba(19,157,255,0.26), inset 0 1px 0 var(--highlight);
+      box-shadow: 0 24px 60px rgba(0,3,12,0.65), 0 0 30px rgba(10,132,255,0.26), inset 0 1px 0 var(--highlight);
       transform: translateY(-4px);
     }
     .service-detail-panel {
@@ -132,7 +145,7 @@
     .service-detail-copy p { color: var(--muted); font-size: 15px; line-height: 1.68; }
     .service-results { align-items: center; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
     .result-pill {
-      background: rgba(19,157,255,0.1); border: 1px solid rgba(38,169,255,0.3);
+      background: rgba(10,132,255,0.1); border: 1px solid rgba(23,200,244,0.3);
       border-radius: 999px; color: var(--accent-pale); font-size: 11px; font-weight: 700; padding: 3px 10px;
     }
     .service-detail-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
@@ -144,11 +157,11 @@
     .package-card { display: flex; flex-direction: column; padding: 30px; position: relative; }
     .package-card.featured {
       border-color: var(--accent-bright);
-      box-shadow: 0 24px 70px rgba(0,2,8,0.7), 0 0 42px rgba(19,157,255,0.2), inset 0 1px 0 var(--highlight);
+      box-shadow: 0 24px 70px rgba(0,3,12,0.7), 0 0 42px rgba(10,132,255,0.2), inset 0 1px 0 var(--highlight);
     }
     .package-badge {
       background: linear-gradient(135deg, var(--accent-bright), var(--accent)); border-radius: 999px;
-      color: #021018; font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
+      color: #04101F; font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
       padding: 6px 11px; position: absolute; right: 22px; text-transform: uppercase; top: 20px;
     }
     .package-kicker { color: var(--accent-bright); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; text-transform: uppercase; }
@@ -162,6 +175,19 @@
     .package-list li { color: #D7E1EF; font-size: 13px; line-height: 1.5; padding-left: 22px; position: relative; }
     .package-list li::before { color: var(--accent-bright); content: "✓"; font-weight: 900; left: 0; position: absolute; }
     .package-card .btn-primary, .package-card .btn-ghost { margin-top: auto; width: 100%; }
+    /* Secondary booking path under each plan CTA. Deliberately quieter than the
+       CTA above it so the audit form stays the primary action. The !important
+       overrides margin-top:auto above, which would otherwise push the two
+       buttons apart instead of stacking them. */
+    .package-book {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-top: 10px !important;
+      min-height: 46px;
+      opacity: 0.88;
+      width: 100%;
+    }
+    .package-book:hover { opacity: 1; }
     .package-note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 24px auto 0; max-width: 780px; text-align: center; }
     .reporting-strip { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); margin-top: 26px; }
     .reporting-item { border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
@@ -175,7 +201,7 @@
     }
     .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
     .steps-grid::before {
-      background: linear-gradient(90deg, transparent, rgba(38,169,255,0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(23,200,244,0.4), transparent);
       content: ""; height: 1px; left: 16%; position: absolute; right: 16%; top: 32px;
     }
     .step { padding: 0 32px; text-align: center; }
@@ -184,7 +210,7 @@
       background: linear-gradient(135deg, var(--accent-bright), var(--accent-deep));
       border-radius: 50%; color: #fff;
       font-family: var(--font-head); font-size: 20px; font-weight: 700;
-      box-shadow: 0 8px 26px rgba(19,157,255,0.45);
+      box-shadow: 0 8px 26px rgba(10,132,255,0.45);
       height: 64px; margin-bottom: 20px; position: relative; width: 64px; z-index: 1;
     }
     .step h3 { font-size: 18px; margin-bottom: 10px; }
@@ -205,7 +231,7 @@
     .contact-direct { display: grid; gap: 8px; }
     .contact-direct a { color: var(--accent-bright); font-size: 14px; font-weight: 600; }
     .contact-direct a:hover { text-decoration: underline; }
-    .contact-form-card { border-color: var(--glass-border-hi); border-radius: var(--r-lg); box-shadow: 0 0 70px rgba(19,157,255,0.12), var(--shadow); padding: 32px; }
+    .contact-form-card { border-color: var(--glass-border-hi); border-radius: var(--r-lg); box-shadow: 0 0 70px rgba(10,132,255,0.12), var(--shadow); padding: 32px; }
     .contact-form-card h3 { font-size: 20px; margin-bottom: 6px; }
     .contact-form-card > p { color: var(--muted); font-size: 13px; line-height: 1.55; margin-bottom: 20px; }
     .contact-form-card .btn-primary { font-size: 15px; margin-top: 8px; min-height: 54px; width: 100%; }
@@ -282,16 +308,19 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <img src="assets/pairden-wordmark-white.png" alt="PAIRDEN" height="34" />
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" height="34" />
       </a>
       <ul class="nav-links">
         <li><a href="/" aria-current="page">Home</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#plans">Plans</a></li>
-        <li><a href="frontdesk.html">AI Front Desk</a></li>
-        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="/frontdesk">AI Front Desk</a></li>
+        <li><a href="/faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <a href="/es/" class="lang-toggle" hreflang="es" aria-label="Ver esta página en español">
+        <span class="is-current">EN</span> ⇄ <span>ES</span>
+      </a>
       <a href="#contact" class="btn-primary nav-cta">Get Free Audit →</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
         <span></span><span></span><span></span>
@@ -305,10 +334,11 @@
       <li><a href="/">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#plans">Plans</a></li>
-      <li><a href="frontdesk.html">AI Front Desk</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="/frontdesk">AI Front Desk</a></li>
+      <li><a href="/faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <a href="/es/" class="lang-toggle" hreflang="es"><span class="is-current">EN</span> ⇄ <span>ES</span></a>
     <a href="#contact" class="btn-primary">Get Free Audit →</a>
   </div>
 
@@ -333,25 +363,25 @@
           </p>
           <div class="hero-actions reveal reveal-d3">
             <a href="#contact" class="btn-primary">Get a Free Systems Audit →</a>
-            <a href="tel:+18406882967" class="btn-ghost">Call the Live AI Demo</a>
+            <a href="tel:+19516513966" class="btn-ghost">Call the Live AI Demo</a>
           </div>
           <div class="hero-trust reveal reveal-d3">
             <div class="trust-item"><div class="trust-check">✓</div> Built for local services</div>
-            <div class="trust-item"><div class="trust-check">✓</div> English &amp; Spanish available</div>
+            <div class="trust-item"><div class="trust-check">✓</div> English-first reliability</div>
             <div class="trust-item"><div class="trust-check">✓</div> Most systems live within a week</div>
           </div>
         </div>
 
         <!-- Right: PAIRDEN brand mark -->
         <div class="growth-visual reveal reveal-d2" aria-hidden="true">
-          <img src="assets/pairden-mark.png" alt="" class="gv-render" />
+          <img src="/assets/brand/pairden-icon.png" alt="" class="gv-render" />
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ── Services row (mockup) ── -->
+  <!-- ── Services row ── -->
   <section class="services-row-wrap" id="services">
     <div class="container">
       <div class="section-header reveal" style="margin-bottom:38px">
@@ -418,7 +448,7 @@
         <p>Every plan combines the tools local service businesses need most. Existing clients only pay the setup difference when they move up.</p>
       </div>
       <div class="package-grid">
-        <article class="package-card glass-card reveal">
+        <article class="package-card glass-card reveal" id="plan-foundation">
           <p class="package-kicker">Get found</p>
           <h3>Online Foundation</h3>
           <p class="package-tagline">A credible online presence that turns local searches into direct inquiries.</p>
@@ -432,9 +462,10 @@
             <li>Monthly calls-and-leads snapshot</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="Online Foundation">Choose Foundation</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
 
-        <article class="package-card glass-card featured reveal reveal-d1">
+        <article class="package-card glass-card featured reveal reveal-d1" id="plan-growth">
           <span class="package-badge">Most popular</span>
           <p class="package-kicker">Stop lead leaks</p>
           <h3>Growth Engine</h3>
@@ -450,9 +481,10 @@
             <li>Monthly performance report</li>
           </ul>
           <a href="#contact" class="btn-primary package-select" data-package="Growth Engine">Choose Growth Engine</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
 
-        <article class="package-card glass-card reveal reveal-d2">
+        <article class="package-card glass-card reveal reveal-d2" id="plan-frontoffice">
           <p class="package-kicker">Answer every call</p>
           <h3>AI Front Office</h3>
           <p class="package-tagline">A complete front-office layer for established businesses with real call volume.</p>
@@ -460,16 +492,17 @@
           <p class="package-setup">$997 one-time setup · waived with a 12-month plan</p>
           <ul class="package-list">
             <li>Everything in Growth Engine</li>
-            <li>24/7 AI receptionist, English and Spanish</li>
+            <li>24/7 English-speaking AI receptionist</li>
             <li>Booking and call summaries</li>
             <li>Local SEO and AI website chat</li>
             <li>4 customer win-back campaigns per year</li>
             <li>Priority support and monthly strategy call</li>
           </ul>
           <a href="#contact" class="btn-ghost package-select" data-package="AI Front Office">Choose AI Front Office</a>
+          <a href="/book" class="btn-ghost package-book">Book a Call</a>
         </article>
       </div>
-      <p class="package-note reveal">AI Front Office includes up to 1,000 receptionist minutes per month. Additional minutes are $0.40 each. Select services are also available individually.</p>
+      <p class="package-note reveal">AI Front Office includes up to 1,000 receptionist minutes per month. Additional minutes are $0.50 each. Select services are also available individually.</p>
       <div class="reporting-strip reveal">
         <div class="reporting-item"><strong>Calls caught</strong><span>See what follow-up recovered</span></div>
         <div class="reporting-item"><strong>Jobs booked</strong><span>Track appointments and deposits</span></div>
@@ -481,7 +514,7 @@
 
   <!-- ── How it works / Approach ── -->
   <section class="section-pad" id="how-it-works">
-    <img src="assets/pairden-mark.png" alt="" aria-hidden="true" class="steps-mark-bg" />
+    <img src="/assets/brand/pairden-icon.png" alt="" aria-hidden="true" class="steps-mark-bg" />
     <div class="container">
       <div class="section-header reveal">
         <p class="eyebrow">How it works</p>
@@ -541,8 +574,8 @@
         <div class="why-card glass-card glass-lift reveal reveal-d1">
           <div class="icon-chip"><svg><use href="#i-mappin"/></svg></div>
           <div>
-            <h3>English &amp; Spanish</h3>
-            <p>Bilingual websites and phone experiences are available for businesses serving the diverse communities of Inland Empire and Southern California.</p>
+            <h3>English-First Reliability</h3>
+            <p>Current receptionist launches are configured and tested in English. Multilingual support is offered only after its separate language and call-flow review passes.</p>
           </div>
         </div>
         <div class="why-card glass-card glass-lift reveal">
@@ -573,7 +606,7 @@
           <p>Tell us how customers currently find, call, and book with you. We will identify the clearest leak and recommend the smallest system that can fix it.</p>
           <div class="contact-direct">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+18406882967">Call the live demo: (840) 688-2967</a>
+            <a href="tel:+19516513966">Call the live demo: (951) 651-3966</a>
           </div>
         </div>
 
@@ -589,22 +622,22 @@
               </div>
               <div class="form-group">
                 <label for="company">Business name *</label>
-                <input id="company" name="business_name" type="text" autocomplete="organization" placeholder="Smith Plumbing" required />
+                <input id="company" name="company" type="text" autocomplete="organization" placeholder="Smith Plumbing" required />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="businessType">Business type *</label>
-                <select id="businessType" name="business_type" required>
-                  <option value="">— Select —</option>
-                  <option>Hauling / Junk Removal</option>
-                  <option>Plumbing / HVAC / Roofing</option>
-                  <option>Restoration / Handyman</option>
-                  <option>Landscaping / Cleaning</option>
-                  <option>Barber / Detailing</option>
-                  <option>Restaurant / Food Service</option>
-                  <option>Other</option>
-                </select>
+                <input id="businessType" name="business_type" type="text" list="businessTypeOptions"
+                       placeholder="Start typing, or pick one" autocomplete="off" required />
+                <datalist id="businessTypeOptions">
+                  <option value="Hauling / Junk Removal"></option>
+                  <option value="Plumbing / HVAC / Roofing"></option>
+                  <option value="Restoration / Handyman"></option>
+                  <option value="Landscaping / Cleaning"></option>
+                  <option value="Barber / Detailing"></option>
+                  <option value="Restaurant / Food Service"></option>
+                </datalist>
               </div>
               <div class="form-group">
                 <label for="packageInterest">What interests you most?</label>
@@ -616,10 +649,6 @@
                   <option>One individual service</option>
                 </select>
               </div>
-            </div>
-            <div class="form-group" id="businessTypeOtherGroup" style="display:none">
-              <label for="businessTypeOther">Tell us your business type *</label>
-              <input id="businessTypeOther" name="business_type_other" type="text" placeholder="e.g. Pool Cleaning" />
             </div>
             <div class="form-row">
               <div class="form-group">
@@ -638,7 +667,7 @@
 
             <label class="consent-row" for="smsConsent">
               <input id="smsConsent" name="sms_consent" type="checkbox" required />
-              <span>I agree to receive calls and text messages from PAIRDEN about this request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</span>
+              <span>I agree to receive calls and text messages from PAIRDEN about this request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.</span>
             </label>
 
             <!-- Honeypot — hidden from humans, filled by bots → blocked by Make.com -->
@@ -667,12 +696,12 @@
   <!-- ── CTA Band ── -->
   <section class="cta-band">
     <div class="container">
-      <img src="assets/pairden-lockup-white.png" alt="PAIRDEN — People. AI. Better Together." class="cta-wordmark reveal" />
+      <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN — People. AI. Better Together." class="cta-wordmark reveal" />
       <p class="eyebrow reveal" style="text-align:center">Hear it for yourself</p>
       <h2 class="reveal">Call the AI Receptionist.<br>Try to Stump It.</h2>
       <p class="reveal reveal-d1">Ask the same questions your customers ask. Test an urgent job, a service-area question, or an after-hours request.</p>
       <div class="cta-actions reveal reveal-d2">
-        <a href="tel:+18406882967" class="btn-primary" style="font-size:16px;min-height:58px;padding:0 36px">Call (840) 688-2967</a>
+        <a href="tel:+19516513966" class="btn-primary" style="font-size:16px;min-height:58px;padding:0 36px">Call (951) 651-3966</a>
         <a href="#contact" class="btn-ghost" style="font-size:16px;min-height:58px;padding:0 36px">
           Get a Free Systems Audit →
         </a>
@@ -685,11 +714,18 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/pairden-wordmark-white.png" alt="PAIRDEN" class="footer-wordmark" />
+          <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" class="footer-wordmark" />
           <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
           <div class="footer-contact">
             <a href="mailto:Admin@pairden.com">Admin@pairden.com</a>
-            <a href="tel:+18406882967">(840) 688-2967</a>
+            <a href="tel:+19516513966">(951) 651-3966</a>
+          </div>
+          <div class="footer-social" aria-label="PAIRDEN on social media">
+            <a href="https://www.instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/pairdenai" rel="noopener" target="_blank">Facebook</a>
+            <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+            <a href="https://www.tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+            <a href="https://www.linkedin.com/in/pairden-ai-659501426/" rel="noopener" target="_blank">LinkedIn</a>
           </div>
         </div>
         <div class="footer-col">
@@ -699,7 +735,7 @@
             <li><a href="#services">Booking + Reminders</a></li>
             <li><a href="#services">Missed-Call Text-Back</a></li>
             <li><a href="#services">Review Engine</a></li>
-            <li><a href="frontdesk.html">AI Receptionist</a></li>
+            <li><a href="/frontdesk">AI Receptionist</a></li>
             <li><a href="#services">Local SEO</a></li>
           </ul>
         </div>
@@ -708,15 +744,16 @@
           <ul>
             <li><a href="#plans">Plans</a></li>
             <li><a href="#about">Why PAIRDEN</a></li>
-            <li><a href="tools.html">Free Tools</a></li>
-            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="/tools">Free Tools</a></li>
+            <li><a href="/text-us">Text Us</a></li>
+            <li><a href="/faq">FAQ</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 PAIRDEN. All rights reserved.</span>
-        <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+        <span>© 2026 PAIRDEN, a d/b/a of Pairden Technologies LLC<br /><span class="footer-legal">Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · Admin@pairden.com · (951) 477-5918</span></span>
+        <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
       </div>
     </div>
   </footer>
@@ -728,7 +765,7 @@
   <button class="chat-bubble" id="chatBubble" aria-label="Open PAIRDEN systems guide" aria-expanded="false" aria-controls="chatPanel">💬</button>
   <div class="chat-panel" id="chatPanel" role="dialog" aria-label="PAIRDEN Systems Guide" aria-hidden="true">
     <div class="chat-header">
-      <img src="assets/pairden-mark.png" alt="PAIRDEN" />
+      <img src="/assets/brand/pairden-icon.png" alt="PAIRDEN" />
       <div class="chat-header-text">
         <strong>PAIRDEN Systems Guide</strong>
         <span>● Online</span>
@@ -743,12 +780,14 @@
     </div>
   </div>
 
-  <script src="site.js" defer></script>
+  <script src="/site.js" defer></script>
   <script>
     /* ────────────────────────────────────────────────────────────────
        Make.com webhook — lead pipeline (Make.com → Supabase)
+       Payload keys are contract-locked with the Make scenario.
+       Do not rename, add, or drop keys without Michael updating Make.
     ──────────────────────────────────────────────────────────────── */
-    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/4s7yesdxybsh7nwvek8tgjtf63gkaa1c";
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/1tmq6r7nokdt6xhvehywqvdqxejqmuw9";
 
     const serviceDetails = {
       website: {
@@ -786,7 +825,7 @@
         icon: "i-search",
         title: "Local SEO",
         text: "Ongoing Google Business Profile work, listings cleanup, local content, and monthly ranking reports against competitors you choose. This service requires enough runway for search signals to develop.",
-        pills: ["$497/mo", "3-month minimum"]
+        pills: ["$497/mo", "6- or 12-month terms"]
       },
       chat: {
         icon: "i-sparkles",
@@ -848,6 +887,18 @@
           ? `<a class="service-detail-link" href="${detail.action.href}">${detail.action.label}</a>`
           : "";
         panel.classList.add("open");
+
+        // On a phone the panel opens below the tile grid, often entirely off
+        // screen — tapping a tile looks like nothing happened. Bring it into
+        // view once it has finished expanding, so the height is correct.
+        const reduceMotion = window.matchMedia
+          && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.setTimeout(() => {
+          panel.scrollIntoView({
+            behavior: reduceMotion ? "auto" : "smooth",
+            block: "nearest"
+          });
+        }, reduceMotion ? 0 : 300);
       }
 
       tiles.forEach(tile => {
@@ -927,15 +978,8 @@
       });
     });
 
-    /* ── Business type "Other" toggle ── */
-    const businessTypeSelect     = document.getElementById("businessType");
-    const businessTypeOtherGroup = document.getElementById("businessTypeOtherGroup");
-    const businessTypeOtherInput = document.getElementById("businessTypeOther");
-    businessTypeSelect.addEventListener("change", () => {
-      const isOther = businessTypeSelect.value === "Other";
-      businessTypeOtherGroup.style.display = isOther ? "block" : "none";
-      if (!isOther) businessTypeOtherInput.value = "";
-    });
+    /* Business type is a free-text input with datalist suggestions — users can
+       type anything. No "Other" branch needed; the typed value IS the value. */
 
     /* ── Lead form ── */
     const form        = document.getElementById("leadForm");
@@ -950,8 +994,7 @@
 
       const firstName        = document.getElementById("firstName").value.trim();
       const company          = document.getElementById("company").value.trim();
-      const businessTypeSel  = document.getElementById("businessType").value;
-      const businessTypeOther = document.getElementById("businessTypeOther").value.trim();
+      const businessType     = document.getElementById("businessType").value.trim();
       const email            = document.getElementById("email").value.trim();
       const phone            = document.getElementById("phone").value.trim();
       const packageInterest  = document.getElementById("packageInterest").value;
@@ -959,13 +1002,12 @@
 
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const phoneValid = /^[\d\s\-\+\(\)\.]{7,20}$/.test(phone);
-      const businessTypeValid = businessTypeSel && (businessTypeSel !== "Other" || businessTypeOther);
+      const businessTypeValid = businessType.length >= 2;
       if (!firstName || !company || !businessTypeValid || !email || !phone || !emailValid || !phoneValid || !smsConsent) {
         formError.style.display = "block";
         return;
       }
 
-      const businessType = businessTypeSel === "Other" ? businessTypeOther : businessTypeSel;
       const services = [packageInterest || "Needs recommendation"];
       const budget   = "";
       const goal     = document.getElementById("goal").value.trim();
@@ -988,7 +1030,7 @@
       }
     });
 
-    /* ── Chatbot ── */
+    /* ── Chatbot — collects name/company/email only. Never a phone number. ── */
     (function() {
       const bubble   = document.getElementById("chatBubble");
       const panel    = document.getElementById("chatPanel");
@@ -1096,7 +1138,7 @@
         if (step === 0 && value === "Call the live demo") {
           setTimeout(() => {
             botSay("Opening the live demo line now. Try a service question, an urgent request, or an after-hours scenario.");
-            setTimeout(() => { window.location.href = "tel:+18406882967"; }, 900);
+            setTimeout(() => { window.location.href = "tel:+19516513966"; }, 900);
           }, 500);
           return;
         }

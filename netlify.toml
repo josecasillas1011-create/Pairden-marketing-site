@@ -6,9 +6,83 @@
   publish = "."
   command = ""
 
-# Preserve every path while permanently moving the former Axis domain to PAIRDEN.
+# ═══════════════════════════════════════════════════════════════════
+# INTERNAL DOCS — MUST NOT BE PUBLICLY READABLE
+# The repo root IS the site root, so every .md file here would otherwise be
+# served at pairden.com/<name>.md. These contain locked pricing, margin
+# targets, and internal strategy.
+#
+# Placed FIRST so nothing downstream can match a .md path before this does.
+# No conflict with the clean-URL rewrites below — those match extensionless
+# paths only (/frontdesk, /faq), never a .md suffix.
+#
+# NOTE ON THE WILDCARD: Netlify expects the splat at the END of a path, so
+# "/*.md" is not a documented pattern and may match nothing. It is kept as a
+# catch-all for any future .md file, but the explicit per-file rules below are
+# the ones actually guaranteed to fire. If you add a new root-level .md, add
+# an explicit rule for it too — do not rely on the wildcard alone.
+# ═══════════════════════════════════════════════════════════════════
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/BUILD-SPEC.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/MASTER-LIST.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/HANDOFF.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/PENDING-INPUTS.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/ASSETS-README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/NEXT-SESSION-PROMPT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Belt and braces: even if a .md were served, keep it out of search results.
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# ═══════════════════════════════════════════════════════════════════
+# AXIS DOMAIN MIGRATION — ported VERBATIM from reference/legacy/netlify.toml
+# Do not edit without Michael's approval. Preserve every path while
+# permanently moving the former Axis domain to PAIRDEN.
 # Keep axismarketingai.net assigned to this Netlify site so these host-level
 # redirects continue working during the domain migration.
+# ═══════════════════════════════════════════════════════════════════
 [[redirects]]
   from = "http://axismarketingai.net/*"
   to = "https://pairden.com/:splat"
@@ -60,6 +134,44 @@
   to = "/"
   status = 301
 
+# ── Booking → GHL calendar ─────────────────────────────────────────
+# Single source of truth for the booking link. Every booking CTA on the
+# site points at /book (or /es/reservar), never at the vendor URL directly —
+# so if the calendar ever moves, it changes here and nowhere else.
+[[redirects]]
+  from = "/book"
+  to = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/es/reservar"
+  to = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
+  status = 302
+  force = true
+
+# ── Short links → plan deep links (Phase 3) ────────────────────────
+[[redirects]]
+  from = "/growth"
+  to = "/?plan=growth"
+  status = 302
+
+[[redirects]]
+  from = "/foundation"
+  to = "/?plan=foundation"
+  status = 302
+
+[[redirects]]
+  from = "/frontoffice"
+  to = "/?plan=frontoffice"
+  status = 302
+
+[[redirects]]
+  from = "/demo"
+  to = "/frontdesk"
+  status = 302
+
+# ── Clean-URL rewrites — English ───────────────────────────────────
 [[redirects]]
   from = "/frontdesk"
   to = "/frontdesk.html"
@@ -75,6 +187,13 @@
   to = "/tools.html"
   status = 200
 
+# A2P 10DLC registered opt-in URL. This route is named in the campaign
+# registration — never remove, rename, or redirect it elsewhere.
+[[redirects]]
+  from = "/text-us"
+  to = "/text-us.html"
+  status = 200
+
 [[redirects]]
   from = "/privacy"
   to = "/privacy.html"
@@ -85,6 +204,20 @@
   to = "/terms.html"
   status = 200
 
+# ── ENGLISH-ONLY LAUNCH — Spanish is deliberately unavailable ─────
+[[redirects]]
+  from = "/es"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/es/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# ── Security headers (ported from legacy) ──────────────────────────
 [[headers]]
   for = "/*"
   [headers.values]
@@ -96,3 +229,9 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Belt and braces if Spanish content is added back before its review gate passes.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

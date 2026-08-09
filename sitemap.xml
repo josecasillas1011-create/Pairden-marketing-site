@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ENGLISH-ONLY LAUNCH.
+  The Spanish pages exist in the repo under /es/ but are deliberately excluded
+  from this sitemap, from hreflang, and from the nav until they have had a
+  native-speaker review. When Spanish ships, restore the /es/ <url> entries and
+  the xhtml:link alternates on the EN/ES pairs (index, frontdesk, faq, privacy,
+  terms) — see HANDOFF.md §7.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://pairden.com/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://pairden.com/frontdesk</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
+
+  <url>
+    <loc>https://pairden.com/text-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://pairden.com/faq</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://pairden.com/tools</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
+
   <url>
     <loc>https://pairden.com/privacy</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://pairden.com/terms</loc>
-    <lastmod>2026-08-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
+
 </urlset>
