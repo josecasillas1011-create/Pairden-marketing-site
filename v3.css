@@ -1,0 +1,1886 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PAIRDEN V3 — "THE LINE IS OPEN"
+   Design system. Encoded from DESIGN-CONTRACT.md before any page
+   styling. If this file and the contract disagree, the contract wins.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 0. SELF-HOSTED TYPE ─────────────────────────────────────────────
+   Latin subset, variable where available. No CDN link tags: self-
+   hosting is required, and it removes a render-blocking third party.
+   NOTE: the latin subset does NOT contain U+2192 (→). Trailing CTA
+   arrows are inline SVG, never the character — otherwise they fall
+   back to a system font, which is a kill-list violation.
+   ------------------------------------------------------------------ */
+@font-face {
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo-var.woff2") format("woff2-variations");
+  font-weight: 400 600;
+  font-stretch: 62.5% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public Sans";
+  src: url("/assets/fonts/publicsans-var.woff2") format("woff2-variations");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/geistmono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── 1. TOKENS ───────────────────────────────────────────────────── */
+:root {
+  /* Colour — navy depth, evolved not replaced */
+  --ink-900: #040C1F;
+  --ink-800: #08152B;
+  --ink-700: #0E1E3C;
+  --ink-600: #132546;
+  --rule:      #1C2E52;
+  --rule-soft: rgba(28, 46, 82, 0.55);
+  --text:       #F4F7FB;
+  --text-dim:   #8CA0BE;
+  --text-faint: #7C8BA5;   /* was #5D6B82 (3.61) — failed AA. Now 5.65 on ink-900, 5.29 on ink-800. */
+
+  /* SCARCE — max 3 per viewport, one must be the primary CTA */
+  --signal:      #0A84FF;   /* text, data, borders — 5.34 on ink-900 */
+  /* Button FILL is deepened so white label text passes AA (4.91).
+     #0A84FF behind white is only 3.65 and fails — the most important
+     control on the page must not be the least legible one. Same hue
+     family, so the identity is unchanged. */
+  --signal-text: #2E97FF;   /* accent as TEXT — see §11 AA note */
+  --signal-fill: #0A6FD8;
+  --signal-glow: rgba(10, 132, 255, 0.28);
+  --signal-wash: rgba(10, 132, 255, 0.08);
+
+  /* Type */
+  --font-display: "Archivo", ui-sans-serif, sans-serif;
+  --font-body:    "Public Sans", ui-sans-serif, sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, monospace;
+
+  /* Three weights sitewide. 700+ is banned. */
+  --w-body: 400;
+  --w-mid:  500;
+  --w-disp: 600;
+
+  /* Scale — fluid, ratio 1.25 */
+  --t-display-xl: clamp(2.75rem, 6.2vw, 5.5rem);
+  --t-display-l:  clamp(2rem, 3.6vw, 3rem);
+  --t-display-m:  clamp(1.25rem, 1.6vw, 1.5rem);
+  --t-body-l:  1.125rem;
+  --t-body:    1.0625rem;
+  --t-small:   0.875rem;
+  --t-eyebrow: 0.6875rem;
+  --t-mono:    0.9375rem;
+
+  /* Rhythm — three steps only, never improvise a fourth */
+  --space-sm: 80px;
+  --space-md: 128px;
+  --space-lg: 160px;
+
+  /* Section padding STACKS with the adjacent section's. Measured on
+     /ai-team: 128 bottom + 128 top left 245px of continuous emptiness
+     between one section's last element and the next section's first —
+     what review read as 300-500px of dead space. These values are HALF
+     the intended gap, so the gap between sections IS the number below
+     doubled, and no section leaves more than --sec-pad-lg above its
+     first element. */
+  --sec-pad: 84px;
+  --sec-pad-lg: 104px;
+  --sec-pad-sm: 56px;
+
+  --maxw: 1280px;
+  --gutter: 32px;
+
+  /* Stacking scale. Every layer is named; nothing invents a z-index. */
+  --z-flow:   1;
+  --z-raised: 5;     /* grid-break overhangs */
+  --z-chrome: 100;   /* sticky nav */
+  --z-sticky: 280;   /* sticky mobile CTA */
+
+  /* Grid-break clearance. ONE token drives both the negative margin and
+     the compensating padding, so an overhang can never out-run the
+     space reserved for it at any width. */
+  --overhang: 88px;
+
+  /* Height the fixed nav occupies (16px top offset + 62px bar). Anchor
+     targets reserve this plus breathing room, or a deep-link scrolls
+     the heading underneath the nav. */
+  --nav-h: 78px;
+  /* Height of the sticky mobile CTA. Content that must be readable at
+     rest reserves this, or the bar sits on top of it on first load. */
+  --sticky-h: 69px;
+
+  --r-btn: 8px;      /* slight radius = enterprise; pills = consumer */
+  --r-panel: 12px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 180ms;
+  --dur-reveal: 520ms;
+
+  color-scheme: dark;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --overhang: 56px;
+    --space-sm: 56px;
+    --space-md: 80px;
+    --space-lg: 96px;
+    --sec-pad: 56px;
+    --sec-pad-lg: 68px;
+    --sec-pad-sm: 40px;
+    --gutter: 24px;
+  }
+}
+
+/* ── 2. BASE ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* Every anchor target clears the fixed nav. Applied to [id] rather than
+   per-section so a new deep-link target can never be added without it. */
+[id] { scroll-margin-top: calc(var(--nav-h) + 24px); }
+
+body {
+  /* One continuous vertical atmosphere spanning the whole document —
+     body wraps all content, so the gradient traverses the page instead
+     of restarting per section. Navy world unchanged, no new hues. */
+  background-color: var(--ink-900);
+  /* FOUR glows anchored off-axis at different heights, so each
+     screenful of a long page has its own light source instead of one
+     gradient repeating. All inside the navy family; none strong enough
+     to move text contrast (re-verified against AA after this). */
+  background-image:
+    radial-gradient(64% 30% at 78%  2%, rgba(10,132,255,0.055), transparent 62%),
+    radial-gradient(58% 26% at 12% 27%, rgba(10,132,255,0.03),  transparent 64%),
+    radial-gradient(70% 30% at 88% 56%, rgba(10,132,255,0.04),  transparent 62%),
+    radial-gradient(60% 28% at 22% 84%, rgba(10,132,255,0.028), transparent 66%),
+    linear-gradient(180deg,
+      #040C1F 0%,
+      #061020 24%,
+      #071228 50%,
+      #061020 76%,
+      #040C1F 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: var(--w-body);
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* SCROLL-RESPONSIVE DEPTH.
+   A single fixed veil whose luminance and position track scroll
+   progress (--scroll, set once per rAF by site-v3.js). One compositor
+   -friendly element, no per-section work, no layout reads in the
+   handler — so it cannot cause scroll-jank. If the script never runs,
+   --scroll stays 0 and this is simply a static wash. */
+body::after {
+  content: "";
+  position: fixed; inset: -10% -10% -10% -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: calc(0.16 + (var(--scroll, 0) * 0.29));
+  transform: translate3d(0, calc(var(--scroll, 0) * -4vh), 0);
+  background:
+    radial-gradient(46% 38% at calc(18% + (var(--scroll, 0) * 58%)) calc(88% - (var(--scroll, 0) * 66%)),
+      rgba(10,132,255,0.07), transparent 68%),
+    radial-gradient(38% 30% at calc(86% - (var(--scroll, 0) * 52%)) calc(14% + (var(--scroll, 0) * 60%)),
+      rgba(46,92,190,0.05), transparent 70%);
+  will-change: opacity, transform;
+}
+
+/* Grain — raised from 3% to 4.5%: at these luminances the old value was
+   imperceptible, which is the same as not having it. */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: var(--z-flow);
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body > * { position: relative; z-index: calc(var(--z-flow) + 1); }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--signal-glow); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── 3. TYPE ROLES ───────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--w-disp);
+  font-stretch: 100%;
+  /* Balances the last line so a single short word cannot be orphaned
+     ("…One Booked / Job."). Purely a wrapping hint — the locked copy is
+     untouched. Ignored by older engines, which simply wrap as before. */
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-display-xl); line-height: 1.02; letter-spacing: -0.03em; }
+h2 { font-size: var(--t-display-l);  line-height: 1.08; letter-spacing: -0.022em; }
+h3 { font-size: var(--t-display-m);  line-height: 1.2;  letter-spacing: -0.01em; }
+
+/* Eyebrow — Expanded caps quote the logo's wide tracking */
+.eyebrow {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid);
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--signal-text);
+  display: block;
+  margin-bottom: 18px;
+}
+.eyebrow-dim { color: var(--text-faint); }
+
+.lede { font-size: var(--t-body-l); color: var(--text-dim); line-height: 1.65; }
+.small { font-size: var(--t-small); color: var(--text-dim); }
+.faint { color: var(--text-faint); }
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: var(--w-mid);
+  font-size: var(--t-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* ── 4. LAYOUT ───────────────────────────────────────────────────── */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding: var(--sec-pad) 0; position: relative; }
+.section-lg { padding: var(--sec-pad-lg) 0; }
+.section-sm { padding: var(--sec-pad-sm) 0; }
+
+/* Each .field used to paint its own opaque --ink-800 fill plus its own
+   radial gradient. That produced visible horizontal seams and gradients
+   that started and stopped mid-page. The atmosphere is now ONE
+   document-spanning field on <body>; a section differentiates itself
+   with a hairline and spacing only. Never an opaque full-width block. */
+.field {
+  position: relative;
+  border-top: 1px solid var(--rule-soft);
+}
+.field > * { position: relative; }
+/* Consecutive fields must not double the hairline into a 2px seam. */
+.field + .field { border-top: none; }
+
+/* THE TWO SANCTIONED SECTION LAYOUTS — there are no others.
+   (a) left-axis (default): eyebrow, headline, body and content all
+       share one left edge. Asymmetry comes from the head-block being
+       62ch against full-width content, not from moving the heading.
+   (b) .sec-split: headline column beside content column, both anchored
+       to the same grid and the same left edges as each other's stack.
+   A now-deleted modifier class set margin-left:auto on the head-block,
+   shoving 32 headings to the right edge over left-aligned content. It
+   is not named here so the kill-list grep stays meaningful. A heading
+   must share an edge with the content it introduces; the sweep asserts
+   against it (layout-sweep.js, ALIGNMENT ASSERTION). */
+.head-block { max-width: 62ch; }
+.head-block .lede { margin-top: 18px; }
+
+.sec-split { display: grid; grid-template-columns: 5fr 7fr; gap: 32px 64px; align-items: start; }
+.sec-split > .head-block { max-width: none; grid-column: 1; }
+.sec-split > .sec-split-body { grid-column: 2; }
+@media (max-width: 1000px) { .sec-split { grid-template-columns: 1fr; gap: 28px; }
+  .sec-split > .head-block, .sec-split > .sec-split-body { grid-column: 1; } }
+
+/* Inline CTA link — reviewed as "bare unstyled text" at the end of the
+   problem sections. It is a funnel step, so it carries the arrow and a
+   rule that draws on hover, without becoming a third button weight. */
+.cta-link {
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+  color: var(--signal-text);
+  display: inline-flex;
+  font-size: var(--t-body);
+  font-weight: var(--w-mid);
+  gap: 10px;
+  padding-bottom: 4px;
+  transition: border-color var(--dur-micro) var(--ease), gap var(--dur-micro) var(--ease);
+}
+.cta-link svg { height: 16px; width: 16px; flex: 0 0 auto; }
+.cta-link:hover { border-bottom-color: var(--signal); gap: 14px; }
+
+/* ── 5. BUTTONS — ONE SYSTEM, TWO STYLES ─────────────────────────────
+   The homepage submit carried `class="btn-primary"` with no `.btn`, so
+   it never got the base treatment and fell back to native browser
+   chrome — a 2px bevelled white border, Arial, zero radius. That is
+   the "bright, fake-3D" button from review: the browser's default, not
+   a style anyone chose. (The literal keyword is not written here so the
+   kill-list grep stays meaningful.)
+
+   The base list therefore includes the MODIFIERS and bare submits, so a
+   button can never render as native chrome again just because someone
+   forgot a class. There is exactly one primary and one ghost; no
+   gloss, bevel, gradient fill or heavy drop shadow anywhere. */
+.btn, .btn-primary, .btn-ghost,
+button[type="submit"], input[type="submit"] {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: var(--w-mid);
+  letter-spacing: 0.01em;
+  min-height: 50px;
+  padding: 0 26px;
+  transition: transform var(--dur-micro) var(--ease),
+              box-shadow var(--dur-micro) var(--ease),
+              background var(--dur-micro) var(--ease),
+              border-color var(--dur-micro) var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.btn svg, .btn-primary svg, .btn-ghost svg { height: 15px; width: 15px; flex-shrink: 0; transition: transform var(--dur-micro) var(--ease); }
+
+/* ONE primary per viewport */
+.btn-primary { background: var(--signal-fill); color: #fff; }
+.btn-primary:hover {
+  /* Fill is held on hover — anything lighter drops below AA. The lift
+     and the glow carry the hover state instead. */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(10, 132, 255, 0.42);
+}
+.btn-primary:hover svg { transform: translateX(3px); }
+.btn-primary:active { transform: translateY(1px); box-shadow: none; }
+
+.btn-ghost { background: transparent; border-color: var(--rule); color: var(--text); }
+.btn-ghost:hover { background: var(--ink-700); border-color: var(--signal); transform: translateY(-2px); }
+.btn-ghost:active { transform: translateY(1px); }
+
+/* Text link — underline reveals left to right */
+.link {
+  color: var(--text);
+  font-weight: var(--w-mid);
+  background-image: linear-gradient(var(--signal), var(--signal));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  padding-bottom: 2px;
+  transition: background-size 220ms var(--ease), color var(--dur-micro) var(--ease);
+}
+.link:hover { background-size: 100% 1px; color: var(--signal-text); }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* ── 6. NAV — glass surface #1 of exactly 2 ──────────────────────── */
+.nav { position: fixed; inset: 0 0 auto; z-index: var(--z-chrome); padding: 16px var(--gutter) 0; pointer-events: none; }
+.nav-inner {
+  align-items: center;
+  display: flex;
+  gap: 28px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: var(--maxw);
+  min-height: 62px;
+  padding: 0 8px 0 20px;
+  pointer-events: auto;
+  background: rgba(8, 21, 43, 0.72);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+.nav-logo img { height: 30px; width: auto; }
+.nav-links { align-items: center; display: flex; gap: 26px; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  font-size: var(--t-small);
+  font-weight: var(--w-body);
+  transition: color var(--dur-micro) var(--ease);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta { min-height: 40px; font-size: var(--t-small); padding: 0 18px; }
+.nav-burger {
+  align-items: center; background: none; border: 1px solid var(--rule);
+  border-radius: 8px; cursor: pointer; display: none;
+  flex-direction: column; gap: 5px; height: 44px; justify-content: center; width: 44px;
+}
+.nav-burger span { background: var(--text); display: block; height: 1.5px; width: 18px; transition: transform var(--dur-micro) var(--ease), opacity var(--dur-micro); }
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav-drop { position: relative; }
+.nav-drop-panel {
+  position: absolute; top: calc(100% + 18px); left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 262px; display: grid; gap: 1px; padding: 8px;
+  background: rgba(8, 21, 43, 0.97);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  /* No blur: this sits at 0.97 opacity so blur is invisible, and the
+     contract allows glass on exactly two surfaces — the sticky nav bar
+     and the sticky mobile CTA. Nothing else. */
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--dur-micro) var(--ease), transform var(--dur-micro) var(--ease), visibility var(--dur-micro);
+}
+.nav-drop-panel::before { content: ""; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+.nav-drop:hover .nav-drop-panel, .nav-drop:focus-within .nav-drop-panel {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.nav-drop-panel a {
+  border-radius: 6px; color: var(--text-dim); display: block;
+  font-size: var(--t-small); padding: 9px 12px; white-space: nowrap;
+  transition: background var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease);
+}
+.nav-drop-panel a:hover { background: var(--ink-700); color: var(--text); }
+.nav-drop-all { border-top: 1px solid var(--rule-soft); color: var(--signal-text) !important; margin-top: 6px; padding-top: 12px !important; }
+
+.nav-mobile {
+  display: none; position: fixed; left: var(--gutter); right: var(--gutter); top: 88px; z-index: calc(var(--z-chrome) - 1);
+  background: rgba(4, 12, 31, 0.98);
+  border: 1px solid var(--rule); border-radius: 10px;
+  padding: 12px 18px 20px;   /* 0.98 opaque — no blur needed, see above */
+}
+.nav-mobile.open { display: block; }
+.nav-mobile ul { list-style: none; }
+.nav-mobile a:not(.btn) { border-bottom: 1px solid var(--rule-soft); color: var(--text); display: block; font-size: var(--t-body); padding: 13px 0; }
+.nav-mobile .btn { margin-top: 16px; width: 100%; }
+.m-acc-btn {
+  align-items: center; background: none; border: none; border-bottom: 1px solid var(--rule-soft);
+  color: var(--text); cursor: pointer; display: flex; font-family: var(--font-body);
+  font-size: var(--t-body); justify-content: space-between; padding: 13px 0; width: 100%;
+}
+.m-acc-chev { color: var(--text-faint); transition: transform var(--dur-micro) var(--ease); }
+.m-acc-panel { display: grid; max-height: 0; overflow: hidden; transition: max-height 300ms var(--ease); }
+.m-acc-panel.open { max-height: 640px; }
+.m-acc-panel a { color: var(--text-dim) !important; font-size: var(--t-small) !important; padding-left: 14px !important; }
+
+@media (max-width: 940px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+}
+
+/* ── 7. HERO — 7/5 asymmetric, visual off-axis ───────────────────── */
+.hero { padding: 184px 0 var(--space-md); position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 72% 22%, rgba(10,132,255,0.13), transparent 62%),
+    radial-gradient(50% 40% at 8% 78%, rgba(10,132,255,0.05), transparent 60%);
+}
+/* Grid-break #1: the headline breaks out of the 7/5 split and runs the
+   full measure. Measured at 1440: the longest locked line needs 995px
+   and the 7fr column is only 672px — inside the column it wrapped to
+   four lines, against the max-two rule. Full width fits it in two. */
+.hero-head { position: relative; margin-bottom: 56px; }
+
+.hero-grid {
+  align-items: end;
+  display: grid;
+  gap: 64px;
+  grid-template-columns: 7fr 5fr;    /* mandated asymmetry */
+  position: relative;
+}
+.hero .lede { max-width: 46ch; }
+.hero .cta-row { margin-top: 32px; }
+
+/* NOTE: do NOT hide the <br> on mobile. The locked copy is
+   "Answered.<br>Every" with no space around the break — hiding it
+   collides the words into "Answered.Every". The break stays at every
+   width. On a 390px phone this headline lands in four lines at the
+   40px floor; that is unavoidable without dropping below the floor,
+   and legibility for the actual reader wins over the two-line rule. */
+
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--rule-soft); }
+.hero-meta-item { color: var(--text-dim); font-size: var(--t-small); }
+.hero-meta-item b { color: var(--text); font-weight: var(--w-mid); }
+
+/* ── 8. SIGNATURE — the line as instrument ───────────────────────── */
+/* Hero panel: line status readout */
+.line-panel {
+  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  border: 1px solid var(--rule);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+  position: relative;
+}
+.line-panel-head {
+  align-items: center; display: flex; gap: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  padding: 14px 18px;
+}
+.line-dot {
+  background: var(--signal); border-radius: 50%; flex-shrink: 0; height: 7px; width: 7px;
+  box-shadow: 0 0 0 0 var(--signal-glow);
+  animation: linePulse 2.4s var(--ease) infinite;
+}
+@keyframes linePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(10,132,255,0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(10,132,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(10,132,255,0); }
+}
+.line-panel-head .label {
+  font-family: var(--font-display); font-stretch: 125%;
+  font-size: var(--t-eyebrow); font-weight: var(--w-mid);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);
+}
+.line-panel-head .stamp { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.75rem; margin-left: auto; }
+.line-panel-body { padding: 26px 18px 22px; }
+.line-num {
+  color: var(--text); display: block;
+  font-family: var(--font-mono); font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.line-num-label { color: var(--text-faint); display: block; font-size: var(--t-small); margin-top: 6px; }
+
+/* Carrier-signal ambience — the one risk. ≤4%, ~20s. */
+.carrier { display: block; height: 46px; margin-top: 22px; opacity: 0.26; width: 100%; }
+.carrier path { stroke: var(--signal); stroke-width: 1.5; fill: none; }
+.carrier-wrap { overflow: hidden; }
+.carrier-inner { animation: carrierDrift 22s linear infinite; display: flex; width: 200%; }
+@keyframes carrierDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.line-stats { border-top: 1px solid var(--rule-soft); display: grid; grid-template-columns: 1fr 1fr; }
+.line-stat { padding: 16px 18px; }
+.line-stat + .line-stat { border-left: 1px solid var(--rule-soft); }
+.line-stat .v { color: var(--text); display: block; font-family: var(--font-mono); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.line-stat .k { color: var(--text-faint); display: block; font-size: 0.75rem; margin-top: 3px; }
+
+/* Call log — the signature proper */
+/* Grid-break #2: the log overhangs into the next section. Both sections
+   are positioned, so without this the LATER section paints over the
+   log's foot and swallows the BOOKED state — the one moment that has
+   to land. The signature section must win the stacking order. */
+.sig-section { position: relative; z-index: var(--z-raised); }
+
+/* Any element that deliberately crosses a section boundary uses this
+   pair. The overhang and its clearance derive from the same token, so
+   they stay in lockstep at every width — no fixed-pixel offsets. */
+.overhangs { margin-bottom: calc(var(--overhang) * -1); position: relative; z-index: var(--z-raised); }
+.sig-clear { padding-top: calc(var(--sec-pad) + var(--overhang)) !important; }
+
+.log {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-panel);
+  background: linear-gradient(180deg, var(--ink-800), var(--ink-900));
+  overflow: hidden;
+  position: relative;
+}
+.log::after {   /* the live line */
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--signal), rgba(10,132,255,0.05));
+}
+.log-head {
+  align-items: center; display: flex; gap: 12px;
+  border-bottom: 1px solid var(--rule-soft); padding: 15px 22px;
+}
+.log-head .label {
+  font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);
+}
+.log-head .stamp { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.75rem; margin-left: auto; }
+
+.log-line { display: grid; gap: 20px; grid-template-columns: 58px 74px 1fr; padding: 15px 22px; align-items: baseline; }
+.log-line + .log-line { border-top: 1px solid var(--rule-soft); }
+.log-t { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.log-who {
+  font-family: var(--font-display); font-stretch: 125%; font-size: 0.625rem;
+  font-weight: var(--w-mid); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint);
+}
+.log-line.is-ai .log-who { color: var(--signal-text); }
+.log-say { color: var(--text); font-size: var(--t-body); line-height: 1.55; }
+.log-line.is-caller .log-say { color: var(--text-dim); }
+
+.log-foot { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--rule); padding: 16px 22px; background: var(--signal-wash); }
+.log-badge {
+  background: var(--signal-fill); border-radius: 4px; color: #fff;
+  font-family: var(--font-display); font-stretch: 125%; font-size: 0.625rem;
+  font-weight: var(--w-mid); letter-spacing: 0.14em; padding: 5px 9px; text-transform: uppercase;
+}
+/* :not([class]) — THE THIRD TIME. As `.log-foot span` this was (0,1,1)
+   and outranked `.log-badge` (0,1,0), which sits inside it: the badge
+   lost BOTH its white text and its 10px size, rendering --text-dim on
+   the solid --signal-fill at 1.84:1 — the same blue-on-blue failure as
+   `.legal-page a` over `.btn-primary` (§13.8) and `.sig-flow-step span`
+   over `.sig-stars` (§11.9). A bare-tag descendant selector always
+   outranks a component class. Scope it to unclassed spans. */
+.log-foot span:not([class]) { color: var(--text-dim); font-size: var(--t-small); }
+
+/* Sequenced reveal at a call's pace */
+.log-line { opacity: 0; transform: translateY(6px); }
+.log.in-view .log-line { animation: logIn 420ms var(--ease) forwards; }
+.log.in-view .log-line:nth-child(1) { animation-delay: 120ms; }
+.log.in-view .log-line:nth-child(2) { animation-delay: 400ms; }
+.log.in-view .log-line:nth-child(3) { animation-delay: 700ms; }
+.log.in-view .log-line:nth-child(4) { animation-delay: 980ms; }
+.log.in-view .log-line:nth-child(5) { animation-delay: 1240ms; }
+.log.in-view .log-line:nth-child(6) { animation-delay: 1520ms; }
+.log-foot { opacity: 0; }
+.log.in-view .log-foot { animation: logIn 420ms var(--ease) 1820ms forwards; }
+@keyframes logIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ── 9. CALCULATOR — precision instrument panel ──────────────────── */
+.instrument {
+  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  border: 1px solid var(--rule);
+  border-radius: var(--r-panel);
+  margin: 0 auto; max-width: 820px; overflow: hidden;
+}
+.instrument-head { border-bottom: 1px solid var(--rule-soft); padding: 26px 30px 22px; }
+.instrument-head h3 { margin-bottom: 8px; }
+.instrument-head p { color: var(--text-dim); font-size: var(--t-small); max-width: 56ch; }
+.instrument-body { display: grid; gap: 34px; grid-template-columns: 1fr 1fr; padding: 28px 30px; }
+
+.dial label {
+  color: var(--text-dim); display: block;
+  font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid); letter-spacing: 0.14em; margin-bottom: 12px; text-transform: uppercase;
+}
+.dial-val { color: var(--text); font-family: var(--font-mono); font-size: 1.6rem; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.dial input[type="range"] {
+  -webkit-appearance: none; appearance: none; background: transparent;
+  cursor: pointer; display: block; height: 44px; margin-top: 8px; width: 100%;
+}
+.dial input[type="range"]::-webkit-slider-runnable-track { background: var(--ink-600); border-radius: 2px; height: 3px; }
+.dial input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  background: var(--signal); border: none; border-radius: 2px;
+  height: 22px; width: 8px; margin-top: -9.5px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 2px 10px var(--signal-glow);
+  transition: box-shadow var(--dur-micro) var(--ease);
+}
+.dial input[type="range"]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 1px rgba(255,255,255,0.3), 0 3px 16px var(--signal-glow); }
+.dial input[type="range"]::-moz-range-track { background: var(--ink-600); border-radius: 2px; height: 3px; }
+.dial input[type="range"]::-moz-range-thumb { background: var(--signal); border: none; border-radius: 2px; height: 22px; width: 8px; }
+
+/* Ruled tick scale — the instrument tell */
+.ticks { display: flex; justify-content: space-between; margin-top: -4px; padding: 0 3px; }
+.ticks i { background: var(--rule); display: block; height: 5px; width: 1px; }
+.ticks i:nth-child(5n+1) { height: 9px; background: var(--rule); }
+.tick-labels { color: var(--text-faint); display: flex; font-family: var(--font-mono); font-size: 0.6875rem; justify-content: space-between; margin-top: 6px; }
+
+.readout { border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; }
+.readout-cell { padding: 24px 30px; }
+.readout-cell + .readout-cell { border-left: 1px solid var(--rule-soft); }
+.readout-k {
+  color: var(--text-faint);
+  font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid); letter-spacing: 0.14em; margin-bottom: 10px; text-transform: uppercase;
+}
+.readout-v { color: var(--signal-text); font-family: var(--font-mono); font-size: clamp(1.9rem, 3.2vw, 2.5rem); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1; }
+.readout-sub { color: var(--text-dim); font-size: var(--t-small); margin-top: 10px; }
+.instrument-note { border-top: 1px solid var(--rule-soft); color: var(--text-faint); font-size: var(--t-small); line-height: 1.6; padding: 20px 30px; }
+.instrument-cta { border-top: 1px solid var(--rule-soft); padding: 22px 30px; }
+
+/* ── 9b. STEPS — editorial, mono-led (v2.4 rework) ───────────────────
+   Was three identical filled cards with oversized icons: the one
+   template-adjacent moment on the page. Now a hairline-ruled, staggered
+   sequence led by mono numerals, matching the call log's timestamp
+   gutter and the instrument readouts. Icons demoted to accent scale.
+   Sequence numbering is legitimate here — this really is 1 → 2 → 3.
+   ------------------------------------------------------------------ */
+.steps-seq { display: grid; gap: 40px 32px; grid-template-columns: repeat(3, 1fr); }
+.step-col { border-top: 1px solid var(--rule); padding-top: 22px; }
+/* Progressive offset: the eye descends as the process advances.
+   Uses margin, NOT transform — .rv.in sets `transform:none` and is
+   declared later, so a transform-based stagger is silently cancelled. */
+.step-col:nth-child(2) { margin-top: 28px; }
+.step-col:nth-child(3) { margin-top: 56px; }
+.step-meta { align-items: center; display: flex; gap: 10px; margin-bottom: 18px; }
+.step-meta .icon-line { --icon: 15px; }
+.step-no {
+  color: var(--signal-text);
+  font-family: var(--font-mono); font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.08em;
+}
+.step-col h3 { margin-bottom: 10px; }
+.step-col p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+@media (max-width: 900px) {
+  .steps-seq { gap: 28px; grid-template-columns: 1fr; }
+  .step-col:nth-child(2), .step-col:nth-child(3) { margin-top: 0; }
+}
+
+/* ── 10. CARD VARIETY — never the same twice in a row ────────────── */
+/* A: bordered panel */
+.panel { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); padding: 30px 28px; }
+/* B: borderless with glow */
+.glowcard { background: linear-gradient(180deg, rgba(14,30,60,0.9), rgba(8,21,43,0.6)); border-radius: var(--r-panel); box-shadow: 0 20px 60px rgba(0,3,12,0.5); padding: 30px 28px; }
+/* C: horizontal media row */
+.row-card { align-items: flex-start; display: grid; gap: 22px; grid-template-columns: 44px 1fr; padding: 26px 0; }
+.row-card + .row-card { border-top: 1px solid var(--rule-soft); }
+/* D: stat tile with rule */
+.stat-tile { border-left: 1px solid var(--rule); padding: 4px 0 4px 22px; }
+.stat-tile .v { color: var(--text); display: block; font-family: var(--font-mono); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.stat-tile .k { color: var(--text-dim); display: block; font-size: var(--t-small); margin-top: 6px; }
+
+/* .icon-line was a <span>, i.e. display:inline — width/height on an
+   inline box are IGNORED, so the child svg's height:100% resolved
+   against nothing and ballooned to 337x283 instead of 22x22, shoving
+   card text out of its own grid row. Any sized box fixes the whole
+   class of bug wherever this component is used. */
+.icon-line {
+  align-items: center;
+  color: var(--signal-text);
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: var(--icon, 22px);
+  justify-content: center;
+  width: var(--icon, 22px);
+}
+.icon-line svg { display: block; height: 100%; width: 100%; stroke-width: 1.5; }
+
+/* Numbered problem cards — sequence is real here (a call's path) */
+.seq-num { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.06em; }
+
+/* ── 11. PRICE + TIERS ───────────────────────────────────────────── */
+.price-lead { align-items: flex-end; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.price-fig { color: var(--text); font-family: var(--font-mono); font-size: clamp(2.6rem, 5vw, 3.6rem); font-variant-numeric: tabular-nums; letter-spacing: -0.03em; line-height: 1; }
+.price-per { color: var(--text-dim); font-size: var(--t-body); padding-bottom: 6px; }
+.price-meta { color: var(--text-dim); font-size: var(--t-small); margin-top: 14px; }
+.price-meta b { color: var(--text); font-weight: var(--w-mid); }
+
+.tiers { display: grid; gap: 0; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden; }
+.tier { padding: 28px 26px; }
+.tier + .tier { border-left: 1px solid var(--rule-soft); }
+.tier-name { font-family: var(--font-display); font-size: var(--t-body); font-weight: var(--w-disp); letter-spacing: -0.01em; margin-bottom: 14px; }
+.tier-fig { color: var(--text); font-family: var(--font-mono); font-size: 1.75rem; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.tier-fig span { color: var(--text-dim); font-size: 0.875rem; }
+.tier-meta { color: var(--text-faint); font-size: var(--t-small); line-height: 1.55; margin-top: 12px; }
+
+/* ── 12. FAQ ─────────────────────────────────────────────────────── */
+.faq { border-top: 1px solid var(--rule-soft); }
+.faq-item { border-bottom: 1px solid var(--rule-soft); }
+.faq-q {
+  align-items: center; background: none; border: none; color: var(--text); cursor: pointer;
+  display: flex; font-family: var(--font-display); font-size: var(--t-display-m); font-weight: var(--w-disp);
+  gap: 20px; justify-content: space-between; letter-spacing: -0.01em;
+  padding: 26px 0; text-align: left; width: 100%;
+  transition: color var(--dur-micro) var(--ease);
+}
+.faq-q:hover { color: var(--signal-text); }
+.faq-mark { color: var(--signal-text); flex-shrink: 0; height: 14px; position: relative; width: 14px; }
+.faq-mark::before, .faq-mark::after { background: currentColor; content: ""; position: absolute; transition: transform 260ms var(--ease); }
+.faq-mark::before { height: 1.5px; left: 0; top: 6.25px; width: 14px; }
+.faq-mark::after { height: 14px; left: 6.25px; top: 0; width: 1.5px; }
+.faq-item.open .faq-mark::after { transform: scaleY(0); }
+/* visibility:hidden makes a closed answer genuinely inert — out of the
+   a11y tree, out of find-in-page, out of tab order — instead of merely
+   clipped. It also stops the collapsed text reporting phantom geometry. */
+.faq-a {
+  color: var(--text-dim);
+  max-height: 0; overflow: hidden; visibility: hidden;
+  transition: max-height 320ms var(--ease), padding 260ms var(--ease), visibility 320ms;
+}
+.faq-item.open .faq-a { visibility: visible; }
+.faq-item.open .faq-a { max-height: 420px; padding-bottom: 26px; }
+.faq-a p { max-width: 68ch; }
+
+/* ── 13. CTA BAND + FOOTER ───────────────────────────────────────── */
+.cta-band { border-top: 1px solid var(--rule); position: relative; overflow: hidden; }
+.cta-band::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 120% at 50% 100%, rgba(10,132,255,0.14), transparent 62%);
+}
+.cta-band .wrap { position: relative; }
+
+footer { border-top: 1px solid var(--rule-soft); padding: 64px 0 36px; }
+footer a { color: var(--text-faint); font-size: var(--t-small); transition: color var(--dur-micro) var(--ease); }
+footer a:hover { color: var(--text-dim); }
+.foot-grid { display: grid; gap: 44px; grid-template-columns: 1.6fr 1fr 1fr; }
+.foot-col h3 {
+  color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.16em;
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.foot-col ul { display: grid; gap: 11px; list-style: none; }
+.foot-brand img { height: 30px; margin-bottom: 16px; width: auto; }
+.foot-brand p { color: var(--text-faint); font-size: var(--t-small); max-width: 34ch; }
+.foot-contact { display: grid; gap: 6px; margin-top: 18px; }
+.foot-social { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; }
+.foot-legal { border-top: 1px solid var(--rule-soft); color: var(--text-faint); display: flex; flex-wrap: wrap; font-size: 0.8125rem; gap: 8px 24px; justify-content: space-between; margin-top: 44px; padding-top: 26px; }
+
+/* ── 14. STICKY MOBILE CTA — glass surface #2 of exactly 2 ───────── */
+.sticky-cta {
+  align-items: center; display: none; gap: 8px;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-sticky);
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(8, 21, 43, 0.86);
+  border-top: 1px solid var(--rule);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  transition: transform 240ms var(--ease), opacity 240ms var(--ease);
+}
+.sticky-cta.is-hidden { opacity: 0; pointer-events: none; transform: translateY(110%); }
+.sticky-cta .btn { flex: 1 1 0; font-size: var(--t-small); min-height: 48px; padding: 0 10px; }
+.sticky-close {
+  align-items: center; background: none; border: 1px solid var(--rule); border-radius: 8px;
+  color: var(--text-faint); cursor: pointer; display: flex; flex: 0 0 auto;
+  height: 44px; justify-content: center; width: 34px;
+}
+@media (max-width: 767px) {
+  .sticky-cta { display: flex; }
+  body.has-sticky footer { padding-bottom: calc(var(--space-sm) + var(--sticky-h)); }
+  /* NOTE: no hero padding-bottom here. It was tried and reverted —
+     padding-bottom sits AFTER the content, so it cannot lift the hero
+     meta out from under the bar; it only added dead space. A fixed bar
+     covering whatever is at its y is inherent to sticky chrome. What
+     matters is that nothing is permanently unreachable (footer padding
+     + scroll-padding below) and that the bar is dismissible. Registered
+     as sanctioned chrome in DESIGN-CONTRACT.md §5b.3. */
+  /* Anchor jumps must not land content under the bar either. */
+  body.has-sticky { scroll-padding-bottom: calc(var(--sticky-h) + 16px); }
+}
+
+/* A hero with no second-column instrument must not leave a 5-column
+   void. Solo heroes run one column on a comfortable measure. */
+.hero-solo .hero-grid { grid-template-columns: 1fr; }
+.hero-solo .hero-copy .lede { max-width: 64ch; }
+
+/* ── 14b. AI TEAM — departments, roster, direction ───────────────── */
+/* ODD-COUNT GRIDS — generic, applies to any .auto-grid on the site.
+   Five departments in a 3-wide grid left a hole in the sixth cell.
+   Centring the trailing row is the usual answer, but these grids draw
+   their hairlines with a 1px gap over a background, so a centred row
+   leaves empty rules hanging at both edges. Filling the row instead
+   reads deliberate: the last row is simply made of wider cards.
+   Six tracks, cards span two; a trailing row of two spans three each,
+   a trailing row of one spans the width. */
+.auto-grid { display: grid; gap: 1px; grid-template-columns: repeat(6, 1fr);
+  background: var(--rule-soft); border: 1px solid var(--rule-soft);
+  border-radius: var(--r-panel); overflow: hidden; }
+.auto-grid > * { grid-column: span 2; }
+.auto-grid > :nth-last-child(2):nth-child(3n+1),
+.auto-grid > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 3; }
+.auto-grid > :last-child:nth-child(3n+1) { grid-column: span 6; }
+.dept-covers { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; }
+.dept-dl { border-top: 1px solid var(--rule-soft); display: grid; gap: 4px; margin-top: 4px; padding-top: 14px; }
+.dept-dl dt { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%; font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.dept-dl dt + dd { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; margin-bottom: 10px; }
+.dept-dl dd:last-child { margin-bottom: 0; }
+
+.role-list { border-top: 1px solid var(--rule-soft); }
+.role-row { align-items: baseline; border-bottom: 1px solid var(--rule-soft); display: grid; gap: 24px; grid-template-columns: 48px 1fr; padding: 22px 0; }
+.role-no { color: var(--text-faint); font-family: var(--font-mono); font-size: var(--t-mono); }
+.role-row strong { display: block; font-family: var(--font-display); font-size: 1.0625rem; font-weight: var(--w-mid); margin-bottom: 5px; }
+.role-row span { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+
+.dir-grid { display: grid; gap: 1px; grid-template-columns: repeat(6, 1fr); background: var(--rule-soft); border: 1px solid var(--rule-soft); border-radius: var(--r-panel); overflow: hidden; }
+/* Odd counts fill their last row rather than leaving a hole — the
+   generic .auto-grid behaviour from §12.5. Three items span two tracks
+   each and make one full row. */
+.dir-grid > * { grid-column: span 2; }
+.dir-grid > :nth-last-child(2):nth-child(3n+1),
+.dir-grid > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 3; }
+.dir-grid > :last-child:nth-child(3n+1) { grid-column: span 6; }
+.dir-col { background: var(--ink-800); display: grid; gap: 10px; padding: 28px 26px; align-content: start; }
+.dir-col p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+.dir-k { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%; font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.dir-grid .dir-col:last-child .dir-k { color: var(--signal-text); }
+
+@media (max-width: 1000px) {
+  .auto-grid { grid-template-columns: repeat(4, 1fr); }.auto-grid > * { grid-column: span 2; }.auto-grid > :last-child:nth-child(odd) { grid-column: span 4; }.auto-grid > :nth-last-child(2):nth-child(3n+1), .auto-grid > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 2; }
+  .dir-grid { grid-template-columns: 1fr; }
+  .dir-grid > * { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .auto-grid { grid-template-columns: 1fr; }.auto-grid > *, .auto-grid > :last-child { grid-column: 1 / -1; }
+  .role-row { grid-template-columns: 36px 1fr; gap: 14px; }
+}
+
+/* ── 14c. GEO — the AI-search argument ───────────────────────────── */
+.geo-steps { border-top: 1px solid var(--rule-soft); }
+.geo-step { align-items: baseline; border-bottom: 1px solid var(--rule-soft); display: grid; gap: 26px; grid-template-columns: 52px 1fr; padding: 24px 0; }
+.geo-no { color: var(--signal-text); font-family: var(--font-mono); font-size: var(--t-mono); }
+.geo-step strong { display: block; font-family: var(--font-display); font-size: 1.125rem; font-weight: var(--w-mid); letter-spacing: -0.01em; margin-bottom: 7px; }
+.geo-step p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.7; max-width: 76ch; }
+.geo-note { color: var(--text-faint); font-size: 0.8125rem; line-height: 1.65; margin-top: 22px; max-width: 88ch; }
+
+.geo-pillars { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); border-radius: var(--r-panel); overflow: hidden; }
+.geo-pillar { background: var(--ink-800); display: grid; gap: 22px; grid-template-columns: 52px 1fr; padding: 26px 28px; }
+.geo-pillar-no { color: var(--text-faint); font-family: var(--font-mono); font-size: var(--t-mono); }
+.geo-pillar strong { display: block; font-family: var(--font-display); font-size: 1.0625rem; font-weight: var(--w-mid); margin-bottom: 7px; }
+.geo-pillar p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.7; max-width: 82ch; }
+@media (max-width: 640px) {
+  .geo-step, .geo-pillar { grid-template-columns: 36px 1fr; gap: 14px; }
+  .geo-pillar { padding: 22px 20px; }
+}
+
+/* ── 14d. FORM CONTROLS — the checkbox was native chrome ──────────────
+   #smsConsent sat outside .form-group and rendered with the browser's
+   own `1px solid #FFFFFF`. That is the white border from review. The
+   consent control is A2P-required, so it is restyled, never removed or
+   pre-checked. */
+input[type="checkbox"] {
+  -webkit-appearance: none; appearance: none;
+  background: var(--ink-900);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  display: grid;
+  flex: 0 0 auto;
+  height: 20px;
+  place-content: center;
+  transition: border-color var(--dur-micro) var(--ease), background var(--dur-micro) var(--ease);
+  width: 20px;
+}
+input[type="checkbox"]::before {
+  content: "";
+  height: 10px; width: 10px;
+  transform: scale(0);
+  transition: transform var(--dur-micro) var(--ease);
+  box-shadow: inset 1em 1em var(--signal);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked { border-color: var(--signal); }
+input[type="checkbox"]:checked::before { transform: scale(1); }
+input[type="checkbox"]:hover { border-color: var(--signal); }
+input[type="checkbox"]:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+::placeholder { color: var(--text-faint); opacity: 1; }/* ── 14e. ELEVATION — panels sit above the field ─────────────────────
+   Border-only surfaces read as drawn ON the background. A top inner
+   light (the edge catching the field's glow), a hairline border and one
+   soft ambient shadow lift them off it. One shadow, never a stack —
+   heavy drop shadows are on the kill-list. */
+.panel, .spec-panel, .line-panel, .instrument, .plan, .tier-card, .form-card, .waitlist-card, .dir-col, .geo-pillar, .log, .svc-sig .sig-frame, .sig-map, .mini {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.045),
+    0 18px 44px -28px rgba(0,0,0,0.75);
+}
+/* Grid children share one border, so only the container is lifted. */
+.dept-stack, .dir-grid, .geo-pillars, .seat-list {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045),
+              0 18px 44px -28px rgba(0,0,0,0.75);
+}
+.dir-col, .geo-pillar, .seat { box-shadow: none; }
+
+/* ── 14f. NIGHT CALENDAR — after-hours told as a schedule ─────────── */
+.nightcal { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden; }
+.nightcal-head { align-items: baseline; border-bottom: 1px solid var(--rule); display: flex; gap: 14px; padding: 16px 22px; }
+.nightcal-day { font-family: var(--font-display); font-size: 0.9375rem; font-weight: var(--w-mid); letter-spacing: 0.02em; }
+.nightcal-meta { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.75rem; margin-left: auto; }
+.nightcal-row { align-items: center; display: grid; gap: 20px; grid-template-columns: 74px 1fr; padding: 13px 22px; }
+.nightcal-row + .nightcal-row { border-top: 1px solid var(--rule-soft); }
+.nightcal-t { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; }
+.nightcal-slot { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; }
+.nightcal-slot > span { color: var(--text-faint); font-size: var(--t-small); }
+.nightcal-slot b { color: var(--signal-text); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: var(--w-body); }
+.nightcal-row.is-quiet .nightcal-slot > span { color: var(--text-faint); opacity: 0.55; }
+.nightcal-row.is-call { background: var(--signal-wash); }
+.nightcal-row.is-call .nightcal-slot > span { color: var(--text); }
+.nightcal-row.is-call .nightcal-t { color: var(--signal-text); }
+.nightcal-row.is-captured .nightcal-slot > span { color: var(--text); }
+.nightcal-row.is-captured { border-left: 2px solid var(--signal); }
+.nightcal-badge { background: var(--signal-fill); border-radius: 3px; color: #fff; font-family: var(--font-display); font-size: 0.625rem; font-stretch: 125%; font-style: normal; letter-spacing: 0.12em; padding: 3px 7px; text-transform: uppercase; }
+.nightcal-note { border-top: 1px solid var(--rule); color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; padding: 16px 22px; }
+@media (max-width: 640px) { .nightcal-row { grid-template-columns: 58px 1fr; gap: 12px; padding: 12px 16px; }
+  .nightcal-head, .nightcal-note { padding-left: 16px; padding-right: 16px; } }
+
+/* ── 14g. AI TEAM ROSTER — departments and seats ─────────────────────
+   Five departments, each with its own seat list. Card treatment varies
+   between departments (card-variety law): two-column, ruled rows,
+   three-column, and a wide pair. No status badges anywhere — honesty is
+   carried by tense, per §11.6. */
+.dept-stack { display: grid; gap: 40px; }
+.dept { border: 1px solid var(--rule-soft); border-radius: var(--r-panel); overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045), 0 18px 44px -28px rgba(0,0,0,0.75); }
+.dept-bar { align-items: center; background: var(--ink-800); border-bottom: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 14px; padding: 18px 24px; }
+.dept-bar .icon-line { color: var(--signal-text); }
+.dept-no { color: var(--text-faint); font-family: var(--font-mono); font-size: var(--t-mono); }
+.dept-bar h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: var(--w-disp); letter-spacing: -0.01em; }
+.dept-tag { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%; font-size: 0.6875rem;
+  letter-spacing: 0.14em; margin-left: auto; text-transform: uppercase; }
+
+.seat-list { background: var(--rule-soft); display: grid; gap: 1px; }
+.seat { background: var(--ink-900); display: grid; gap: 8px; padding: 22px 24px; align-content: start; }
+.seat-h strong { font-family: var(--font-display); font-size: 1rem; font-weight: var(--w-mid); }
+.seat-does { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+.seat-stops { color: var(--text-faint); font-size: 0.8125rem; line-height: 1.6; }
+.seat-stops span { color: var(--signal-text); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.625rem; letter-spacing: 0.14em; margin-right: 8px; text-transform: uppercase; }
+
+/* Variety — no two consecutive departments share a treatment.
+   All seat lists run on SIX tracks so an odd count can fill its last
+   row instead of leaving a hole (the .auto-grid law from §12.5):
+   Operations has 5 seats in a 2-up, Sales has 8 in a 3-up, and both
+   would otherwise end on a gap. */
+.seat-list { grid-template-columns: repeat(6, 1fr); }
+
+.dept-ops   .seat { grid-column: span 3; }                     /* 2-up */
+.dept-ops   .seat-list > :last-child:nth-child(odd) { grid-column: span 6; }
+
+.dept-fin   .seat { grid-column: span 6; }                     /* ruled rows */
+.dept-fin   .seat { grid-template-columns: 220px 1fr; gap: 6px 28px; }
+.dept-fin   .seat-h { grid-row: span 2; }
+
+.dept-sales .seat { grid-column: span 2; }                     /* 3-up */
+.dept-sales .seat-list > :nth-last-child(2):nth-child(3n+1),
+.dept-sales .seat-list > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 3; }
+.dept-sales .seat-list > :last-child:nth-child(3n+1) { grid-column: span 6; }
+
+.dept-del   .seat { grid-column: span 3; }                     /* lead seat, then 2-up */
+.dept-del   .seat:first-child { grid-column: span 6; background: var(--ink-800); }
+
+.dept-intel .seat { grid-column: span 3; }                     /* 2-up */
+.dept-intel .seat-list > :last-child:nth-child(odd) { grid-column: span 6; }
+
+@media (max-width: 1000px) {
+  .dept-sales .seat { grid-column: span 3; }
+  .dept-sales .seat-list > :nth-last-child(2):nth-child(3n+1),
+  .dept-sales .seat-list > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 3; }
+  .dept-sales .seat-list > :last-child:nth-child(odd) { grid-column: span 6; }
+  .dept-fin   .seat { grid-template-columns: 1fr; }
+  .dept-fin   .seat-h { grid-row: auto; }
+}
+@media (max-width: 640px) {
+  .seat, .dept-ops .seat, .dept-sales .seat, .dept-del .seat,
+  .dept-intel .seat, .dept-del .seat:first-child { grid-column: 1 / -1; }
+  .seat-list { grid-template-columns: 1fr; }
+  .dept-bar { padding: 16px 18px; }
+  .seat { padding: 18px; }
+}
+
+/* ── 14h. LEGAL / UTILITY PAGES ──────────────────────────────────────
+   The six live-only pages ported onto v3. Their markup is carried
+   VERBATIM (legal copy is locked), so these rules dress the classes
+   those documents already use — .doc, .container, .page-head — rather
+   than rewriting them. Long-form reading measure, generous leading. */
+.legal-page { padding-top: calc(var(--nav-h) + var(--sec-pad)); }
+.legal-page .doc, .legal-page .container { max-width: 74ch; }
+.legal-page .page-head { margin-bottom: 32px; }
+.legal-page h1 { font-family: var(--font-display); font-size: var(--t-h1-sm, 2.5rem); font-weight: var(--w-disp);
+  letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 10px; }
+.legal-page h2 { font-family: var(--font-display); font-size: 1.25rem; font-weight: var(--w-disp);
+  letter-spacing: -0.01em; margin: 40px 0 12px; }
+.legal-page h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: var(--w-mid); margin: 26px 0 8px; }
+/* :not([class]) — the law (§19.8). Unscoped, this took line-height and
+   margin-bottom off every .eyebrow and .lede on the five legal-register
+   pages: the eyebrow kept its colour but read at body rhythm. */
+.legal-page p:not([class]) { color: var(--text-dim); line-height: 1.75; margin-bottom: 14px; }
+.legal-page li { color: var(--text-dim); line-height: 1.75; margin-bottom: 8px; }
+.legal-page ul, .legal-page ol { margin: 0 0 16px 20px; }
+.legal-page strong { color: var(--text); font-weight: var(--w-mid); }
+/* PROSE LINKS ONLY. As `.legal-page a` this had specificity (0,1,1) and
+   beat `.btn-primary` (0,1,0), painting accent-blue text on the blue
+   button fill — the blue-on-blue defect reported on /text-us, /faq and
+   /tools. Every button on these pages is classed and every prose link is
+   not, so :not([class]) separates them exactly. Third time a descendant
+   rule has outranked a component class in this build (§11.9, §12.3). */
+.legal-page a:not([class]) { border-bottom: 1px solid var(--rule); color: var(--signal-text); }
+.legal-page a:not([class]):hover { border-bottom-color: var(--signal); }
+.legal-page .eyebrow, .legal-page p.eyebrow { color: var(--signal-text); display: block; margin-bottom: 12px; }
+.legal-page .meta { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; margin-bottom: 34px; }
+.legal-page .divider, .legal-page hr { background: var(--rule); border: 0; height: 1px; margin: 36px 0; }
+.legal-page table { border-collapse: collapse; margin: 18px 0; width: 100%; }
+.legal-page th, .legal-page td { border-bottom: 1px solid var(--rule-soft); padding: 10px 12px; text-align: left; }
+.legal-page th { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.legal-page .lang-toggle { color: var(--text-faint); font-size: var(--t-small); }
+
+/* ── 14i. SYSTEMS GUIDE — conversational capture ─────────────────────
+   Deliberately NOT a glass surface: the law allows exactly two and both
+   are spent (nav, sticky bar). Solid ink, hairline structure, accent
+   used only on the active affordance. Clears the sticky CTA on mobile
+   via --sticky-h so the two can never collide. */
+.guide-launcher { bottom: 24px; position: fixed; right: 24px; z-index: var(--z-chrome);
+  transition: opacity var(--dur-micro) var(--ease), transform var(--dur-micro) var(--ease); }
+.guide-launcher.is-hidden { opacity: 0; pointer-events: none; transform: translateY(8px); visibility: hidden; }
+/* Collapsed once the reader is past the hero. A 259px-wide labelled
+   button parked over body text is a real readability cost; an icon-only
+   target is a bounded one. The label earns its space only at the top of
+   the page, where nothing sits in that corner. */
+.guide-launcher.is-compact { border-radius: 999px; gap: 0; padding: 0; width: 50px; }
+.guide-launcher.is-compact span { display: none; }
+.guide-launcher svg { height: 17px; width: 17px; }
+.guide-panel {
+  background: var(--ink-800);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-panel);
+  bottom: 88px; right: 24px; position: fixed;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 30px 70px -30px rgba(0,0,0,0.85);
+  display: grid; grid-template-rows: auto 1fr auto auto auto;
+  max-height: min(560px, calc(100vh - 140px));
+  width: min(380px, calc(100vw - 32px));
+  z-index: var(--z-chrome);
+}
+.guide-panel[hidden] { display: none; }
+.guide-head { align-items: center; border-bottom: 1px solid var(--rule); display: flex; padding: 14px 16px; }
+.guide-title { font-family: var(--font-display); font-size: 0.9375rem; font-weight: var(--w-mid); }
+.guide-close { background: none; border: 0; color: var(--text-faint); cursor: pointer; display: inline-flex;
+  margin-left: auto; min-height: 0; padding: 4px; }
+.guide-close svg { height: 16px; width: 16px; }
+.guide-close:hover { color: var(--text); }
+.guide-msgs { display: grid; gap: 10px; overflow-y: auto; padding: 16px; }
+.guide-msg { border-radius: 10px; font-size: var(--t-small); line-height: 1.6; max-width: 88%; padding: 10px 13px; }
+.guide-msg.is-bot { background: var(--ink-700); color: var(--text); justify-self: start; }
+.guide-msg.is-you { background: var(--signal-fill); color: #fff; justify-self: end; }
+.guide-opts { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 14px; }
+.guide-opt { background: transparent; border: 1px solid var(--rule); border-radius: 999px; color: var(--text-dim);
+  cursor: pointer; font-family: var(--font-body); font-size: 0.8125rem; min-height: 0; padding: 7px 13px;
+  transition: border-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease); }
+.guide-opt:hover { border-color: var(--signal); color: var(--text); }
+.guide-gate { border-top: 1px solid var(--rule); display: grid; gap: 12px; padding: 14px 16px; }
+.guide-gate[hidden] { display: none; }
+.guide-gate .consent-row { align-items: flex-start; display: flex; gap: 10px; }
+.guide-gate .consent-row span { color: var(--text-faint); font-size: 0.75rem; line-height: 1.55; }
+.guide-gate .btn { width: 100%; }
+.guide-input-row { border-top: 1px solid var(--rule); display: flex; gap: 8px; padding: 12px 16px; }
+.guide-input-row[hidden] { display: none; }
+.guide-input { background: var(--ink-900); border: 1px solid var(--rule); border-radius: var(--r-btn);
+  color: var(--text); flex: 1; font-family: var(--font-body); font-size: var(--t-small); padding: 10px 12px; }
+.guide-input:focus { border-color: var(--signal); box-shadow: 0 0 0 3px var(--signal-glow); outline: none; }
+.guide-send { background: var(--signal-fill); border: 0; border-radius: var(--r-btn); color: #fff; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; min-height: 0; padding: 0 14px; }
+.guide-send svg { height: 16px; width: 16px; }
+
+/* Mobile: the sticky CTA owns the bottom edge. Both clear it by its
+   own token, so the bar and the guide can never overlap. */
+@media (max-width: 900px) {
+  /* Icon-only on mobile, always: the labelled button is 259px wide,
+     two-thirds of a 390px screen, and at rest it parked over the hero.
+     A floating control should never cost that much of a small viewport. */
+  .guide-launcher { bottom: calc(var(--sticky-h) + 16px); right: 16px;
+    border-radius: 999px; gap: 0; padding: 0; width: 50px; }
+  .guide-launcher span { display: none; }
+  .guide-panel { bottom: calc(var(--sticky-h) + 74px); right: 16px; left: 16px; width: auto;
+    max-height: calc(100vh - var(--sticky-h) - 130px); }
+}
+
+/* ── 14j. IN-PAGE NAV — long pages only ──────────────────────────────
+   /frontdesk runs ~13 screens with pricing about seven down; without a
+   jump bar the section people came for is unreachable except by scroll.
+   Sticky beneath the fixed nav. SOLID ink, never glass — the law allows
+   exactly two glass surfaces and both are spent (nav, sticky bar). */
+:root { --subnav-h: 52px; }
+
+.page-nav {
+  background: var(--ink-900);
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-soft);
+  position: sticky; top: var(--nav-h);
+  z-index: calc(var(--z-chrome) - 1);
+}
+.page-nav-inner { align-items: center; display: flex; gap: 20px; height: var(--subnav-h); }
+.page-nav-label { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.625rem; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; }
+.page-nav ul { display: flex; gap: 4px; list-style: none; margin: 0; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none; }
+.page-nav ul::-webkit-scrollbar { display: none; }
+.page-nav a {
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  display: inline-block;
+  font-size: var(--t-small);
+  padding: 6px 12px;
+  transition: color var(--dur-micro) var(--ease), border-color var(--dur-micro) var(--ease);
+  white-space: nowrap;
+}
+.page-nav a:hover { color: var(--text); }
+.page-nav a.is-current { border-bottom-color: var(--signal); color: var(--text); }
+
+/* A jump must clear the fixed nav AND this bar. (0,2,0) beats the
+   global [id] rule at (0,1,0), so it wins without !important. */
+/* When the sub-nav is the FIRST element in <main> it has no flow
+   position below the fixed nav, so it sticks to top:--nav-h instantly
+   and covers whatever follows it. The fixed nav takes no flow space, so
+   the document has to reserve it. Without this the hub's hero sat under
+   both bars at rest — 13 overlay hits across three widths. */
+.has-page-nav main { padding-top: var(--nav-h); }
+.has-page-nav [id] { scroll-margin-top: calc(var(--nav-h) + var(--subnav-h) + 24px); }
+
+@media (max-width: 640px) {
+  :root { --subnav-h: 48px; }
+  .page-nav-label { display: none; }
+  .page-nav-inner { gap: 0; }
+  .page-nav a { padding: 6px 10px; }
+}
+
+/* ── 14k. PORTED-PAGE COMPONENTS ─────────────────────────────────────
+   The six pulled-down pages carry their original class names. The shell
+   and prose were dressed in §13.4; these are the structural classes
+   those pages use that had NO v3 rule and were rendering as browser
+   defaults. `.icon-chip` was the worst: an unsized SVG container
+   ballooning to 300x150 — the same class of bug as the original
+   .icon-line defect. `.glass-card` is styled as a SOLID panel, not
+   glass: the two-surface budget is spent and a ported class does not
+   get to spend it again. */
+.icon-chip {
+  align-items: center; background: var(--ink-700); border: 1px solid var(--rule);
+  border-radius: 10px; color: var(--signal-text); display: inline-flex;
+  flex: 0 0 auto; height: 40px; justify-content: center; margin-bottom: 14px; width: 40px;
+}
+.icon-chip svg { height: 20px; width: 20px; }
+
+.glass-card {
+  background: var(--ink-800); border: 1px solid var(--rule-soft);
+  border-radius: var(--r-panel); padding: 24px 22px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045), 0 18px 44px -28px rgba(0,0,0,0.75);
+}
+.glass-lift { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); }
+
+/* Ported pages nest their own .page-head and .section-pad inside
+   .legal-page, so THREE top paddings stacked: .legal-page's nav
+   clearance (162), the native .page-head hero padding (172 top / 80
+   bottom), and .section-pad (40). That is where ~182px between the
+   intro and the first question came from. .legal-page already reserves
+   the nav clearance, so its page-head does not repeat it. */
+.legal-page .page-head { margin-bottom: 0; padding: 0 0 8px; }
+.legal-page .section-pad { padding-top: 0; }
+
+/* ── 21.6 FRONTDESK SPACING ────────────────────────────────────────
+   Two separate bugs, both measured before fixing, both scoped to
+   `.has-page-nav` — which is EXACTLY the five /frontdesk routes.
+   `/faq` and `/tools` also use `.section-pad` and are approved as they
+   are, so a global rule would have moved two reviewed pages. Same trap
+   as `.container` (§21.3): check who else matches first.
+
+   1. CLEARANCE RESERVED TWICE. `.has-page-nav main` reserves --nav-h
+      (78) because the fixed nav takes no flow space. `.legal-page` then
+      reserves `calc(--nav-h + --sec-pad)` = 162 on top of it, because
+      that rule was written for /privacy and /terms, which have no such
+      reservation. Measured chrome-to-ink: 162 against the reference's
+      106. Reserve the nav ONCE — here the page-head only owes the
+      section step. */
+.has-page-nav .legal-page { padding-top: var(--sec-pad-lg); }
+
+/* 2. NO SECTION RHYTHM AT ALL. `.section-pad` is a ported class with no
+      padding rule anywhere in this stylesheet — computed 0px top AND
+      bottom, so consecutive sections butted together at a measured -2px
+      and the h1 sat directly on the tier cards. Give it the same step
+      the other 18 routes get from `.section`. */
+.has-page-nav .section-pad { padding: var(--sec-pad) 0; }
+.faq-list { display: grid; gap: 10px; margin-top: 44px; }
+.faq-chevron { color: var(--text-faint); margin-left: auto; }
+.grad-text { color: var(--signal-text); }
+.cta-wordmark { height: auto; margin: 0 auto 18px; max-width: 180px; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.trust-chip { align-items: center; border: 1px solid var(--rule); border-radius: 999px; color: var(--text-dim);
+  display: inline-flex; font-size: 0.8125rem; gap: 7px; padding: 5px 12px; }
+/* An SVG with no explicit size is not a small SVG — it is a 300x150 block.
+   Same failure class as .icon-line and .icon-chip (§11.9). */
+.chip-ico { color: var(--signal-text); flex: none; height: 13px; width: 13px; }
+.usage-note { color: var(--text-faint); font-size: 0.8125rem; line-height: 1.6; }
+/* the tier -> detail-page link sits under the /book CTA, not beside it:
+   the booking CTA stays the primary action on a pricing card. */
+.tier-more { margin-top: 14px; text-align: center; }
+
+/* ── 14l. TOOLS PAGE — instrument panels ─────────────────────────────
+   The three tools rendered as large grey blocks: every class below had
+   NO v3 rule, so they fell back to browser defaults. Same failure as
+   .icon-line and .icon-chip — an unstyled container is not a neutral
+   container. Built from the native calculator language: hairline
+   structure, mono numerals, accent on the readout only. */
+.tools-tabs { border-bottom: 1px solid var(--rule); display: flex; gap: 4px; margin-bottom: 32px; overflow-x: auto; }
+.tools-tab { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--text-dim);
+  cursor: pointer; font-family: var(--font-body); font-size: var(--t-small); min-height: 0;
+  padding: 10px 14px; white-space: nowrap;
+  transition: color var(--dur-micro) var(--ease), border-color var(--dur-micro) var(--ease); }
+.tools-tab svg { height: 16px; width: 16px; flex: 0 0 auto; }
+.tools-tab { align-items: center; display: inline-flex; gap: 8px; }
+.tools-tab:hover { color: var(--text); }
+.tools-tab.active { border-bottom-color: var(--signal); color: var(--text); }
+
+.tools-panel { display: none; }
+.tools-panel.active { display: block; }
+
+.tool-card {
+  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 18px 44px -28px rgba(0,0,0,0.75);
+}
+.tool-2col { display: grid; gap: 1px; grid-template-columns: 1fr 1fr; background: var(--rule-soft); }
+.tool-field { background: var(--ink-900); display: grid; gap: 8px; padding: 20px 22px; }
+.tool-field label { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.tool-field input, .tool-field select {
+  background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-btn);
+  color: var(--text); font-family: var(--font-mono); font-size: 1.0625rem; padding: 10px 12px; width: 100%;
+}
+.tool-field input:focus, .tool-field select:focus {
+  border-color: var(--signal); box-shadow: 0 0 0 3px var(--signal-glow); outline: none; }
+
+.tool-result { border-top: 1px solid var(--rule); padding: 0; }
+.tool-result[hidden] { display: none; }
+.tool-result-grid { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); background: var(--rule-soft); }
+.tool-result-label { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.tool-result-value { color: var(--signal-text); font-family: var(--font-mono); font-size: 1.75rem;
+  letter-spacing: -0.02em; line-height: 1.1; }
+.tool-result-sub { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; }
+.tool-result-grid > * { background: var(--ink-900); display: grid; gap: 6px; padding: 20px 22px; }
+
+.quiz-question { border-top: 1px solid var(--rule-soft); display: grid; gap: 12px; padding: 20px 22px; }
+.quiz-question:first-child { border-top: 0; }
+.quiz-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-opt { background: transparent; border: 1px solid var(--rule); border-radius: 999px; color: var(--text-dim);
+  cursor: pointer; font-family: var(--font-body); font-size: 0.8125rem; min-height: 0; padding: 7px 13px;
+  transition: border-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease); }
+.quiz-opt:hover { border-color: var(--signal); color: var(--text); }
+/* The ported JS adds `.selected`; my rule styled `.active` only, so a
+   chosen answer got no feedback at all. Both are styled now — the
+   mismatch is the kind of thing that survives a source read and only
+   shows up when you click. Selected state is deliberately loud: filled
+   wash, accent border, full-strength text. */
+.quiz-opt.active,
+.quiz-opt.selected {
+  background: var(--signal-wash);
+  border-color: var(--signal);
+  box-shadow: inset 0 0 0 1px var(--signal);
+  color: var(--text);
+  font-weight: var(--w-mid);
+}
+.quiz-opt.selected::before { color: var(--signal-text); content: "✓"; margin-right: 7px; }
+
+/* Submit gate for the audit — results only calculate when pressed. */
+.quiz-submit-row { align-items: center; border-top: 1px solid var(--rule-soft); display: flex;
+  flex-wrap: wrap; gap: 14px; margin-top: 4px; padding: 20px 22px; }
+.quiz-progress { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; }
+.quiz-submit-row .btn[disabled] { cursor: not-allowed; opacity: 0.45; }
+.quiz-score-ring { align-items: center; border: 2px solid var(--signal); border-radius: 50%;
+  display: grid; height: 104px; justify-items: center; margin: 0 auto 14px; place-content: center; width: 104px; }
+.quiz-score-num { color: var(--text); font-family: var(--font-mono); font-size: 2rem; line-height: 1; }
+.quiz-score-lbl { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.75rem; }
+
+@media (max-width: 640px) {
+  .tool-2col, .tool-result-grid { grid-template-columns: 1fr; }
+}
+
+/* ── 14m. /frontdesk — ported components brought to register ──────────
+   43 classes on this page had NO v3 rule, which is why it read as
+   "everything is everywhere". The cards already inherit the solid
+   .glass-card panel; what was missing was grid layout and in-card
+   typography. Every rule below reuses existing tokens and the
+   odd-count grid law (§12.5) — no new visual language is invented, and
+   nothing here restates a price. */
+
+/* hero */
+.frontdesk-hero { padding: var(--sec-pad) 0; }
+.frontdesk-hero-grid { display: grid; gap: 48px; grid-template-columns: 7fr 5fr; align-items: start; }
+.frontdesk-badge { align-items: center; border: 1px solid var(--rule); border-radius: 999px;
+  color: var(--text-dim); display: inline-flex; font-size: 0.8125rem; gap: 8px; margin-bottom: 22px; padding: 6px 14px; }
+.signal-dot { background: var(--signal); border-radius: 50%; box-shadow: 0 0 0 3px var(--signal-glow);
+  flex: 0 0 auto; height: 7px; width: 7px; }
+.frontdesk-sub { color: var(--text-dim); font-size: var(--t-body-l); line-height: 1.65; margin-top: 20px; max-width: 54ch; }
+.frontdesk-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.trust-strip { border-top: 1px solid var(--rule-soft); display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 34px; padding-top: 20px; }
+
+/* card grids — trailing rows fill rather than leaving a hole */
+.workflow-steps, .problem-grid, .include-grid, .demo-proof-grid, .fit-grid {
+  display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); margin-top: 44px;
+}
+.workflow-steps > *, .problem-grid > *, .include-grid > *, .demo-proof-grid > * { grid-column: span 2; }
+.workflow-steps > :nth-last-child(2):nth-child(3n+1),
+.workflow-steps > :nth-last-child(2):nth-child(3n+1) ~ *,
+.problem-grid > :nth-last-child(2):nth-child(3n+1),
+.problem-grid > :nth-last-child(2):nth-child(3n+1) ~ *,
+.include-grid > :nth-last-child(2):nth-child(3n+1),
+.include-grid > :nth-last-child(2):nth-child(3n+1) ~ *,
+.demo-proof-grid > :nth-last-child(2):nth-child(3n+1),
+.demo-proof-grid > :nth-last-child(2):nth-child(3n+1) ~ * { grid-column: span 3; }
+.workflow-steps > :last-child:nth-child(3n+1),
+.problem-grid > :last-child:nth-child(3n+1),
+.include-grid > :last-child:nth-child(3n+1),
+.demo-proof-grid > :last-child:nth-child(3n+1) { grid-column: span 6; }
+.fit-grid > * { grid-column: span 1; }
+
+.front-card h3, .workflow-step h3, .demo-test-card h3, .demo-guide-card h3, .fit-card h3 {
+  font-family: var(--font-display); font-size: 1.0625rem; font-weight: var(--w-mid);
+  letter-spacing: -0.01em; margin-bottom: 8px;
+}
+.front-card p:not([class]), .workflow-step p:not([class]),
+.demo-test-card p:not([class]), .demo-guide-card p:not([class]) {
+  color: var(--text-dim); font-size: var(--t-small); line-height: 1.65;
+}
+.fit-card { padding: 18px; text-align: center; }
+.fit-card h3 { margin: 0; }
+.weak-fit-note, .phase-note, .setup-note, .plan-limit {
+  color: var(--text-faint); font-size: 0.8125rem; line-height: 1.6; margin-top: 12px;
+}
+
+/* pricing — figures come from the markup; nothing is restated here */
+.receptionist-pricing-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 44px; }
+.pricing-single { display: grid; align-content: start; gap: 14px; }
+.pricing-single.featured { border-color: var(--signal); }
+.pricing-head { align-items: start; border-bottom: 1px solid var(--rule-soft); display: flex;
+  gap: 16px; justify-content: space-between; padding-bottom: 14px; }
+.pricing-head h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: var(--w-mid); }
+.pricing-head .price { color: var(--text); font-family: var(--font-mono); font-size: 1.5rem; white-space: nowrap; }
+.pricing-head .price small { color: var(--text-faint); font-size: 0.75rem; }
+.feature-list { display: grid; gap: 8px; list-style: none; margin: 0; }
+.feature-list li { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; padding-left: 16px; position: relative; }
+.feature-list li::before { color: var(--signal); content: "·"; left: 4px; position: absolute; }
+.full-office-callout { border: 1px solid var(--rule); border-radius: var(--r-panel);
+  background: var(--signal-wash); margin-top: 22px; padding: 20px 22px; }
+
+/* demo block */
+.demo-call-card { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden; }
+.demo-call-top { align-items: center; border-bottom: 1px solid var(--rule); display: flex; gap: 12px; padding: 14px 18px; }
+.demo-call-pill { border: 1px solid var(--rule); border-radius: 999px; color: var(--text-faint);
+  font-family: var(--font-mono); font-size: 0.6875rem; padding: 3px 9px; }
+.demo-call-status { color: var(--signal-text); font-family: var(--font-mono); font-size: 0.75rem; margin-left: auto; }
+.call-transcript { display: grid; gap: 12px; padding: 18px; }
+.transcript-line { display: grid; gap: 3px; }
+.transcript-label { color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.demo-number { color: var(--signal-text); display: inline-block; font-family: var(--font-mono);
+  font-size: 1.25rem; margin: 14px 0; }
+.demo-card-actions, .book-actions, .capture-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.demo-facts { display: grid; gap: 10px; margin-top: 12px; }
+.demo-facts > div { border-top: 1px solid var(--rule-soft); display: flex; gap: 12px;
+  justify-content: space-between; padding-top: 8px; }
+.demo-facts span { color: var(--text-faint); font-size: 0.8125rem; }
+.demo-facts strong { color: var(--text); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: var(--w-body); }
+
+/* closing contact block */
+/* No margin-top. It existed because `.section-pad` had no padding at all
+   (§21.6), so 44px was the only separation this block had. Now the
+   section supplies the step, and the margin COLLAPSED THROUGH
+   `.wrap` — which has `padding: 0 var(--gutter)`, i.e. zero vertical
+   padding, so a child's top margin escapes it — landing outside and
+   adding to the section's 84px for a measured 128px gap. Spacing comes
+   from the section step, one place. The grid `gap` is between columns
+   and is unrelated. */
+.book-wrap { display: grid; gap: 44px; grid-template-columns: 6fr 6fr; align-items: start; }
+/* :not([class]) — unscoped this beat .eyebrow on COLOUR, so the eyebrow
+   on /frontdesk/demo rendered as body text instead of accent. */
+.book-copy p:not([class]) { color: var(--text-dim); line-height: 1.7; margin-top: 14px; }
+.contact-panel { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); padding: 24px 22px; }
+.contact-links { display: grid; gap: 8px; margin-top: 14px; }
+.contact-links a { color: var(--signal-text); font-size: var(--t-small); }
+
+@media (max-width: 1000px) {
+  .frontdesk-hero-grid, .book-wrap { grid-template-columns: 1fr; gap: 32px; }
+  .receptionist-pricing-grid { grid-template-columns: 1fr; }
+  .workflow-steps > *, .problem-grid > *, .include-grid > *, .demo-proof-grid > * { grid-column: span 3; }
+  .fit-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .workflow-steps, .problem-grid, .include-grid, .demo-proof-grid { grid-template-columns: 1fr; }
+  .workflow-steps > *, .problem-grid > *, .include-grid > *, .demo-proof-grid > *,
+  .workflow-steps > :last-child, .problem-grid > :last-child,
+  .include-grid > :last-child, .demo-proof-grid > :last-child { grid-column: 1 / -1; }
+  .fit-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── 15. REVEALS ─────────────────────────────────────────────────── */
+.rv { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-reveal) var(--ease), transform var(--dur-reveal) var(--ease); }
+.rv.in { opacity: 1; transform: none; }
+.rv-1 { transition-delay: 70ms; }
+.rv-2 { transition-delay: 140ms; }
+.rv-3 { transition-delay: 210ms; }
+.rv-4 { transition-delay: 280ms; }
+
+/* ── 16. RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .hero { padding-top: 150px; }
+  .hero-grid { gap: 44px; grid-template-columns: 1fr; }
+  .instrument-body { grid-template-columns: 1fr; gap: 26px; }
+  .tiers { grid-template-columns: 1fr; }
+  .tier + .tier { border-left: none; border-top: 1px solid var(--rule-soft); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 132px; }
+  .readout { grid-template-columns: 1fr; }
+  .readout-cell + .readout-cell { border-left: none; border-top: 1px solid var(--rule-soft); }
+  .log-line { grid-template-columns: 52px 1fr; gap: 6px 14px; }
+  .log-who { grid-column: 2; }
+  .log-say { grid-column: 2; }
+  .instrument-head, .instrument-body, .readout-cell, .instrument-note, .instrument-cta { padding-left: 20px; padding-right: 20px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+  .line-stats { grid-template-columns: 1fr; }
+  .line-stat + .line-stat { border-left: none; border-top: 1px solid var(--rule-soft); }
+}
+
+/* ── 17. REDUCED MOTION — complete, not partial ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; transform: none; }
+  .log-line, .log-foot { opacity: 1; transform: none; }
+  .carrier-inner { animation: none; }
+  .line-dot { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   18. PROPAGATION COMPONENTS (v3 rollout)
+   Hero panels and signature blocks for the other 12 routes. Nine v2
+   signature types collapse into FIVE v3 components — every message-
+   style mock (transcript, sms, chat, win-back) becomes one timestamped
+   exchange, which is both less code and a more consistent language.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hero aside for services with no demo line: a spec readout. */
+.spec-panel {
+  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden;
+}
+.spec-row { display: grid; grid-template-columns: 1fr 1fr; }
+.spec-cell { padding: 22px 20px; }
+.spec-cell + .spec-cell { border-left: 1px solid var(--rule-soft); }
+.spec-row + .spec-row { border-top: 1px solid var(--rule-soft); }
+.spec-k {
+  color: var(--text-faint); font-family: var(--font-display); font-stretch: 125%;
+  font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.14em;
+  margin-bottom: 8px; text-transform: uppercase;
+}
+.spec-v { color: var(--text); font-family: var(--font-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1; }
+.spec-v.is-signal { color: var(--signal-text); }
+.spec-note { border-top: 1px solid var(--rule-soft); color: var(--text-faint); font-size: var(--t-small); line-height: 1.6; padding: 16px 20px; }
+
+/* Night call — reuses the line panel frame */
+.sig-night { padding: 32px 22px 26px; text-align: center; }
+.sig-night-time { color: var(--text); font-family: var(--font-mono); font-size: clamp(2.4rem,5vw,3.2rem); font-variant-numeric: tabular-nums; letter-spacing: -0.03em; line-height: 1; }
+.sig-night-sub { color: var(--text-faint); font-size: var(--t-small); margin-top: 8px; }
+.sig-night-caller { color: var(--text-dim); font-size: var(--t-body); margin-top: 26px; }
+.sig-answered {
+  align-items: center; display: inline-flex; gap: 8px;
+  background: var(--signal-wash); border: 1px solid rgba(10,132,255,0.45); border-radius: 999px;
+  color: var(--signal-text); font-family: var(--font-display); font-stretch: 125%;
+  font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.14em;
+  margin-top: 18px; padding: 8px 15px; text-transform: uppercase;
+}
+
+/* Calendar slots */
+.sig-cal { padding: 24px; }
+.sig-cal-head { align-items: baseline; display: flex; justify-content: space-between; margin-bottom: 16px; }
+.sig-cal-head strong { font-family: var(--font-display); font-size: var(--t-body); font-weight: var(--w-disp); }
+.sig-cal-head span { color: var(--text-faint); font-size: var(--t-small); }
+.sig-slots { display: grid; gap: 8px; grid-template-columns: repeat(4, 1fr); }
+.sig-slot {
+  border: 1px solid var(--rule); border-radius: 6px; color: var(--text-dim);
+  font-family: var(--font-mono); font-size: 0.8125rem; font-variant-numeric: tabular-nums;
+  padding: 12px 4px; text-align: center;
+}
+.sig-slot.taken { color: var(--text-faint); opacity: 0.45; text-decoration: line-through; }
+.sig-slot.booking { background: var(--signal-wash); border-color: var(--signal); color: var(--text); }
+.sig-cal-foot { border-top: 1px solid var(--rule-soft); color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; margin-top: 18px; padding-top: 16px; }
+
+/* Star flow */
+.sig-flow { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); }
+.sig-flow-step { padding: 26px 22px; position: relative; }
+.sig-flow-step + .sig-flow-step { border-left: 1px solid var(--rule-soft); }
+.sig-flow-no { color: var(--signal-text); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em; }
+.sig-flow-step strong { display: block; font-family: var(--font-display); font-size: var(--t-body); font-weight: var(--w-disp); margin: 14px 0 6px; }
+/* Scoped to UNCLASSED spans only. As `.sig-flow-step span` this had
+   specificity (0,1,1) and silently beat the component classes that
+   follow it — `.sig-stars` rendered dim instead of signal and
+   `.sig-bars` computed display:block, so its four bars stacked into one
+   tall column overlapping the heading. Wrong at every width, not just
+   mobile, and invisible to the layout sweep because it is colour and
+   display rather than geometry. :not([class]) stops this rule from
+   swallowing any future component child. */
+.sig-flow-step span:not([class]) { color: var(--text-dim); display: block; font-size: var(--t-small); line-height: 1.6; }
+.sig-stars { color: var(--signal-text); font-size: 15px; letter-spacing: 4px; }
+.sig-bars { align-items: flex-end; display: flex; gap: 3px; height: 22px; }
+.sig-bars i { background: var(--signal); border-radius: 1px; display: block; width: 5px; }
+
+/* Before / after frames */
+.sig-frames { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.sig-frame { border: 1px solid var(--rule); border-radius: var(--r-panel); overflow: hidden; }
+.sig-frame-label {
+  border-bottom: 1px solid var(--rule-soft); color: var(--text-faint);
+  font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid); letter-spacing: 0.14em; padding: 11px 16px; text-transform: uppercase;
+}
+.sig-frame.after .sig-frame-label { color: var(--signal-text); }
+.sig-frame-body { padding: 18px 16px; }
+/* MINIATURE PAGE — a real tiny layout, not a wireframe placeholder.
+   Type is small but genuine, so the frame reads as a page rather than a
+   loading state. aria-hidden in markup: it is illustration, and the
+   honest caption beneath carries the meaning for assistive tech. */
+.mini { display: grid; gap: 9px; font-size: 7px; line-height: 1.5; letter-spacing: 0.01em; }
+.mini-nav { align-items: center; border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 7px; padding-bottom: 6px; }
+.mini-nav span { color: var(--text-faint); }
+.mini-logo { background: var(--text-faint); border-radius: 1px; height: 5px; width: 24px; }
+.mini-logo.on { background: var(--signal); }
+.mini-navcta { border: 1px solid var(--signal); border-radius: 2px; color: var(--signal-text) !important; margin-left: auto; padding: 2px 5px; }
+.mini-h { color: var(--text); font-family: var(--font-display); font-size: 13px; font-weight: var(--w-disp); letter-spacing: -0.01em; line-height: 1.12; }
+.mini-lines { display: grid; gap: 5px; }
+.mini-lines i { background: var(--rule); border-radius: 1px; display: block; height: 4px; width: 100%; }
+.mini-foot { color: var(--text-faint); }
+.mini-rows { display: grid; gap: 0; }
+.mini-row { align-items: center; border-top: 1px solid var(--rule-soft); display: flex; justify-content: space-between; padding: 5px 0; }
+.mini-row b { color: var(--text); font-weight: var(--w-mid); }
+.mini-row em { color: var(--signal-text); font-style: normal; }
+.mini-form { align-items: center; display: flex; gap: 6px; margin-top: 2px; }
+.mini-field { border: 1px solid var(--rule); border-radius: 3px; flex: 1; height: 14px; }
+.mini-btn { background: var(--signal-fill); border-radius: 3px; color: #fff; font-weight: var(--w-mid); padding: 4px 8px; }
+
+.sig-bar { background: var(--ink-600); border-radius: 2px; height: 7px; margin-bottom: 8px; }
+.sig-frame.after .sig-bar { background: rgba(10,132,255,0.35); }
+.sig-frame.after .sig-bar.cta { background: var(--signal); height: 16px; margin-top: 14px; width: 58%; }
+.sig-frame-note { color: var(--text-faint); font-size: 0.8125rem; line-height: 1.55; margin-top: 14px; }
+
+/* Map pack */
+.sig-map { overflow: hidden; }
+.sig-map-head { border-bottom: 1px solid var(--rule-soft); color: var(--text-faint); font-size: var(--t-small); padding: 14px 18px; }
+.sig-map-head strong { color: var(--text-dim); }
+.sig-map-row { align-items: center; display: flex; gap: 14px; padding: 14px 18px; }
+.sig-map-row + .sig-map-row { border-top: 1px solid var(--rule-soft); }
+.sig-map-row.you { background: var(--signal-wash); }
+.sig-map-pin {
+  align-items: center; border: 1px solid var(--rule); border-radius: 50%;
+  color: var(--text-faint); display: flex; flex: 0 0 auto; font-family: var(--font-mono);
+  font-size: 0.75rem; height: 26px; justify-content: center; width: 26px;
+}
+/* --signal-fill, not --signal. White on #0A84FF is 3.65:1 and fails AA
+   at 12px; #0A6FD8 is the darker fill the button system already uses for
+   exactly this reason. Any white-on-accent surface takes --signal-fill. */
+.sig-map-row.you .sig-map-pin { background: var(--signal-fill); border-color: var(--signal-fill); color: #fff; }
+.sig-map-row b { display: block; font-size: var(--t-small); font-weight: var(--w-mid); }
+.sig-map-row.you b { color: var(--text); }
+.sig-map-row:not(.you) b { color: var(--text-faint); }
+.sig-map-row em { color: var(--text-faint); display: block; font-size: 0.75rem; font-style: normal; margin-top: 2px; }
+.sig-map-foot { border-top: 1px solid var(--rule-soft); color: var(--text-faint); font-size: 0.8125rem; line-height: 1.6; padding: 14px 18px; }
+
+@media (max-width: 760px) {
+  .sig-flow, .sig-frames { grid-template-columns: 1fr; }
+  .sig-flow-step + .sig-flow-step { border-left: none; border-top: 1px solid var(--rule-soft); }
+  .sig-slots { grid-template-columns: repeat(3, 1fr); }
+  .spec-row { grid-template-columns: 1fr; }
+  .spec-cell + .spec-cell { border-left: none; border-top: 1px solid var(--rule-soft); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   19. HOMEPAGE COMPONENTS
+   The services index is a ruled register, not a tile grid — it keeps
+   the mono-numeral language and avoids the generic icon-card look.
+   ═══════════════════════════════════════════════════════════════════ */
+.svc-index { border-top: 1px solid var(--rule-soft); }
+.svc-row {
+  align-items: center; display: grid; gap: 20px;
+  grid-template-columns: 40px 22px 1fr auto 16px;
+  border-bottom: 1px solid var(--rule-soft); padding: 20px 4px;
+  transition: background var(--dur-micro) var(--ease), padding-left var(--dur-micro) var(--ease);
+}
+.svc-row:hover { background: rgba(10,132,255,0.05); padding-left: 12px; }
+.svc-row-no { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; }
+.svc-row-name { font-family: var(--font-display); font-size: var(--t-body-l); font-weight: var(--w-disp); letter-spacing: -0.01em; }
+.svc-row-meta { color: var(--text-dim); font-family: var(--font-mono); font-size: 0.8125rem; }
+.svc-row-go { color: var(--text-faint); transition: color var(--dur-micro) var(--ease), transform var(--dur-micro) var(--ease); }
+.svc-row:hover .svc-row-go { color: var(--signal-text); transform: translateX(3px); }
+
+/* Plans — the one place three cards are correct, because they are a
+   genuine ladder. Varied by elevation, not repetition. */
+.plan-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+.plan {
+  background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel);
+  display: flex; flex-direction: column; padding: 30px 26px; position: relative;
+}
+.plan.is-featured { background: linear-gradient(180deg, var(--ink-700), var(--ink-800)); border-color: var(--signal); }
+.plan-badge {
+  background: var(--signal-fill); border-radius: 4px; color: #fff;
+  font-family: var(--font-display); font-stretch: 125%; font-size: 0.625rem;
+  font-weight: var(--w-mid); letter-spacing: 0.12em; padding: 5px 9px;
+  position: absolute; right: 22px; top: -10px; text-transform: uppercase;
+}
+.plan-kicker { color: var(--signal-text); font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.14em; text-transform: uppercase; }
+.plan h3 { margin: 12px 0 8px; }
+.plan-tag { color: var(--text-dim); font-size: var(--t-small); line-height: 1.55; min-height: 44px; }
+.plan-price { align-items: baseline; display: flex; gap: 7px; margin: 22px 0 4px; }
+.plan-fig { color: var(--text); font-family: var(--font-mono); font-size: 2.4rem; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; line-height: 1; }
+.plan-per { color: var(--text-dim); font-size: var(--t-small); }
+.plan-setup { color: var(--text-faint); font-size: 0.8125rem; line-height: 1.5; margin-bottom: 22px; }
+.plan-list { display: grid; gap: 10px; list-style: none; margin-bottom: 26px; }
+.plan-list li { color: var(--text-dim); font-size: var(--t-small); line-height: 1.5; padding-left: 20px; position: relative; }
+.plan-list li::before { background: var(--signal); border-radius: 50%; content: ""; height: 4px; left: 4px; position: absolute; top: 9px; width: 4px; }
+.plan .btn { margin-top: auto; width: 100%; }
+
+/* Why — numbered register, distinct from both the services index and plans */
+.why-grid { display: grid; gap: 0; grid-template-columns: 1fr 1fr; }
+.why-row {
+  align-items: start; border-top: 1px solid var(--rule-soft);
+  display: grid; gap: 16px; grid-template-columns: 34px 22px 1fr; padding: 26px 0;
+}
+.why-row:nth-child(odd) { padding-right: 32px; }
+.why-row:nth-child(even) { padding-left: 32px; border-left: 1px solid var(--rule-soft); }
+.why-no { color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8125rem; }
+.why-row h3 { font-size: var(--t-body-l); margin-bottom: 6px; }
+.why-row p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+
+/* Contact — asymmetric 5/7, form in the major column */
+.contact-wrap { align-items: start; display: grid; gap: 56px; grid-template-columns: 5fr 7fr; }
+.form-card {
+  background: linear-gradient(180deg, var(--ink-700), var(--ink-800));
+  border: 1px solid var(--rule); border-radius: var(--r-panel); padding: 32px;
+}
+.form-card h3 { font-size: var(--t-display-m); }
+.form-group { margin-bottom: 14px; }
+.form-row { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+.form-group label, .svc-label {
+  color: var(--text-dim); display: block;
+  font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow);
+  font-weight: var(--w-mid); letter-spacing: 0.12em; margin-bottom: 8px; text-transform: uppercase;
+}
+.form-group input, .form-group select, .form-group textarea {
+  background: var(--ink-900); border: 1px solid var(--rule); border-radius: var(--r-btn);
+  color: var(--text); font-family: var(--font-body); font-size: var(--t-body);
+  min-height: 48px; outline: none; padding: 12px 14px; width: 100%;
+  transition: border-color var(--dur-micro) var(--ease), box-shadow var(--dur-micro) var(--ease);
+}
+.form-group textarea { min-height: 92px; resize: vertical; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--signal); box-shadow: 0 0 0 3px var(--signal-glow);
+}
+.consent-row {
+  align-items: flex-start; color: var(--text-dim); cursor: pointer; display: flex;
+  font-size: 0.8125rem; gap: 12px; line-height: 1.6; margin: 10px 0 18px;
+}
+.consent-row input { flex: 0 0 auto; height: 18px; margin-top: 2px; width: 18px; accent-color: var(--signal); }
+.consent-row a { color: var(--signal-text); text-decoration: underline; }
+.form-error-msg { color: var(--signal-text); display: none; font-size: var(--t-small); margin: 10px 0; }
+.privacy-note { color: var(--text-faint); font-size: 0.75rem; margin-top: 14px; text-align: center; }
+.form-card .btn-primary { margin-top: 6px; width: 100%; }
+.form-success { display: none; padding: 20px 0; text-align: center; }
+.contact-direct a { display: inline-block; margin-bottom: 4px; }
+
+@media (max-width: 1000px) {
+  .plan-grid { grid-template-columns: 1fr; }
+  .plan { margin: 0 auto; max-width: 560px; width: 100%; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-row:nth-child(odd) { padding-right: 0; }
+  .why-row:nth-child(even) { padding-left: 0; border-left: none; }
+}
+@media (max-width: 700px) {
+  .svc-row { grid-template-columns: 32px 20px 1fr; gap: 12px; row-gap: 4px; }
+  .svc-row-meta { grid-column: 3; }
+  .svc-row-go { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-card { padding: 24px 18px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   20. CAPTURE PAGES (/partners, /ai-team)
+   ═══════════════════════════════════════════════════════════════════ */
+.page-head { padding: 172px 0 var(--space-sm); }
+.page-head h1 { max-width: 22ch; }
+.page-head .lede { margin-top: 20px; max-width: 60ch; }
+.page-head .cta-row { margin-top: 34px; }
+@media (max-width: 600px) { .page-head { padding-top: 132px; } }
+
+/* Two-tier cards */
+.tier-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+.tier-card {
+  background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel);
+  display: flex; flex-direction: column; padding: 32px 28px;
+}
+.tier-card.is-lead { background: linear-gradient(180deg, var(--ink-700), var(--ink-800)); border-color: var(--signal); }
+.tier-kicker { color: var(--signal-text); font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.14em; text-transform: uppercase; }
+.tier-card h3 { margin: 12px 0 8px; }
+.tier-tagline { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; margin-bottom: 20px; }
+.tier-rate { align-items: baseline; display: flex; gap: 8px; margin-bottom: 20px; }
+.tier-rate strong { color: var(--text); font-family: var(--font-mono); font-size: 2.2rem; letter-spacing: -0.03em; line-height: 1; }
+.tier-rate span { color: var(--text-dim); font-size: var(--t-small); }
+.tier-list { display: grid; gap: 10px; list-style: none; margin-bottom: 26px; }
+.tier-list li { color: var(--text-dim); font-size: var(--t-small); line-height: 1.55; padding-left: 20px; position: relative; }
+.tier-list li::before { background: var(--signal); border-radius: 50%; content: ""; height: 4px; left: 4px; position: absolute; top: 9px; width: 4px; }
+.tier-card .btn { margin-top: auto; width: 100%; }
+
+/* Per-tier comp lanes */
+.comp-lanes { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+.comp-lane { background: var(--ink-800); border: 1px solid var(--rule); border-radius: var(--r-panel); padding: 30px 26px; }
+.comp-lane-name { color: var(--signal-text); font-family: var(--font-display); font-stretch: 125%; font-size: var(--t-eyebrow); font-weight: var(--w-mid); letter-spacing: 0.14em; margin-bottom: 20px; text-transform: uppercase; }
+.comp-lane-row { align-items: baseline; display: flex; gap: 14px; }
+.comp-lane-row + .comp-lane-row { border-top: 1px solid var(--rule-soft); margin-top: 16px; padding-top: 16px; }
+.comp-lane-pct { color: var(--signal-text); font-family: var(--font-mono); font-size: 2.6rem; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; line-height: 1; }
+.comp-lane-when { color: var(--text); font-size: var(--t-small); font-weight: var(--w-mid); }
+.comp-lane-when span { color: var(--text-faint); display: block; font-weight: 400; margin-top: 3px; }
+.comp-lane-foot { border-top: 1px solid var(--rule-soft); color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; margin-top: 20px; padding-top: 16px; }
+.comp-shared { display: grid; gap: 0; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); border-radius: var(--r-panel); margin-top: 18px; }
+.comp-shared-item { padding: 20px 18px; }
+.comp-shared-item + .comp-shared-item { border-left: 1px solid var(--rule-soft); }
+.comp-shared-item strong { display: block; font-family: var(--font-display); font-size: var(--t-body); font-weight: var(--w-disp); }
+.comp-shared-item span { color: var(--text-faint); display: block; font-size: 0.8125rem; line-height: 1.5; margin-top: 5px; }
+
+/* Rules / steps registers */
+.rules-grid { display: grid; gap: 0; grid-template-columns: 1fr 1fr; }
+.rule-row { align-items: start; border-top: 1px solid var(--rule-soft); display: grid; gap: 16px; grid-template-columns: 22px 1fr; padding: 24px 0; }
+.rule-row:nth-child(odd) { padding-right: 32px; }
+.rule-row:nth-child(even) { padding-left: 32px; border-left: 1px solid var(--rule-soft); }
+.rule-row h3 { font-size: var(--t-body-l); margin-bottom: 6px; }
+.rule-row p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; }
+.tier-steps { display: grid; gap: 44px; grid-template-columns: 1fr 1fr; }
+.tier-steps h3 { font-size: var(--t-body-l); margin-bottom: 18px; }
+.step-row { align-items: baseline; display: grid; gap: 14px; grid-template-columns: 30px 1fr; padding: 12px 0; }
+.step-row + .step-row { border-top: 1px solid var(--rule-soft); }
+.step-row .n { color: var(--signal-text); font-family: var(--font-mono); font-size: 0.8125rem; }
+.step-row p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.6; }
+.step-row p strong { color: var(--text); font-weight: var(--w-mid); }
+
+/* Application / waitlist */
+.apply-wrap { align-items: start; display: grid; gap: 56px; grid-template-columns: 5fr 7fr; }
+.ghl-embed { border-radius: var(--r-btn); overflow: hidden; }
+.ghl-embed iframe { border: none; display: block; width: 100%; }
+.compliance-note { border-top: 1px solid var(--rule-soft); color: var(--text-faint); font-size: 0.8125rem; line-height: 1.7; margin-top: 48px; max-width: 780px; padding-top: 22px; }
+.proof-row { align-items: start; border-top: 1px solid var(--rule-soft); display: grid; gap: 16px; grid-template-columns: 22px 1fr; padding: 26px 0; }
+.proof-row:nth-child(odd) { padding-right: 32px; }
+.proof-row:nth-child(even) { padding-left: 32px; border-left: 1px solid var(--rule-soft); }
+.proof-live { color: var(--signal-text); font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; }
+.proof-row h3 { font-size: var(--t-body-l); margin: 8px 0 6px; }
+.proof-row p { color: var(--text-dim); font-size: var(--t-small); line-height: 1.65; }
+.seat-status, .dept-tag {
+  border-radius: 999px; display: inline-block; font-family: var(--font-display); font-stretch: 125%;
+  font-size: 0.625rem; font-weight: var(--w-mid); letter-spacing: 0.12em; padding: 4px 10px; text-transform: uppercase;
+}
+.seat-status.in-service, .dept-tag.is-running { background: var(--signal-wash); border: 1px solid rgba(10,132,255,0.45); color: var(--signal-text); }
+.dept-tag.is-partly { background: rgba(10,132,255,0.06); border: 1px solid var(--rule); color: var(--text-dim); }
+.seat-status.in-dev, .dept-tag.is-building { background: transparent; border: 1px solid var(--rule); color: var(--text-faint); }
+.no-cost-line { background: var(--signal-wash); border: 1px solid rgba(10,132,255,0.3); border-radius: var(--r-panel); color: var(--text); font-size: var(--t-body-l); line-height: 1.65; margin: 32px auto 0; max-width: 720px; padding: 24px 28px; text-align: center; }
+.no-cost-line strong { color: var(--signal-text); }
+.sec-split .waitlist-card { margin: 0; max-width: none; }
+.waitlist-card { background: linear-gradient(180deg, var(--ink-700), var(--ink-800)); border: 1px solid var(--rule); border-radius: var(--r-panel); margin: 0 auto; max-width: 560px; padding: 32px; }
+.waitlist-card h3 { text-align: left; }
+.waitlist-card .sub { color: var(--text-dim); font-size: var(--t-small); margin: 6px 0 22px; text-align: left; }
+.cross-link { border-top: 1px solid var(--rule-soft); color: var(--text-dim); font-size: var(--t-body); line-height: 1.7; margin: 48px auto 0; max-width: 720px; padding-top: 26px; text-align: center; }
+
+@media (max-width: 1000px) {
+  .tier-grid, .comp-lanes, .tier-steps, .apply-wrap, .rules-grid { grid-template-columns: 1fr; }
+  .rule-row:nth-child(even), .proof-row:nth-child(even) { border-left: none; padding-left: 0; }
+  .rule-row:nth-child(odd), .proof-row:nth-child(odd) { padding-right: 0; }
+  .comp-shared { grid-template-columns: 1fr; }
+  .comp-shared-item + .comp-shared-item { border-left: none; border-top: 1px solid var(--rule-soft); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   21. WEB INTERFACE GUIDELINES — compliance pass
+   ═══════════════════════════════════════════════════════════════════ */
+/* Kill the 300ms tap delay and the grey flash on touch. */
+a, button, input, select, textarea, summary, .btn, .svc-row, .faq-q {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(10, 132, 255, 0.16);
+}
+/* Scroll chaining must not leak to the page behind a panel. */
+.nav-mobile, .m-acc-panel, .nav-drop-panel { overscroll-behavior: contain; }
+
+/* Skip link — first tab stop, visible only when focused. */
+.skip-link {
+  background: var(--signal-fill); border-radius: 0 0 var(--r-btn) 0; color: #fff;
+  font-size: var(--t-small); font-weight: var(--w-mid);
+  left: 0; padding: 12px 18px; position: fixed; top: 0;
+  transform: translateY(-120%); transition: transform var(--dur-micro) var(--ease);
+  z-index: calc(var(--z-sticky) + 10);
+}
+.skip-link:focus-visible { transform: translateY(0); }

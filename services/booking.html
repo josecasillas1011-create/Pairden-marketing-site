@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Booking + Reminders for Local Service Businesses | Pairden AI</title>
+  <meta name="description" content="Customers book themselves, put money down, and actually show up. $197/mo. For service businesses anywhere — founded in the Inland Empire." />
+  <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
+  <meta name="theme-color" content="#040C1F" />
+  <link rel="canonical" href="https://pairden.com/services/booking" />
+  <meta property="og:title" content="Online Booking + Reminders | PAIRDEN" />
+  <meta property="og:description" content="Customers book themselves, put money down, and actually show up." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pairden.com/services/booking" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Online Booking + Reminders | PAIRDEN" />
+  <meta name="twitter:description" content="Customers book themselves, put money down, and actually show up." />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/publicsans-var.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do deposits go straight to me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Deposits are collected through your own Stripe account, so the money is yours from the moment it clears. Pairden never holds your customers' payments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still book people manually?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The calendar is yours — phone bookings, walk-ins, and jobs you add yourself all live in the same place and block the same availability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if someone needs to reschedule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The confirmation and reminder messages both carry a reschedule link, so most changes happen without anyone calling you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a free trial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Booking builds take real setup work up front, so we do not trial them. Missed-call text-back, the review engine, and website chat are the three services that do carry a 30-day trial."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PAIRDEN",
+    "legalName": "Pairden Technologies LLC",
+    "url": "https://pairden.com/",
+    "logo": "https://pairden.com/assets/brand/pairden-icon.png",
+    "telephone": "+1-951-477-5918",
+    "email": "contact@pairden.com",
+    "address": { "@type": "PostalAddress", "streetAddress": "41877 Enterprise Circle N., 2nd Floor", "addressLocality": "Temecula", "addressRegion": "CA", "postalCode": "92590", "addressCountry": "US" },
+    "areaServed": ["Inland Empire", "Southern California"],
+    "sameAs": ["https://www.facebook.com/PairdenAI/","https://www.instagram.com/pairdenai","https://x.com/pairdenai","https://www.tiktok.com/@pairdenai","https://www.linkedin.com/in/pairden-ai-659501426/"]
+  }
+  </script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-wUxij6fIlXLBBLC0_UKxq.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <link rel="stylesheet" href="/v3.css?v=c343aab0" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.36-.47A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.47.35a1 1 0 0 0-.29 1.24 14 14 0 0 0 6.39 6.38"/></symbol>
+  <symbol id="i-workflow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+</svg>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" width="146" height="30" fetchpriority="high" /></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="nav-drop">
+        <a href="/#services" aria-haspopup="true">Services</a>
+        <div class="nav-drop-panel">
+          <a href="/services/website">Website + Google Presence</a>
+          <a href="/services/booking">Online Booking + Reminders</a>
+          <a href="/services/missed-call-text-back">Missed-Call Text-Back</a>
+          <a href="/services/review-engine">Review Engine</a>
+          <a href="/services/ai-receptionist">24/7 AI Receptionist</a>
+          <a href="/services/after-hours-ai">After-Hours AI</a>
+          <a href="/services/seo-geo">Local SEO + GEO</a>
+          <a href="/services/website-chat">AI Website Chat</a>
+          <a href="/services/win-back">Customer Win-Back</a>
+          <a href="/services/gbp-tune-up">Google Profile Tune-Up</a>
+          <a href="/#plans" class="nav-drop-all">View all pricing</a>
+        </div>
+      </li>
+      <li><a href="/#plans">Plans</a></li>
+      <li><a href="/frontdesk">AI Front Desk</a></li>
+          <li><a href="/frontdesk/pricing">Front Desk Pricing</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="/#contact" class="btn btn-ghost nav-cta">Get My Free Audit <svg><use href="#i-arrow"/></svg></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>
+      <button type="button" class="m-acc-btn" aria-expanded="false" aria-controls="mServices">Services <svg class="m-acc-chev" width="14" height="14" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+      <div class="m-acc-panel" id="mServices">
+          <a href="/services/website">Website + Google Presence</a>
+          <a href="/services/booking">Online Booking + Reminders</a>
+          <a href="/services/missed-call-text-back">Missed-Call Text-Back</a>
+          <a href="/services/review-engine">Review Engine</a>
+          <a href="/services/ai-receptionist">24/7 AI Receptionist</a>
+          <a href="/services/after-hours-ai">After-Hours AI</a>
+          <a href="/services/seo-geo">Local SEO + GEO</a>
+          <a href="/services/website-chat">AI Website Chat</a>
+          <a href="/services/win-back">Customer Win-Back</a>
+          <a href="/services/gbp-tune-up">Google Profile Tune-Up</a>
+        <a href="/#plans" class="nav-drop-all">View all pricing</a>
+      </div>
+    </li>
+    <li><a href="/#plans">Plans</a></li>
+    <li><a href="/frontdesk">AI Front Desk</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a href="/#contact" class="btn btn-primary">Get My Free Audit <svg><use href="#i-arrow"/></svg></a>
+</div>
+
+<main id="main">
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-head">
+      <span class="eyebrow rv">Online Booking + Reminders</span>
+      <h1 class="rv rv-1">Stop Losing Money<br>to No-Shows and Phone Tag.</h1>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <p class="lede rv rv-2">Customers book themselves, put a deposit down through your own Stripe, and get reminded twice before the appointment.</p>
+        <div class="cta-row rv rv-3">
+          <a href="/#contact" class="btn btn-primary">Get My Free Audit <svg><use href="#i-arrow"/></svg></a>
+          <a href="#price" class="btn btn-ghost">See Pricing</a>
+        </div>
+        <div class="hero-meta rv rv-4">
+          <span class="hero-meta-item"><b>$197/mo</b></span>
+          <span class="hero-meta-item">+ $250 setup</span>
+          <span class="hero-meta-item">waived on a 6-month term</span>
+        </div>
+      </div>
+      <aside class="spec-panel rv rv-2" aria-label="At a glance">
+        <div class="spec-row">
+          <div class="spec-cell"><div class="spec-k">Per month</div><div class="spec-v is-signal">$197</div></div>
+          <div class="spec-cell"><div class="spec-k">Setup</div><div class="spec-v">$250</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-cell"><div class="spec-k">Commitment</div><div class="spec-v">Monthly</div></div>
+          <div class="spec-cell"><div class="spec-k">Serving</div><div class="spec-v" style="font-size:1rem">Nationwide</div></div>
+        </div>
+        <p class="spec-note">Customers book themselves, put money down, and actually show up.</p>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section class="section field">
+  <div class="wrap">
+    <div class="head-block rv">
+      <span class="eyebrow eyebrow-dim">Where the jobs go</span>
+      <h2>Where the no-shows come from.</h2>
+    </div>
+    <div style="margin-top:52px;max-width:900px">
+      <div class="row-card rv">
+        <span class="seq-num">01</span>
+        <p class="lede" style="color:var(--text)">Every back-and-forth text to pin down a time is unpaid work you do after hours.</p>
+      </div>
+      <div class="row-card rv rv-1">
+        <span class="seq-num">02</span>
+        <p class="lede" style="color:var(--text)">A no-show is not just a lost job — it is a slot you could have sold to someone else.</p>
+      </div>
+      <div class="row-card rv rv-2">
+        <span class="seq-num">03</span>
+        <p class="lede" style="color:var(--text)">When there is nothing at stake, a booking is a maybe. A deposit turns it into a commitment.</p>
+      </div>
+    </div>
+    <div class="cta-row rv rv-3" style="margin-top:44px">
+      <a href="#calc" class="cta-link">See what that is worth in a month <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section field">
+  <div class="wrap">
+    <div class="head-block rv" style="max-width:52ch">
+      <span class="eyebrow">What the customer does</span>
+      <h2>They Pick the Slot.<br>You Just Show Up.</h2>
+    </div>
+    <div class="svc-sig rv rv-1" style="margin-top:44px"><div class="panel sig-cal" style="padding:0">
+      <div class="sig-cal" >
+        <div class="sig-cal-head"><strong>Thursday</strong><span>your real availability</span></div>
+        <div class="sig-slots">
+          <div class="sig-slot taken">8:00</div>
+          <div class="sig-slot taken">9:00</div>
+          <div class="sig-slot ">10:00</div>
+          <div class="sig-slot booking">11:00</div>
+          <div class="sig-slot ">12:00</div>
+          <div class="sig-slot taken">1:00</div>
+          <div class="sig-slot ">2:00</div>
+          <div class="sig-slot ">3:00</div>
+        </div>
+        <p class="sig-cal-foot">Deposit taken at booking into <strong>your own Stripe</strong> · confirmation sent · reminders at 24 hours and 2 hours</p>
+      </div>
+    </div></div>
+    <p class="small faint rv" style="max-width:64ch">An illustration of the booking grid, not live availability. Phone bookings and walk-ins you add yourself block the same slots.</p>
+  </div>
+</section>
+
+<section class="section" id="calc">
+  <div class="wrap">
+    <div class="instrument rv">
+      <div class="instrument-head">
+        <span class="eyebrow eyebrow-dim">Your numbers</span>
+        <h3>What do no-shows cost you?</h3>
+        <p>Your numbers. This is the value of the slots, not a claim about how many we prevent.</p>
+      </div>
+      <div class="instrument-body">
+        <div class="dial">
+          <label for="calcJob">Your average job value</label>
+          <div class="dial-val" id="calcJobOut">$350</div>
+          <input type="range" id="calcJob" min="100" max="5000" step="50" value="350" aria-describedby="calcJobOut" />
+          <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="tick-labels"><span>$100</span><span>$5,000</span></div>
+        </div>
+        <div class="dial">
+          <label for="calcMissed">No-shows in a typical week</label>
+          <div class="dial-val" id="calcMissedOut">2</div>
+          <input type="range" id="calcMissed" min="1" max="20" step="1" value="2" aria-describedby="calcMissedOut" />
+          <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="tick-labels"><span>1</span><span>20</span></div>
+        </div>
+      </div>
+      <div class="readout">
+        <div class="readout-cell"><div class="readout-k">Value of those slots</div><div class="readout-v" id="calcOutA">—</div><div class="readout-sub">per month, at your numbers</div></div>
+        <div class="readout-cell"><div class="readout-k">Service cost</div><div class="readout-v" id="calcOutB" style="color:var(--text)">—</div><div class="readout-sub">per month</div></div>
+      </div>
+      <p class="instrument-note">This is the value of the slots you named, multiplied out over a month — not a promise that every no-show gets recovered. Deposits and reminders reduce no-shows; they do not eliminate them.</p>
+      <div class="instrument-cta"><a href="/#contact" class="btn btn-primary">Get My Free Audit <svg><use href="#i-arrow"/></svg></a></div>
+      <noscript><p class="instrument-note">The sliders above need JavaScript to calculate. This service is $197 per month — multiply that against your own average job value to work out the break-even yourself, or ask us on the free audit and we will run the numbers with you.</p></noscript>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section field">
+  <div class="wrap">
+    <div class="head-block rv" style="max-width:46ch">
+      <span class="eyebrow eyebrow-dim">How it works</span>
+      <h2>Three steps to a calendar that fills itself.</h2>
+    </div>
+    <div class="steps-seq" style="margin-top:56px">
+      <div class="step-col rv">
+        <div class="step-meta">
+          <span class="icon-line"><svg><use href="#i-calendar"/></svg></span>
+          <span class="step-no">01</span>
+        </div>
+        <h3>Booking goes on your calendar</h3>
+        <p>Customers pick from your real availability. Phone bookings and walk-ins you add yourself block the same slots.</p>
+      </div>
+      <div class="step-col rv rv-1">
+        <div class="step-meta">
+          <span class="icon-line"><svg><use href="#i-zap"/></svg></span>
+          <span class="step-no">02</span>
+        </div>
+        <h3>A deposit locks it in</h3>
+        <p>Taken at booking through your own Stripe account, so the money is yours from the moment it clears.</p>
+      </div>
+      <div class="step-col rv rv-2">
+        <div class="step-meta">
+          <span class="icon-line"><svg><use href="#i-phone"/></svg></span>
+          <span class="step-no">03</span>
+        </div>
+        <h3>Two reminders go out</h3>
+        <p>Automatic confirmation, then SMS at 24 hours and 2 hours. Every booking texts you too.</p>
+      </div>
+    </div>
+    <div class="cta-row rv rv-3" style="margin-top:56px">
+      <a href="/#contact" class="link">Start with the free audit</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head-block rv">
+      <span class="eyebrow eyebrow-dim">What's included</span>
+      <h2>What the booking system includes.</h2>
+    </div>
+    <div class="inc-grid" style="display:grid;gap:26px 44px;grid-template-columns:1fr 1fr;margin-top:48px">
+      <div class="stat-tile rv"><span class="k" style="color:var(--text);font-size:var(--t-body)">Online booking synced to your calendar</span></div>
+      <div class="stat-tile rv rv-1"><span class="k" style="color:var(--text);font-size:var(--t-body)">Stripe deposits taken at booking — this alone kills most no-shows</span></div>
+      <div class="stat-tile rv"><span class="k" style="color:var(--text);font-size:var(--t-body)">Automatic booking confirmation</span></div>
+      <div class="stat-tile rv rv-1"><span class="k" style="color:var(--text);font-size:var(--t-body)">24-hour and 2-hour SMS reminders</span></div>
+      <div class="stat-tile rv" style="grid-column:1/-1"><span class="k" style="color:var(--text);font-size:var(--t-body)">Every booking texts the owner</span></div>
+    </div>
+    <p class="small faint rv rv-2" style="margin-top:36px;max-width:64ch">Heads up on texting: texting switches on in the 30–45 day carrier window at no charge.</p>
+  </div>
+</section>
+
+<section class="section field">
+  <div class="wrap">
+    <div class="head-block rv">
+      <span class="eyebrow eyebrow-dim">What changes for you</span>
+      <h2>What changes on your calendar.</h2>
+      <p class="lede">Capabilities you gain — not results we promise on your behalf.</p>
+    </div>
+    <div style="margin-top:48px;max-width:940px">
+      <div class="row-card rv" style="grid-template-columns:1fr 28px 1fr;align-items:center">
+        <span class="small" style="color:var(--text-faint);text-align:right">Texting back and forth to find a time</span>
+        <span class="icon-line" style="--icon:16px"><svg><use href="#i-arrow"/></svg></span>
+        <span style="font-weight:500">Customers booking themselves from real availability</span>
+      </div>
+      <div class="row-card rv rv-1" style="grid-template-columns:1fr 28px 1fr;align-items:center">
+        <span class="small" style="color:var(--text-faint);text-align:right">Nothing at stake if they skip</span>
+        <span class="icon-line" style="--icon:16px"><svg><use href="#i-arrow"/></svg></span>
+        <span style="font-weight:500">A deposit taken at booking, into your Stripe</span>
+      </div>
+      <div class="row-card rv rv-2" style="grid-template-columns:1fr 28px 1fr;align-items:center">
+        <span class="small" style="color:var(--text-faint);text-align:right">Hoping they remember</span>
+        <span class="icon-line" style="--icon:16px"><svg><use href="#i-arrow"/></svg></span>
+        <span style="font-weight:500">Confirmation plus 24-hour and 2-hour reminders</span>
+      </div>
+      <div class="row-card rv rv-3" style="grid-template-columns:1fr 28px 1fr;align-items:center">
+        <span class="small" style="color:var(--text-faint);text-align:right">Finding out about a no-show by waiting</span>
+        <span class="icon-line" style="--icon:16px"><svg><use href="#i-arrow"/></svg></span>
+        <span style="font-weight:500">Every booking and change texted to you</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="price">
+  <div class="wrap">
+    <div class="head-block rv">
+      <span class="eyebrow eyebrow-dim">Pricing</span>
+      <h2>What booking costs.</h2>
+    </div>
+    <div class="price-grid" style="display:grid;gap:56px;grid-template-columns:5fr 7fr;margin-top:48px;align-items:start">
+      <div class="rv">
+        <div class="price-lead"><span class="price-fig">$197</span><span class="price-per">/month</span></div>
+        <p class="price-meta">$250 one-time setup</p>
+        <p class="price-meta faint" style="border-top:1px solid var(--rule-soft);margin-top:22px;padding-top:18px">Booking is also inside <strong>Growth Engine</strong> at $397/mo with the multi-page site, missed-call text-back and review engine — about $690/mo bought separately. <a href="/#plans" class="cta-link">Compare the plans →</a></p>
+      </div>
+      <div class="rv rv-1"></div>
+    </div>
+    <div class="cta-row rv rv-2" style="margin-top:44px">
+      <a href="/#contact" class="btn btn-primary">Get My Free Audit <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section field">
+  <div class="wrap">
+    <div class="head-block rv" style="max-width:42ch">
+      <span class="eyebrow eyebrow-dim">Questions</span>
+      <h2>Questions about booking.</h2>
+    </div>
+    <div class="faq rv rv-1" style="margin-top:48px">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do deposits go straight to me? <span class="faq-mark" aria-hidden="true"></span></button>
+        <div class="faq-a"><p>Yes. Deposits are collected through your own Stripe account, so the money is yours from the moment it clears. Pairden never holds your customers' payments.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I still book people manually? <span class="faq-mark" aria-hidden="true"></span></button>
+        <div class="faq-a"><p>Yes. The calendar is yours — phone bookings, walk-ins, and jobs you add yourself all live in the same place and block the same availability.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if someone needs to reschedule? <span class="faq-mark" aria-hidden="true"></span></button>
+        <div class="faq-a"><p>The confirmation and reminder messages both carry a reschedule link, so most changes happen without anyone calling you.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is there a free trial? <span class="faq-mark" aria-hidden="true"></span></button>
+        <div class="faq-a"><p>No. Booking builds take real setup work up front, so we do not trial them. Missed-call text-back, the review engine, and website chat are the three services that do carry a 30-day trial.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-lg cta-band">
+  <div class="wrap">
+    <div style="max-width:60ch">
+      <span class="eyebrow rv">Next step</span>
+      <h2 class="rv rv-1">Let us look at your calendar.</h2>
+      <p class="lede rv rv-2" style="margin-top:18px">Tell us how booking works today and we will show you where the slots are leaking.</p>
+      <div class="cta-row rv rv-3" style="margin-top:36px">
+        <a href="/#contact" class="btn btn-primary">Get My Free Audit <svg><use href="#i-arrow"/></svg></a>
+        <a href="#price" class="btn btn-ghost">See Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" width="146" height="30" loading="lazy" />
+        <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for service businesses. Founded in the Inland Empire, working with owners anywhere.</p>
+        <div class="foot-contact">
+          <a href="mailto:contact@pairden.com">contact@pairden.com</a>
+          <a href="tel:+19514775918">(951) 477-5918</a>
+        </div>
+        <div class="foot-social">
+          <a href="https://www.facebook.com/PairdenAI/" rel="noopener" target="_blank">Facebook</a>
+          <a href="https://www.instagram.com/pairdenai" rel="noopener" target="_blank">Instagram</a>
+          <a href="https://x.com/pairdenai" rel="noopener" target="_blank">X</a>
+          <a href="https://www.tiktok.com/@pairdenai" rel="noopener" target="_blank">TikTok</a>
+          <a href="https://www.linkedin.com/in/pairden-ai-659501426/" rel="noopener" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="/services/website">Website + Google Presence</a></li>
+          <li><a href="/services/booking">Booking + Reminders</a></li>
+          <li><a href="/services/missed-call-text-back">Missed-Call Text-Back</a></li>
+          <li><a href="/services/review-engine">Review Engine</a></li>
+          <li><a href="/services/ai-receptionist">AI Receptionist</a></li>
+          <li><a href="/services/seo-geo">Local SEO + GEO</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/#plans">Plans</a></li>
+          <li><a href="/#about">Why PAIRDEN</a></li>
+          <li><a href="/tools">Free Tools</a></li>
+          <li><a href="/text-us">Get in Touch</a></li>
+          <li><a href="/partners">Partners</a></li>
+          <li><a href="/ai-team">AI Team (waitlist)</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 PAIRDEN, a d/b/a of Pairden Technologies LLC<br>Pairden Technologies LLC · 41877 Enterprise Circle N., 2nd Floor, Temecula, CA 92590 · contact@pairden.com · (951) 477-5918</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a href="/#contact" class="btn btn-primary">Get My Free Audit</a>
+  <a href="tel:+19516513966" class="btn btn-ghost">Call the Demo</a>
+  <button type="button" class="sticky-close" id="stickyClose" aria-label="Dismiss"><svg width="14" height="14"><use href="#i-close"/></svg></button>
+</div>
+
+<script src="/site-v3.js?v=d1baf82b" defer></script>
+<script>
+/* Calculator — logic unchanged from v2.1. Values are set immediately and
+   never depend on the observer: a visitor deep-linking to #price must
+   not find a panel stuck on "—". The observer only adds the count-up. */
+(function () {
+  var jobEl = document.getElementById('calcJob'), secEl = document.getElementById('calcMissed');
+  if (!jobEl || !secEl) return;
+  var jobOut = document.getElementById('calcJobOut'), secOut = document.getElementById('calcMissedOut');
+  var outA = document.getElementById('calcOutA'), outB = document.getElementById('calcOutB');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+  function render(el, v, money) { el.textContent = money ? (v < 0 ? '−' + fmt(Math.abs(v)) : fmt(v)) : Math.round(v); }
+  function setNow(el, v, money) { el.dataset.v = v; render(el, v, money); }
+  function countTo(el, target, money) {
+    var start = parseFloat(String(el.dataset.v || 0));
+    if (reduce || start === target) { setNow(el, target, money); return; }
+    var t0 = performance.now();
+    (function step(now) {
+      var p = Math.min(1, (now - t0) / 520), e = 1 - Math.pow(1 - p, 3);
+      render(el, start + (target - start) * e, money);
+      if (p < 1) requestAnimationFrame(step); else setNow(el, target, money);
+    })(t0);
+  }
+  function update(animate) {
+    var job = Number(jobEl.value), sec = Number(secEl.value);
+    jobOut.textContent = fmt(job); secOut.textContent = sec;
+      var atRisk = job * sec * 4.33;
+      if (animate) { countTo(outA, atRisk, true); countTo(outB, 197, true); }
+      else { setNow(outA, atRisk, true); setNow(outB, 197, true); }
+  }
+  jobEl.addEventListener('input', function () { update(false); });
+  secEl.addEventListener('input', function () { update(false); });
+  update(false);
+  var panel = document.querySelector('.instrument');
+  if (panel && 'IntersectionObserver' in window && !reduce) {
+    /* The observer used to zero both readouts and count them back up.
+       If the panel was already on screen at load, the visitor watched a
+       money figure flicker from $1,061 up to $20,784 — it read as a
+       glitch, not a flourish. Animate only as a reward for scrolling to
+       a panel that was NOT already in view; otherwise leave the settled
+       value exactly as it rendered. */
+    var box = panel.getBoundingClientRect();
+    var visibleAtLoad = box.top < window.innerHeight && box.bottom > 0;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(panel);
+        if (visibleAtLoad) return;
+        outA.dataset.v = 0; outB.dataset.v = 0; update(true);
+      });
+    }, { threshold: 0.25 });
+    io.observe(panel);
+  }
+})();
+</script>
+</body>
+</html>
