@@ -144,6 +144,26 @@
   status = 302
   force = true
 
+# V3 renamed the planned Local SEO route to SEO + GEO. Keep both path
+# variants as permanent insurance for old drafts and shared preview links.
+[[redirects]]
+  from = "/services/local-seo"
+  to = "/services/seo-geo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/local-seo/"
+  to = "/services/seo-geo"
+  status = 301
+  force = true
+
+# There is no services index page in V3.
+[[redirects]]
+  from = "/services"
+  to = "/#services"
+  status = 302
+
 [[redirects]]
   from = "/es/reservar"
   to = "https://api.leadconnectorhq.com/widget/booking/qdwamJ3e9xLaooRS8t8g"
@@ -172,10 +192,17 @@
   status = 302
 
 # ── Clean-URL rewrites — English ───────────────────────────────────
+# The V3 hub lives at frontdesk/index.html. Do not restore the former
+# /frontdesk -> /frontdesk.html rewrite; that file no longer exists.
 [[redirects]]
-  from = "/frontdesk"
-  to = "/frontdesk.html"
-  status = 200
+  from = "/frontdesk/index.html"
+  to = "/frontdesk"
+  status = 301
+
+[[redirects]]
+  from = "/front-desk"
+  to = "/frontdesk"
+  status = 301
 
 [[redirects]]
   from = "/faq"

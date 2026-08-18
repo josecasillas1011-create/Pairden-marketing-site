@@ -3,13 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FAQ — PAIRDEN</title>
-  <meta name="description" content="Common questions about PAIRDEN packages, pricing, launch timing, trials, SMS setup, and AI receptionist systems for local service businesses." />
+  <title>How the AI Front Desk Works | PAIRDEN</title>
+  <meta name="description" content="How the AI Front Desk works: the operating model, what it answers, the handoff rules, and what setup involves." />
   <link rel="icon" href="/assets/brand/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/favicon-180.png" />
   <meta name="theme-color" content="#040C1F" />
-  <link rel="canonical" href="https://pairden.com/faq" />
+  <link rel="canonical" href="https://pairden.com/frontdesk/how-it-works" />
+  <meta property="og:title" content="How the AI Front Desk Works | PAIRDEN" />
+  <meta property="og:description" content="How the AI Front Desk works: the operating model, what it answers, the handoff rules, and what setup involves." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pairden.com/frontdesk/how-it-works" />
+  <meta property="og:image" content="https://pairden.com/assets/brand/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How the AI Front Desk Works | PAIRDEN" />
+  <meta name="twitter:description" content="How the AI Front Desk works: the operating model, what it answers, the handoff rules, and what setup involves." />
+  <meta name="twitter:image" content="https://pairden.com/assets/brand/og-card.png" />
   <meta name="robots" content="index, follow" />
   <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/assets/fonts/publicsans-var.woff2" as="font" type="font/woff2" crossorigin />
@@ -21,10 +30,14 @@
   </script>
   <link rel="stylesheet" href="/v3.css?v=c343aab0" />
 </head>
-<body>
+<body class="has-page-nav">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
@@ -95,80 +108,94 @@
 
 <main id="main">
 
+<nav class="page-nav" aria-label="AI Front Desk">
+  <div class="wrap page-nav-inner">
+    <span class="page-nav-label">AI Front Desk</span>
+    <ul>
+      <li><a href="/frontdesk">Overview</a></li>
+      <li><a href="/frontdesk/how-it-works" class="is-current" aria-current="page">How It Works</a></li>
+      <li><a href="/frontdesk/demo">Demo</a></li>
+      <li><a href="/frontdesk/pricing">Pricing</a></li>
+      <li><a href="/frontdesk/faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
 <section class="section legal-page">
   <div class="wrap">
-<header class="page-head">
-    <div class="container">
-      <p class="eyebrow reveal">FAQ</p>
-      <h1 class="reveal">Common Questions</h1>
-      <p class="reveal reveal-d1">Straight answers about how we work, what things cost, and what to expect. Anything else — just ask.</p>
-    </div>
-  </header>
-
-  <section class="section-pad">
-    <div class="container">
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">How quickly can my system go live? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Online Foundation typically targets 48–72 hours once intake is complete. Growth Engine usually takes 5–7 days, with SMS features switching on after carrier registration is approved. AI Front Office generally takes 7–14 days because the phone agent, booking rules, and live-call QA need deeper testing.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">What do the three plans cost? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Online Foundation is $147 per month with $250 setup. Growth Engine is $397 per month with $500 setup. AI Front Office is $997 per month with $997 setup. Setup is waived with the qualifying 6-month plan for Foundation or Growth, or a 12-month plan for AI Front Office.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Can I start with only one service? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Yes. Missed-call text-back, review automation, booking and reminders, websites, local SEO, website chat, and AI receptionist coverage are available individually. The three plans are priced to be the better value when several pieces need to work together.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Do you offer free trials? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Select services can prove themselves quickly and may include a 30-day trial: missed-call text-back, the review engine, and AI website chat. Receptionist service starts with the live demo and a fit review. Websites, booking builds, and local SEO are not trial services.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">How long is the Local SEO commitment? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Local SEO is offered on 6- or 12-month terms only. Search signals need runway to develop, so shorter engagements do not give the work enough time to show a fair result.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Do I have to change my business phone number? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Usually not. Conditional call forwarding can route unanswered, after-hours, or busy-line calls to the PAIRDEN receptionist while your existing business number and normal answering habits stay in place. A dedicated tracking number is also available when that fits better.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Do you work with businesses outside the Inland Empire? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Yes. Everything we sell is delivered remotely — the website, the booking, the follow-up, and the phone answering all run wherever your business is, so where you are does not decide whether we can work together. We are based in the Inland Empire and learned this work here, which is why the systems are built around winning a local market. Yours just has to be a local market, not ours.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Why does business texting require extra setup? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Business SMS carriers require registration before automated reminders, missed-call texts, or review requests can send reliably. PAIRDEN submits that registration early in onboarding. The website and booking system can go live while approval is pending, and SMS workflows switch on after approval.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">What is the AI receptionist best used for? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>It works best for local businesses where a missed call can quickly become a lost job: restoration, plumbing, HVAC, roofing, hauling, repair, detailing, and appointment-based operations. Use it for after-hours coverage, overflow, or every inbound call. You can <a href="/frontdesk">call the live demo here</a>.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">I'm not ready to start—can I still get a free audit? <span class="faq-mark" aria-hidden="true"></span></button>
-          <div class="faq-a"><p>Yes. The free systems audit identifies where calls, booking, reviews, or follow-up currently leak. You will get the clearest practical next step without an obligation to purchase a plan.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Band ── -->
-  <section class="section-lg cta-band">
-  <div class="wrap">
-    <div style="max-width:60ch">
-      <span class="eyebrow rv">Still have questions?</span>
-      <h2 class="rv rv-1">Get Answers with a Free<br />Systems Audit.</h2>
-      <p class="lede rv rv-2" style="margin-top:18px">Tell us where calls, booking, reviews, or follow-up break down and we will map the simplest practical fix.</p>
-      <div class="cta-row rv rv-3" style="margin-top:36px">
-        <a href="/#contact" class="btn btn-primary">Request My Free Systems Audit <svg><use href="#i-arrow"/></svg></a>
-      </div>
+    <div class="head-block rv">
+      <span class="eyebrow">AI Front Desk</span>
+      <h1>How the AI Front Desk Works</h1>
     </div>
   </div>
 </section>
 
-  <!-- ── Footer ── -->
-  </div>
-</section>
+<section class="section-pad" id="how-it-works">
+      <div class="wrap container">
+        <div class="section-header reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>A simple front-desk layer<br>for the calls you miss.</h2>
+          <p>Start with the part that matters most: answer the call, capture the details, and route the handoff cleanly.</p>
+        </div>
+        <div class="workflow-steps">
+          <article class="workflow-step glass-card glass-lift reveal">
+            <h3>Caller reaches your business</h3>
+            <p>Forward missed calls, after-hours calls, or a dedicated tracking number to the AI Front Desk.</p>
+          </article>
+          <article class="workflow-step glass-card glass-lift reveal reveal-d1">
+            <h3>The agent handles the conversation</h3>
+            <p>It asks one question at a time and captures name, phone, job details, location, urgency, and common FAQs.</p>
+          </article>
+          <article class="workflow-step glass-card glass-lift reveal reveal-d2">
+            <h3>Your team gets the handoff</h3>
+            <p>You receive the summary and call back, schedule, or follow up based on the caller's urgency.</p>
+          </article>
+        </div>
+        <p class="phase-note reveal">Start with missed-call or after-hours coverage, then add calendar booking, SMS summaries, and deeper CRM workflows when the operating rules are confirmed.</p>
+      </div>
+    </section>
+
+<section class="section-pad" id="includes">
+      <div class="wrap container">
+        <div class="section-header reveal">
+          <p class="eyebrow">What is included</p>
+          <h2>The essentials every<br>receptionist plan needs.</h2>
+          <p>Every tier is configured around your business knowledge, intake fields, service area, and a handoff path your team can actually use.</p>
+        </div>
+        <div class="include-grid">
+          <article class="front-card glass-card glass-lift reveal">
+            <div class="icon-chip"><svg><use href="#i-workflow"/></svg></div>
+            <h3>Custom call script</h3>
+            <p>Built around your business name, services, service area, tone, FAQs, and escalation rules.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-bot"/></svg></div>
+            <h3>AI voice agent</h3>
+            <p>Configured to answer inbound calls, ask short questions, and avoid long robotic paragraphs.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d2">
+            <div class="icon-chip"><svg><use href="#i-phone"/></svg></div>
+            <h3>Local demo or tracking number</h3>
+            <p>A clean number that can be used for demos, missed-call routing, or campaign tracking.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal">
+            <div class="icon-chip"><svg><use href="#i-shield"/></svg></div>
+            <h3>Lead capture flow</h3>
+            <p>Name, phone, job type, city or address, urgency, and caller summary captured for follow-up.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d1">
+            <div class="icon-chip"><svg><use href="#i-zap"/></svg></div>
+            <h3>Human handoff rules</h3>
+            <p>Clear instructions for urgent jobs, unknown answers, pricing questions, and escalation.</p>
+          </article>
+          <article class="front-card glass-card glass-lift reveal reveal-d2">
+            <div class="icon-chip"><svg><use href="#i-clock"/></svg></div>
+            <h3>Launch QA</h3>
+            <p>Test calls for latency, turn-taking, hallucination checks, and booking capture.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
 </main>
 
@@ -177,7 +204,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <img src="/assets/brand/pairden-lockup-white.png" alt="PAIRDEN" width="146" height="30" loading="lazy" />
-        <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for Inland Empire and Southern California service businesses.</p>
+        <p>Websites, booking, reviews, missed-call follow-up, and AI phone answering for service businesses. Founded in the Inland Empire, working with owners anywhere.</p>
         <div class="foot-contact">
           <a href="mailto:contact@pairden.com">contact@pairden.com</a>
           <a href="tel:+19514775918">(951) 477-5918</a>
